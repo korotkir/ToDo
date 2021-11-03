@@ -2,6 +2,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import 'bootstrap/dist/css/bootstrap.css'
 import './style.css'
+import {logDOM} from "@testing-library/react";
 
 class NewItem extends React.Component {
  render() {
@@ -17,15 +18,24 @@ class NewItem extends React.Component {
 class TodoItem extends React.Component {
  constructor(props) {
   super(props);
+  this.state = {
+   checked: false,
+   task: ['form-control']
+  }
+ }
+
+ done = () => {
+  // this.setState({ checked: !this.state.checked })
+  this.setState({ task: [...this.state.task, 'task'] })
  }
 
  render() {
   return(
    <div className="todoItem input-group mb-3">
     <div className="input-group-text">
-     <input className="form-check-input mt-0" type="checkbox" />
+     <input className="form-check-input mt-0" type="checkbox" onClick={this.done}/>
     </div>
-    <input type="text" className="form-control" value={this.props.value} />
+    <input type="text" className={this.state.task.join(' ')} defaultValue={this.props.value} />
    </div>
  )
  }

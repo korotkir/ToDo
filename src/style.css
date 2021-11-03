@@ -20,4 +20,10 @@ body {
   height: 50px;
 }
 
+.task {
+  text-decoration: line-through;
+  background-color: lightgrey;
+  color: gray;
+}
+
 /*# sourceMappingURL=style.css.map */
