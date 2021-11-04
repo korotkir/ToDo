@@ -15,21 +15,6 @@ import './style.css'
 // }
 
 class NewItem extends React.Component {
- constructor(props) {
-  super(props);
-  this.state = {value: ''}
-
- }
-
- itemChange = (event) => {
-  this.setState({ value: event.target.value })
- }
-
- itemSubmit = (event) => {
-  event.preventDefault()
-  console.log(this.state.value)
- }
-
  render() {
   const dictNewItem = [
    'Сходить в спортзал',
@@ -44,14 +29,13 @@ class NewItem extends React.Component {
   return(
    <form
     className="newItem input-group"
-    onSubmit={this.itemSubmit}
+    onSubmit={this.props.submit}
    >
     <input
      className="form-control"
      type="text"
      placeholder={placeholderNewItem}
-     value={this.state.value}
-     onChange={this.itemChange}
+     onChange={this.props.change}
     />
     <button className="btn btn-outline-secondary" type="submit" >Add</button>
    </form>
@@ -95,18 +79,34 @@ class TodoItem extends React.Component {
 }
 
 class TodoList extends React.Component {
+ constructor(props) {
+  super(props)
+  this.state = { value: '',
+   items: [
+    {id: 1, value: 'Купить штаны'},
+    {id: 2, value: 'Слетать в Тайланд'},
+    {id: 3, value: 'Купить наушники'},
+    {id: 4, value: 'test'}
+   ]}
+ }
+
+ itemChange = (event) => {
+  this.setState({ value: event.target.value })
+ }
+
+ itemSubmit = (event) => {
+  event.preventDefault()
+  this.setState({
+   items: [...this.state.items, {id: this.state.items.length + 1, value: this.state.value}],
+   value: ''
+  })
+ }
+
  render() {
-
-  let items = [
-   {id: 1, value: 'Купить штаны'},
-   {id: 2, value: 'Слетать в Тайланд'},
-   {id: 3, value: 'Купить наушники'},
-  ]
-
   return(
    <div className="todoList">
-    <NewItem />
-    { items.map(el => <TodoItem key={el.id} value={el.value} />) }
+    <NewItem submit={this.itemSubmit} change={this.itemChange}/>
+    { this.state.items.map(el => <TodoItem key={el.id} value={el.value} />) }
    </div>
   )
  }
