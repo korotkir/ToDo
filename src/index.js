@@ -17,23 +17,43 @@ import './style.css'
 class NewItem extends React.Component {
  constructor(props) {
   super(props);
+  this.state = {value: ''}
 
-  const dict = [
+ }
+
+ itemChange = (event) => {
+  this.setState({ value: event.target.value })
+ }
+
+ itemSubmit = (event) => {
+  event.preventDefault()
+  console.log(this.state.value)
+ }
+
+ render() {
+  const dictNewItem = [
    'Сходить в спортзал',
    'Купить молоко',
    'Заплатить налоги',
    'Заказать телефон',
    'Позвонить Лехе',
    'Навестить бабулю']
-  let int = Math.floor(Math.random() * dict.length)
-  this.state = {random : `Например: ${dict[int]}`}
- }
+  let randomizerForNewItem = Math.floor(Math.random() * dictNewItem.length)
+  let placeholderNewItem = `Например: ${dictNewItem[randomizerForNewItem]}`
 
- render() {
   return(
-   <form className="newItem input-group">
-    <input className="form-control" type="text" placeholder={this.state.random}/>
-    <button className="btn btn-outline-secondary" type="submit">Add</button>
+   <form
+    className="newItem input-group"
+    onSubmit={this.itemSubmit}
+   >
+    <input
+     className="form-control"
+     type="text"
+     placeholder={placeholderNewItem}
+     value={this.state.value}
+     onChange={this.itemChange}
+    />
+    <button className="btn btn-outline-secondary" type="submit" >Add</button>
    </form>
   )
  }
@@ -76,12 +96,17 @@ class TodoItem extends React.Component {
 
 class TodoList extends React.Component {
  render() {
+
+  let items = [
+   {id: 1, value: 'Купить штаны'},
+   {id: 2, value: 'Слетать в Тайланд'},
+   {id: 3, value: 'Купить наушники'},
+  ]
+
   return(
    <div className="todoList">
     <NewItem />
-    <TodoItem value="Купить штаны"/>
-    <TodoItem value="Слетать в Майами"/>
-    <TodoItem value="Заценить клип Oxxy"/>
+    { items.map(el => <TodoItem key={el.id} value={el.value} />) }
    </div>
   )
  }
