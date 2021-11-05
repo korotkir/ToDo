@@ -18,6 +18,15 @@ body {
   margin: 0 auto;
   padding: 0;
   height: 50px;
+  display: flex;
+}
+
+.trash {
+  align-self: center;
+  margin-left: 90%;
+  background-color: #fafafa;
+  border: 1px gray;
+  padding: 1px;
 }
 
 .task {
