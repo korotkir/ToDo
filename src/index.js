@@ -28,7 +28,7 @@ class NewItem extends React.Component {
      onChange={this.props.change}
      value={this.props.value}
     />
-    <button className="btn btn-outline-secondary" type="submit" >Add</button>
+    <button className="btn btn-outline-secondary" type="submit" >Добавить</button>
    </form>
   )
  }
@@ -75,10 +75,10 @@ class TodoList extends React.Component {
   super(props)
   this.state = { value: '',
    items: [
-    {id: 0, value: 'Купить штаны'},
-    {id: 1, value: 'Слетать в Тайланд'},
-    {id: 2, value: 'Купить наушники'},
-    {id: 3, value: 'test'}
+    // {id: 0, value: 'Купить штаны'},
+    // {id: 1, value: 'Слетать в Тайланд'},
+    // {id: 2, value: 'Купить наушники'},
+    // {id: 3, value: 'test'}
    ]}
  }
 
@@ -88,8 +88,13 @@ class TodoList extends React.Component {
 
  itemSubmit = (event) => {
   event.preventDefault()
-  this.setState({
-   items: [...this.state.items, {id: this.state.items.length + 1, value: this.state.value.trim('')}],
+  // TODO:
+  console.log(this.state.items)
+  let value = this.state.value.trim('')
+  value === ''
+   ? this.setState({value: ''})
+   : this.setState({
+   items: [...this.state.items, {id: this.state.items.length, value: value}],
    value: ''
   })
  }
@@ -102,12 +107,11 @@ class TodoList extends React.Component {
   return(
    <div className="todoList">
     <NewItem submit={this.itemSubmit} change={this.itemChange} value={this.state.value}/>
-    { this.state.items.map((el, i) =>
-     <TodoItem
-      key={el.id}
-      value={el.value}
-      onClick={(e) => this.removeItem(this.state.items[i], e)}
-     />) }
+    {this.state.items.length
+     ? this.state.items.map((el, i) =>
+      <TodoItem key={i} value={el.value} onClick={(e) => this.removeItem(this.state.items[i], e)}/>)
+     : <h2 className="empty"> Список пуст!</h2>
+    }
    </div>
   )
  }
