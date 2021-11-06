@@ -56,15 +56,15 @@ class TodoItem extends React.Component {
      backgroundForm: [...this.state.backgroundForm].splice(0,1) })
   }
 
- render() {
+  render() {
   return(
-   <div className="todoItem input-group mb-3">
+   <div className="todoItem input-group mb-3" >
     <div className={this.state.backgroundForm.join(' ')}>
      <input className="form-check-input mt-0" type="checkbox" onChange={this.done} defaultChecked={this.state.checked}/>
     </div>
 
     <input type="text" className={this.state.task.join(' ')} defaultValue={this.props.value} />
-    {/*<Trash className="trash" color="gray" size={25} />*/}
+    <Trash className="trash" size={25} onClick={this.props.onClick}/>
    </div>
  )
  }
@@ -75,10 +75,10 @@ class TodoList extends React.Component {
   super(props)
   this.state = { value: '',
    items: [
-    {id: 1, value: 'Купить штаны'},
-    {id: 2, value: 'Слетать в Тайланд'},
-    {id: 3, value: 'Купить наушники'},
-    {id: 4, value: 'test'}
+    {id: 0, value: 'Купить штаны'},
+    {id: 1, value: 'Слетать в Тайланд'},
+    {id: 2, value: 'Купить наушники'},
+    {id: 3, value: 'test'}
    ]}
  }
 
@@ -94,11 +94,20 @@ class TodoList extends React.Component {
   })
  }
 
+ removeItem = (element, event) => {
+  this.setState( { items : this.state.items.filter(item => item.id !== element.id) })
+ }
+
  render() {
   return(
    <div className="todoList">
     <NewItem submit={this.itemSubmit} change={this.itemChange} value={this.state.value}/>
-    { this.state.items.map(el => <TodoItem key={el.id} value={el.value} />) }
+    { this.state.items.map((el, i) =>
+     <TodoItem
+      key={el.id}
+      value={el.value}
+      onClick={(e) => this.removeItem(this.state.items[i], e)}
+     />) }
    </div>
   )
  }

@@ -11,21 +11,21 @@ body
   height: 50px
 
 .todoItem
+  position: relative
+  display: flex
   width: 90%
   margin: 0 auto
   padding: 0
   height: 50px
-  display: flex
-
 
 .trash
+  position: absolute
   align-self: center
-  margin-left: 90%
-  background-color: #fafafa
-  border: 1px gray
-  padding: 1px
+  left: 95%
+  color: darkgray
 
-
+.trash:hover
+  color: gray
 
 .task
   text-decoration: line-through
