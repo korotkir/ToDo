@@ -94,7 +94,8 @@ class TodoList extends React.Component {
   value === ''
    ? this.setState({value: ''})
    : this.setState({
-   items: [...this.state.items, {id: this.state.items.length, value: value}],
+   // items: [...this.state.items, {id: this.state.items.length, value: value}],
+    items: [...this.state.items, {id: Math.random(), value: value}],
    value: ''
   })
  }
@@ -109,7 +110,7 @@ class TodoList extends React.Component {
     <NewItem submit={this.itemSubmit} change={this.itemChange} value={this.state.value}/>
     {this.state.items.length
      ? this.state.items.map((el, i) =>
-      <TodoItem key={i} value={el.value} onClick={(e) => this.removeItem(this.state.items[i], e)}/>)
+      <TodoItem key={el.id} value={el.value} onClick={(e) => this.removeItem(this.state.items[i], e)}/>)
      : <h2 className="empty"> Список пуст!</h2>
     }
    </div>
