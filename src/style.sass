@@ -1,20 +1,31 @@
+$textColor: darkGray
+
 body
   background-color: #fafafa
+
+input
+  height: 50px
 
 .todoList
   display: flex
   flex-direction: column
-  padding: 3%
+  padding-top: 3%
   margin: 0 auto
   width: 50%
 
 .empty
   margin: 0 auto
-  color: darkgray
+  color: $textColor
 
 .newItem
   margin-bottom: 5%
   height: 50px
+
+.mainBlock
+  display: flex
+  flex-direction: column
+  height: 80vh
+  overflow: auto
 
 .todoItem
   position: relative
@@ -40,6 +51,11 @@ body
 
 .success
   background-color: rgba(0,255,43,0.62)
+
+.status
+  color: $textColor
+  height: 100%
+  margin: 0 auto
 
 
 

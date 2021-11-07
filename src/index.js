@@ -70,6 +70,18 @@ class TodoItem extends React.Component {
  }
 }
 
+class TodoStatus extends React.Component {
+ constructor(props) {
+  super(props);
+ }
+
+ render() {
+  return(
+   <h3 className="status">Выполнено 5/{this.props.total}</h3>
+  )
+ }
+}
+
 class TodoList extends React.Component {
  constructor(props) {
   super(props)
@@ -108,11 +120,13 @@ class TodoList extends React.Component {
   return(
    <div className="todoList">
     <NewItem submit={this.itemSubmit} change={this.itemChange} value={this.state.value}/>
-    {this.state.items.length
-     ? this.state.items.map((el, i) =>
-      <TodoItem key={el.id} value={el.value} onClick={(e) => this.removeItem(this.state.items[i], e)}/>)
-     : <h2 className="empty"> Список пуст!</h2>
-    }
+    <div className="mainBlock">
+     {this.state.items.length
+      ? this.state.items.map((el, i) =>
+       <TodoItem key={el.id} value={el.value} onClick={(e) => this.removeItem(this.state.items[i], e)}/>)
+      : <h1 className="empty">Список пуст!</h1>}
+   </div>
+    <TodoStatus total={this.state.items.length}/>
    </div>
   )
  }
