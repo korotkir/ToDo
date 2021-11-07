@@ -40,7 +40,7 @@ class TodoItem extends React.Component {
   this.state = {
    checked: false,
    task: ['form-control'],
-   backgroundForm: ['input-group-text']
+   backgroundForm: ['input-group-text'],
   }
  }
 
@@ -50,7 +50,7 @@ class TodoItem extends React.Component {
    !this.state.checked
     ? this.setState({
      task: [...this.state.task, 'task'],
-     backgroundForm: [...this.state.backgroundForm, 'success'] })
+     backgroundForm: [...this.state.backgroundForm, 'success']})
     : this.setState({
      task: [...this.state.task].splice(0,1),
      backgroundForm: [...this.state.backgroundForm].splice(0,1) })
@@ -77,7 +77,7 @@ class TodoStatus extends React.Component {
 
  render() {
   return(
-   <h3 className="status">Выполнено 5/{this.props.total}</h3>
+   <h3 className="status">{this.props.completed}/{this.props.total}</h3>
   )
  }
 }
@@ -85,7 +85,9 @@ class TodoStatus extends React.Component {
 class TodoList extends React.Component {
  constructor(props) {
   super(props)
-  this.state = { value: '',
+  this.state = {
+   completed: '',
+   value: '',
    items: [
     // {id: 0, value: 'Купить штаны'},
     // {id: 1, value: 'Слетать в Тайланд'},
@@ -100,14 +102,12 @@ class TodoList extends React.Component {
 
  itemSubmit = (event) => {
   event.preventDefault()
-  // TODO:
-  console.log(this.state.items)
   let value = this.state.value.trim('')
   value === ''
    ? this.setState({value: ''})
    : this.setState({
    // items: [...this.state.items, {id: this.state.items.length, value: value}],
-    items: [...this.state.items, {id: Math.random(), value: value}],
+    items: [...this.state.items, {id: Math.random(), value: value, completed: document.querySelectorAll('.task')}],
    value: ''
   })
  }
@@ -126,7 +126,7 @@ class TodoList extends React.Component {
        <TodoItem key={el.id} value={el.value} onClick={(e) => this.removeItem(this.state.items[i], e)}/>)
       : <h1 className="empty">Список пуст!</h1>}
    </div>
-    <TodoStatus total={this.state.items.length}/>
+    <TodoStatus total={this.state.items.length} completed={this.state.completed.length}/>
    </div>
   )
  }
