@@ -58,12 +58,12 @@ class TodoItem extends React.Component {
 
   render() {
   return(
-   <div className="todoItem input-group mb-3" >
-    <div className={this.state.backgroundForm.join(' ')}>
+   <div className="todoItem input-group mb-3">
+    <div className={ [...this.state.backgroundForm].join(' ') }>
      <input className="form-check-input mt-0" type="checkbox" onChange={this.done} defaultChecked={this.state.checked}/>
     </div>
 
-    <input type="text" className={this.state.task.join(' ')} defaultValue={this.props.value} />
+    <input type="text" className={ [...this.state.task].join(' ') } defaultValue={this.props.value} />
     <Trash className="trash" size={25} onClick={this.props.onClick}/>
    </div>
  )
@@ -89,10 +89,10 @@ class TodoList extends React.Component {
    completed: '',
    value: '',
    items: [
-    // {id: 0, value: 'Купить штаны'},
-    // {id: 1, value: 'Слетать в Тайланд'},
-    // {id: 2, value: 'Купить наушники'},
-    // {id: 3, value: 'test'}
+    {id: 0, value: 'Купить штаны'},
+    {id: 1, value: 'Слетать в Тайланд'},
+    {id: 2, value: 'Купить наушники'},
+    {id: 3, value: 'test'}
    ]}
  }
 
@@ -101,13 +101,13 @@ class TodoList extends React.Component {
  }
 
  itemSubmit = (event) => {
+
   event.preventDefault()
   let value = this.state.value.trim('')
   value === ''
    ? this.setState({value: ''})
    : this.setState({
-   // items: [...this.state.items, {id: this.state.items.length, value: value}],
-    items: [...this.state.items, {id: Math.random(), value: value, completed: document.querySelectorAll('.task')}],
+   items: [...this.state.items, {id: this.state.items.length, value: value}],
    value: ''
   })
  }
@@ -123,7 +123,10 @@ class TodoList extends React.Component {
     <div className="mainBlock">
      {this.state.items.length
       ? this.state.items.map((el, i) =>
-       <TodoItem key={el.id} value={el.value} onClick={(e) => this.removeItem(this.state.items[i], e)}/>)
+       <TodoItem key={el.id}
+                 value={el.value}
+                 onClick={(e) => this.removeItem(this.state.items[i], e)}
+       />)
       : <h1 className="empty">Список пуст!</h1>}
    </div>
     <TodoStatus total={this.state.items.length} completed={this.state.completed.length}/>
@@ -131,8 +134,6 @@ class TodoList extends React.Component {
   )
  }
 }
-
-
 
 ReactDOM.render(
  <TodoList />,
