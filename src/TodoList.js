@@ -22,7 +22,6 @@ class TodoList extends React.Component {
  }
 
  itemSubmit = (event) => {
-
   event.preventDefault()
   let value = this.state.value.trim('')
   value === ''

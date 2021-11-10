@@ -8,19 +8,22 @@ class TodoItem extends React.Component {
    checked: false,
    task: ['form-control'],
    backgroundForm: ['input-group-text'],
+   element: this.props.element
   }
  }
 
- done = () => {
+ done = (event) => {
   this.setState({ checked: !this.state.checked })
 
   !this.state.checked
    ? this.setState({
     task: [...this.state.task, 'task'],
-    backgroundForm: [...this.state.backgroundForm, 'success']})
+    backgroundForm: [...this.state.backgroundForm, 'success'],
+   })
    : this.setState({
     task: [...this.state.task].splice(0,1),
-    backgroundForm: [...this.state.backgroundForm].splice(0,1) })
+    backgroundForm: [...this.state.backgroundForm].splice(0,1)
+   })
  }
 
  render() {
