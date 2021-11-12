@@ -1,8 +1,8 @@
 import React from "react";
 import { Player } from '@lottiefiles/react-lottie-player';
-import success from "../icon/success.json";
+import start from "./icon/start.json"
 
-class Animation extends React.Component {
+class Start extends React.Component {
  constructor(props) {
   super(props);
   this.player = React.createRef(); // initialize your ref
@@ -10,16 +10,18 @@ class Animation extends React.Component {
  render() {
   return (
    <Player
-    className="startAnimation"
+    className="animations"
     ref={this.player} // set the ref to your class instance
-    autoplay={true}
+    autoplay={false}
     loop={true}
     controls={true}
-    src={success}
+    src={start}
     style={{ height: '300px', width: '300px' }}
    ></Player>
   );
  }
 }
 
-export default Animation;
+export default Start
+
+

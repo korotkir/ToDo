@@ -1,6 +1,7 @@
 import React from "react";
 import Item from "./items/Item";
-import Animation from "./items/Animation";
+import Start from "./items/animation/Start";
+import Success from "./items/animation/Success"
 
 class TodoItems extends React.Component {
  render() {
@@ -11,7 +12,7 @@ class TodoItems extends React.Component {
            value={el.value}
            onClick={(e) => this.props.onClick(this.props.items[i], e)}
            items={this.props.items}
-     />) : <div className="animation__start"><Animation /></div>
+     />) : <div className="animation__start"><Start /></div>
   )
  }
 }
