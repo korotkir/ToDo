@@ -56,6 +56,7 @@ class TodoList extends React.Component {
 
  removeItem = (element) => {
   this.setState( { items : this.state.items.filter(item => item.id !== element.id) })
+  this.performed('minus')
  }
 
  render() {
