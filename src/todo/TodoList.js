@@ -7,16 +7,37 @@ class TodoList extends React.Component {
  constructor(props) {
   super(props)
   this.state = {
-   completed: '',
    value: '',
-   items:
-    [
-    // {id: 0, value: 'Купить штаны'},
-    // {id: 1, value: 'Слетать в Тайланд'},
-    // {id: 2, value: 'Купить наушники'},
-    // {id: 3, value: 'test'}
-   ]}
+   items: [/*{id: 0, value: 'Купить штаны'}*/],
+   checked: false,
+   done: 0
+  }
  }
+
+ performed = (condition) => {
+  if(condition === 'plus') {
+   this.setState({done: this.state.done + 1})
+  }
+  if(condition === 'minus') {
+   this.setState({done: this.state.done - 1})
+  }
+ }
+
+ // done = (element, event) => {
+ //  event.target.className = this.state.task
+ //
+ //  this.setState({ checked: !this.state.checked })
+ //
+ //  !this.state.checked
+ //   ? this.setState({
+ //    task: [...this.state.task, 'task'],
+ //    backgroundForm: [...this.state.backgroundForm, 'success'],
+ //   })
+ //   : this.setState({
+ //    task: [...this.state.task].splice(0,1),
+ //    backgroundForm: [...this.state.backgroundForm].splice(0,1)
+ //   })
+ // }
 
  itemChange = (event) => {
   this.setState({ value: event.target.value })
@@ -28,7 +49,7 @@ class TodoList extends React.Component {
   value === ''
    ? this.setState({value: ''})
    : this.setState({
-    items: [...this.state.items, {id: this.state.items.length, value: value}],
+    items: [...this.state.items, {id: Math.random(), value: value}],
     value: ''
    })
  }
@@ -44,9 +65,14 @@ class TodoList extends React.Component {
     <div className="mainBlock">
        <TodoItems onClick={this.removeItem}
                   items={this.state.items}
+                  // backgroundForm={this.state.backgroundForm}
+                  // OnChange={this.done}
+                  // defaultChecked={this.state.checked}
+                  // task={this.state.task}
+                  performed={this.performed}
        />
     </div>
-    <TodoStatus total={this.state.items.length} completed={this.state.completed.length}/>
+    <TodoStatus total={this.state.items.length} done={this.state.done} />
    </div>
   )
  }

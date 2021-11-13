@@ -13,26 +13,29 @@ class Item extends React.Component {
  }
 
  done = () => {
+  console.log(this.state.done)
   this.setState({ checked: !this.state.checked })
 
-  !this.state.checked
-   ? this.setState({
+  if(!this.state.checked) {
+   this.props.performed('plus')
+   this.setState({
     task: [...this.state.task, 'task'],
     backgroundForm: [...this.state.backgroundForm, 'success'],
    })
-   : this.setState({
-    task: [...this.state.task].splice(0,1),
-    backgroundForm: [...this.state.backgroundForm].splice(0,1)
-   })
+  } else {
+     this.props.performed('minus')
+     this.setState({
+       task: [...this.state.task].splice(0,1),
+       backgroundForm: [...this.state.backgroundForm].splice(0,1)})
+    }
  }
 
  render() {
   return(
   <div className="todoItem input-group mb-3">
    <div className={[...this.state.backgroundForm].join(' ')}>
-    <input className="form-check-input mt-0" type="checkbox" onChange={this.done} defaultChecked={this.state.checked}/>
+    <input className="form-check-input mt-0" type="checkbox" onChange={this.done} defaultChecked={this.props.checked}/>
    </div>
-
    <input type="text" className={[...this.state.task].join(' ')} defaultValue={this.props.value}/>
    <Trash className="trash" size={25} onClick={this.props.onClick}/>
   </div>
