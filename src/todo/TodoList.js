@@ -10,6 +10,7 @@ class TodoList extends React.Component {
    value: '',
    items: [/*{id: 0, value: 'Купить штаны'}*/],
    checked: false,
+   series: false,
    done: 0
   }
  }
@@ -22,22 +23,6 @@ class TodoList extends React.Component {
    this.setState({done: this.state.done - 1})
   }
  }
-
- // done = (element, event) => {
- //  event.target.className = this.state.task
- //
- //  this.setState({ checked: !this.state.checked })
- //
- //  !this.state.checked
- //   ? this.setState({
- //    task: [...this.state.task, 'task'],
- //    backgroundForm: [...this.state.backgroundForm, 'success'],
- //   })
- //   : this.setState({
- //    task: [...this.state.task].splice(0,1),
- //    backgroundForm: [...this.state.backgroundForm].splice(0,1)
- //   })
- // }
 
  itemChange = (event) => {
   this.setState({ value: event.target.value })
@@ -55,8 +40,10 @@ class TodoList extends React.Component {
  }
 
  removeItem = (element) => {
-  this.setState( { items : this.state.items.filter(item => item.id !== element.id) })
-  this.performed('minus')
+  this.setState( {
+   items : this.state.items.filter(item => item.id !== element.id),
+   series: true,
+  })
  }
 
  render() {
@@ -64,13 +51,10 @@ class TodoList extends React.Component {
    <div className="todoList">
     <NewItem submit={this.itemSubmit} change={this.itemChange} value={this.state.value}/>
     <div className="mainBlock">
-       <TodoItems onClick={this.removeItem}
+       <TodoItems remove={this.removeItem}
                   items={this.state.items}
-                  // backgroundForm={this.state.backgroundForm}
-                  // OnChange={this.done}
-                  // defaultChecked={this.state.checked}
-                  // task={this.state.task}
                   performed={this.performed}
+                  series={this.state.series}
        />
     </div>
     <TodoStatus total={this.state.items.length} done={this.state.done} />
