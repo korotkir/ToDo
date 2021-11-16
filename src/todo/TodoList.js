@@ -11,7 +11,7 @@ class TodoList extends React.Component {
    items: [/*{id: 0, value: 'Купить штаны'}*/],
    checked: false,
    series: false,
-   done: 0
+   done: 0,
   }
  }
 
@@ -40,6 +40,7 @@ class TodoList extends React.Component {
  }
 
  removeItem = (element) => {
+
   this.setState( {
    items : this.state.items.filter(item => item.id !== element.id),
    series: true,
