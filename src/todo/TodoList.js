@@ -11,7 +11,7 @@ class TodoList extends React.Component {
    items: [/*{id: 0, value: 'Купить штаны'}*/],
    checked: false,
    series: false,
-   done: 0,
+   done: 0
   }
  }
 
@@ -35,15 +35,16 @@ class TodoList extends React.Component {
    ? this.setState({value: ''})
    : this.setState({
     items: [...this.state.items, {id: Math.random(), value: value}],
-    value: ''
+    value: '',
+    isAnimation: true
    })
  }
 
  removeItem = (element) => {
-
   this.setState( {
    items : this.state.items.filter(item => item.id !== element.id),
    series: true,
+   isAnimation: false
   })
  }
 
@@ -52,11 +53,15 @@ class TodoList extends React.Component {
    <div className="todoList">
     <NewItem submit={this.itemSubmit} change={this.itemChange} value={this.state.value}/>
     <div className="mainBlock">
-       <TodoItems remove={this.removeItem}
-                  items={this.state.items}
-                  performed={this.performed}
-                  series={this.state.series}
-       />
+
+      <TodoItems add={this.itemSubmit}
+                 remove={this.removeItem}
+                 items={this.state.items}
+                 performed={this.performed}
+                 series={this.state.series}
+                 isAnimation={this.state.isAnimation}
+
+      />
     </div>
     <TodoStatus total={this.state.items.length} done={this.state.done} />
    </div>

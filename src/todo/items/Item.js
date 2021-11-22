@@ -8,7 +8,7 @@ class Item extends React.Component {
    checked: false,
    task: ['form-control'],
    backgroundForm: ['input-group-text'],
-   bounce: false
+   bounce: false,
   }
  }
 
