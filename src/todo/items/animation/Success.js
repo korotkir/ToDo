@@ -13,7 +13,7 @@ class Success extends React.Component {
     className="animations"
     ref={this.player} // set the ref to your class instance
     autoplay={true}
-    loop={true}
+    loop={false}
     controls={true}
     src={success}
     style={{ height: '300px', width: '300px' }}

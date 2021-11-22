@@ -8,7 +8,7 @@ class TodoItems extends React.Component {
  render() {
   return (
 
-    this.props.items.length + 1
+    this.props.items.length
       ? <TransitionGroup className="todo-list">{
        [...this.props.items].map((el, i) =>
           <CSSTransition
