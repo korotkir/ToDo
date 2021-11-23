@@ -15,7 +15,7 @@ class TodoItems extends React.Component {
             key={el.id}
             in={this.props.isAnimation}
             classNames="alert"
-            timeout={150}
+            timeout={300}
             unmountOnExit
             onEnter={() => this.props.add}
             onExited={() => this.props.remove}>

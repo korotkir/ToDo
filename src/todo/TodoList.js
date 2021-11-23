@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import TodoItems from "./TodoItems"
 import NewItem from "./NewItem"
 import TodoStatus from "./TodoStatus"
