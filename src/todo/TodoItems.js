@@ -9,24 +9,26 @@ class TodoItems extends React.Component {
   return (
 
     this.props.items.length
-      ? <TransitionGroup className="todo-list">{
-       [...this.props.items].map((el, i) =>
-          <CSSTransition
-            key={el.id}
-            in={this.props.isAnimation}
-            classNames="alert"
-            timeout={300}
-            unmountOnExit
-            onEnter={() => this.props.add}
-            onExited={() => this.props.remove}>
-           <Item key={el.id}
-                 value={el.value}
-                 remove={() => this.props.remove(this.props.items[i])}
-                 items={this.props.items}
-                 performed={this.props.performed}/>
-       </CSSTransition>)
-      }</TransitionGroup>
-     : <div className="animation__start">
+      ? <div className="col-xs-12 col-sm-9 col-md-7">
+         <TransitionGroup className="todo-list">{
+          [...this.props.items].map((el, i) =>
+             <CSSTransition
+               key={el.id}
+               in={this.props.isAnimation}
+               classNames="alert"
+               timeout={300}
+               unmountOnExit
+               onEnter={() => this.props.add}
+               onExited={() => this.props.remove}>
+              <Item key={el.id}
+                    value={el.value}
+                    remove={() => this.props.remove(this.props.items[i])}
+                    items={this.props.items}
+                    performed={this.props.performed}/>
+             </CSSTransition>)}
+         </TransitionGroup>
+        </div>
+     : <div className="icons align-self-center">
         { !this.props.series ? <Start /> : <Success /> }
        </div>
   )

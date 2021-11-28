@@ -8,38 +8,25 @@ input {
   height: 50px;
 }
 
-.todoList {
-  display: flex;
-  flex-direction: column;
-  padding-top: 3%;
-  margin: 0 auto;
-  width: 50%;
-}
-
 .empty {
   margin: 0 auto;
   color: darkGray;
 }
 
 .newItem {
-  margin-bottom: 5%;
+  margin: 25px 0 25px 0;
   height: 50px;
 }
 
 .mainBlock {
-  display: flex;
-  flex-direction: column;
-  height: 80vh;
+  height: 81vh;
   overflow: auto;
 }
 
 .todoItem {
   position: relative;
-  display: flex;
-  width: 90%;
-  margin: 0 auto;
-  padding: 0;
   height: 50px;
+  margin-bottom: 10px;
 }
 
 .trash {
@@ -65,13 +52,6 @@ input {
 
 .status {
   color: darkGray;
-  height: 100%;
-  margin: 0 auto;
-  padding: 15px;
-}
-
-.animation__start {
-  margin-top: 20%;
 }
 
 .alert-enter {

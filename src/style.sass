@@ -8,34 +8,28 @@ body
 input
   height: 50px
 
-.todoList
-  display: flex
-  flex-direction: column
-  padding-top: 3%
-  margin: 0 auto
-  width: 50%
+//.todoList
+//  display: flex
+//  flex-direction: column
+//  padding-top: 3%
+//  margin: 0 auto
 
 .empty
   margin: 0 auto
   color: $textColor
 
 .newItem
-  margin-bottom: 5%
+  margin: 25px 0 25px 0
   height: 50px
 
 .mainBlock
-  display: flex
-  flex-direction: column
-  height: 80vh
+  height: 81vh // TODO: управлять для адаптива!
   overflow: auto
 
 .todoItem
   position: relative
-  display: flex
-  width: 90%
-  margin: 0 auto
-  padding: 0
   height: 50px
+  margin-bottom: 10px
 
 .trash
   position: absolute
@@ -56,12 +50,6 @@ input
 
 .status
   color: $textColor
-  height: 100%
-  margin: 0 auto
-  padding: 15px
-
-.animation__start
-  margin-top: 20%
 
 // animation
 

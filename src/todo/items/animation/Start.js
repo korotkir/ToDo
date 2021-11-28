@@ -12,9 +12,9 @@ class Start extends React.Component {
    <Player
     className="animations"
     ref={this.player} // set the ref to your class instance
-    autoplay={false}
-    loop={true}
-    controls={true}
+    autoplay={true}
+    loop={false}
+    controls={false}
     src={start}
     style={{ height: '300px', width: '300px' }}
    ></Player>

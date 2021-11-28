@@ -38,7 +38,7 @@ class Item extends React.Component {
 
  render() {
   return(
-    <div className="todoItem input-group mb-3">
+    <div className="todoItem input-group col-6">
      <div className={[...this.state.backgroundForm].join(' ')}>
       <input className="form-check-input mt-0" type="checkbox" onChange={this.done} defaultChecked={this.props.checked}/>
      </div>

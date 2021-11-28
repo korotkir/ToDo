@@ -1,7 +1,7 @@
 import React from "react"
+import 'bootstrap/dist/js/bootstrap.bundle.min'
 import TodoItems from "./TodoItems"
 import NewItem from "./NewItem"
-import TodoStatus from "./TodoStatus"
 
 class TodoList extends React.Component {
  constructor(props) {
@@ -51,19 +51,25 @@ class TodoList extends React.Component {
  render() {
   return(
    <div className="todoList">
-    <NewItem submit={this.itemSubmit} change={this.itemChange} value={this.state.value}/>
-    <div className="mainBlock">
-
-      <TodoItems add={this.itemSubmit}
-                 remove={this.removeItem}
-                 items={this.state.items}
-                 performed={this.performed}
-                 series={this.state.series}
-                 isAnimation={this.state.isAnimation}
-
-      />
-    </div>
-    <TodoStatus total={this.state.items.length} done={this.state.done} />
+    <div className="container-fluid">
+     <div className="row justify-content-center">
+      <div className="col-xs-12 col-sm-10 col-md-8">
+       <NewItem submit={this.itemSubmit} change={this.itemChange} value={this.state.value}/>
+      </div>
+     </div>
+      <div className="mainBlock row justify-content-center">
+        <TodoItems add={this.itemSubmit}
+                   remove={this.removeItem}
+                   items={this.state.items}
+                   performed={this.performed}
+                   series={this.state.series}
+                   isAnimation={this.state.isAnimation}
+        />
+      </div>
+      <div className="row justify-content-center">
+        <h3 className="status col-auto">Выполнено: {this.state.done} из {this.state.items.length}</h3>
+      </div>
+     </div>
    </div>
   )
  }
