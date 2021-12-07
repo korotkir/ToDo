@@ -1,7 +1,7 @@
 import React from "react"
-import 'bootstrap/dist/js/bootstrap.bundle.min'
 import TodoItems from "./TodoItems"
 import NewItem from "./NewItem"
+import TodosSuccess from "./TodosSuccess"
 
 class TodoList extends React.Component {
  constructor(props) {
@@ -11,13 +11,17 @@ class TodoList extends React.Component {
    items: [/*{id: 0, value: 'Купить штаны'}*/],
    checked: false,
    series: false,
-   done: 0
+   done: 0,
+   showModal: false
   }
  }
 
  performed = (condition) => {
   if(condition === 'plus') {
    this.setState({done: this.state.done + 1})
+   if (this.state.done + 1 === this.state.items.length) {
+    this.setState( {showModal: true} )
+   }
   }
   if(condition === 'minus') {
    this.setState({done: this.state.done - 1})
@@ -41,10 +45,10 @@ class TodoList extends React.Component {
  }
 
  removeItem = (element) => {
-  this.setState( {
-   items : this.state.items.filter(item => item.id !== element.id),
+  this.setState({
+   items: this.state.items.filter(item => item.id !== element.id),
    series: true,
-   isAnimation: false
+   isAnimation: false,
   })
  }
 
@@ -70,6 +74,10 @@ class TodoList extends React.Component {
         <h3 className="status col-auto">Выполнено: {this.state.done} из {this.state.items.length}</h3>
       </div>
      </div>
+    <TodosSuccess
+     show={this.state.showModal}
+     onHide={() => this.setState({ showModal: false } )}
+    />
    </div>
   )
  }

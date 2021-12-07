@@ -52,6 +52,7 @@ input {
 
 .status {
   color: darkGray;
+  padding-top: 2%;
 }
 
 .alert-enter {
