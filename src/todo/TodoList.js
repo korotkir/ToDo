@@ -2,6 +2,7 @@ import React from "react"
 import TodoItems from "./TodoItems"
 import NewItem from "./NewItem"
 import TodosSuccess from "./TodosSuccess"
+import StatusBar from "./StatusBar";
 
 class TodoList extends React.Component {
  constructor(props) {
@@ -54,7 +55,7 @@ class TodoList extends React.Component {
 
  onClear = () => {
   this.setState( {items: []} )
-  this.setState({ showModal: false, done: 0 } )
+  this.setState({ showModal: false, done: 0, series: true } )
 
  }
 
@@ -65,6 +66,9 @@ class TodoList extends React.Component {
      <div className="row justify-content-center">
       <div className="col-xs-12 col-sm-10 col-md-8">
        <NewItem submit={this.itemSubmit} change={this.itemChange} value={this.state.value}/>
+      </div>
+      <div className="col-xs-0 col-sm-1 col-md-2">
+       <StatusBar />
       </div>
      </div>
       <div className="mainBlock row justify-content-center">
