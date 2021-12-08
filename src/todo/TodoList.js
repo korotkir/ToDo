@@ -52,6 +52,12 @@ class TodoList extends React.Component {
   })
  }
 
+ onClear = () => {
+  this.setState( {items: []} )
+  this.setState({ showModal: false, done: 0 } )
+
+ }
+
  render() {
   return(
    <div className="todoList">
@@ -77,6 +83,7 @@ class TodoList extends React.Component {
     <TodosSuccess
      show={this.state.showModal}
      onHide={() => this.setState({ showModal: false } )}
+     onClear={this.onClear}
     />
    </div>
   )

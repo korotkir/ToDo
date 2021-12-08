@@ -26,8 +26,8 @@ class TodosSuccess extends React.Component {
      </p>
     </Modal.Body>
     <Modal.Footer style={ {'justifyContent': 'center'} }>
-     <Button style={ {'width': '40%'} } size="lg" variant="success">Очистить</Button>
-     <Button style={ {'width': '40%'} } size="lg" variant="danger">Оставить</Button>
+     <Button onClick={this.props.onClear} style={ {'width': '40%'} } size="lg" variant="success">Очистить</Button>
+     <Button onClick={this.props.onHide} style={ {'width': '40%'} } size="lg" variant="danger">Оставить</Button>
     </Modal.Footer>
    </Modal>
   )
