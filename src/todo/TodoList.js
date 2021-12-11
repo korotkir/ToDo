@@ -64,11 +64,11 @@ class TodoList extends React.Component {
    <div className="todoList">
     <div className="container-fluid">
      <div className="row justify-content-center">
-      <div className="col-xs-12 col-sm-10 col-md-8">
+     <div className="col-lg-8 order-lg-1 order-2">
        <NewItem submit={this.itemSubmit} change={this.itemChange} value={this.state.value}/>
       </div>
-      <div className="col-xs-0 col-sm-1 col-md-2">
-       <StatusBar />
+      <div className="col-lg-2 order-xl-2 order-1">
+      <StatusBar />
       </div>
      </div>
       <div className="mainBlock row justify-content-center">

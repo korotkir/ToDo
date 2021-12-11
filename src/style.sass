@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap')
+
 $textColor: darkGray
 
 body
-  background-color: #fafafa
+  background-color: #fdsfsd
   font-family: 'Roboto', sans-serif
 
 input
@@ -19,7 +20,7 @@ input
   color: $textColor
 
 .newItem
-  margin: 25px 0 25px 0
+  margin: 25px 0 
   height: 50px
 
 .mainBlock
@@ -73,15 +74,28 @@ input
   transform: scale(0.9)
   transition: opacity 300ms, transform 300ms
 
+ul
+  margin: 0
+  padding: 0
+
 ul.statusBar
-  height: 100%
   display: flex
-  justify-content: center
+  height: 100%  
+  width: 100%
+  justify-content: space-around
   align-items: center
   color: gray
 
 ul.statusBar li
   display: inline
-  padding: 0 25px
+
+@media (max-width: 992px) 
+  .newItem
+    margin: 0 0 25px 0 
+
+  ul.statusBar
+    padding: 15px 
+
+  
 
 

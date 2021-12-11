@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import { Dropdown } from "react-bootstrap";
 import {
  Moon, BrightnessHigh,
  Person, PersonFill,
@@ -11,8 +12,14 @@ class StatusBar extends React.Component {
   return (
    <ul className="statusBar">
     <li><Moon size={size} /></li>
+    <li>
+        <Dropdown variant="none">
+            <Dropdown.Toggle>
+                <Gear size={size} />
+            </Dropdown.Toggle>
+        </Dropdown>
+    </li>
     <li><Person size={size} /></li>
-    <li><Gear size={size} /></li>
    </ul>
   )
  }
