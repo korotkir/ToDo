@@ -5,8 +5,23 @@ import Success from "./items/animation/Success";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 class TodoItems extends React.Component {
- render() {
-  return (
+   constructor(props) {
+      super(props)
+   }
+
+   componentDidMount() {
+      if(localStorage.items) {
+         this.props.itemsDidMount()
+      }
+   }
+
+   componentDidUpdate() {
+      localStorage.setItem('items', JSON.stringify(this.props.items))
+      console.log(localStorage);
+    }
+
+   render() {
+    return (
 
     this.props.items.length
       ? <div className="col-xs-12 col-sm-9 col-md-7">
