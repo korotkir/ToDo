@@ -58,8 +58,10 @@ class TodoList extends React.Component {
   this.setState({ showModal: false, done: 0, series: true } )
  }
 
- itemsDidMount = () => {
-   this.setState( {items: [...JSON.parse(localStorage.getItem('items'))]} )
+ componentDidMount() {
+  if(localStorage.items) {
+    this.setState( {items: [...JSON.parse(localStorage.getItem('items'))]} )
+  }
  }
 
  render() {
@@ -81,7 +83,7 @@ class TodoList extends React.Component {
                    performed={this.performed}
                    series={this.state.series}
                    isAnimation={this.state.isAnimation}
-                   itemsDidMount={this.itemsDidMount}
+                  //  itemsDidMount={this.itemsDidMount}
         />
       </div>
       <div className="row justify-content-center">

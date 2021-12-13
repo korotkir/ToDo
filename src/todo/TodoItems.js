@@ -9,15 +9,8 @@ class TodoItems extends React.Component {
       super(props)
    }
 
-   componentDidMount() {
-      if(localStorage.items) {
-         this.props.itemsDidMount()
-      }
-   }
-
    componentDidUpdate() {
       localStorage.setItem('items', JSON.stringify(this.props.items))
-      console.log(localStorage);
     }
 
    render() {
