@@ -5,10 +5,7 @@ import Success from "./items/animation/Success";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 class TodoItems extends React.Component {
-   constructor(props) {
-      super(props)
-   }
-
+   
    componentDidUpdate() {
       localStorage.setItem('items', JSON.stringify(this.props.items))
     }
@@ -29,6 +26,7 @@ class TodoItems extends React.Component {
                onEnter={() => this.props.add}
                onExited={() => this.props.remove}>
               <Item key={el.id}
+                    index={i}
                     value={el.value}
                     remove={() => this.props.remove(this.props.items[i])}
                     items={this.props.items}

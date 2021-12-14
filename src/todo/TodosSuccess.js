@@ -2,10 +2,7 @@ import React from "react"
 import { Modal, Button } from 'react-bootstrap';
 
 class TodosSuccess extends React.Component {
- constructor(props) {
-  super(props)
- }
-
+ 
  render() {
   return(
    <Modal

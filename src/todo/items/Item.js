@@ -6,6 +6,7 @@ class Item extends React.Component {
   super(props);
   this.state = {
    checked: false,
+   success: {},
    task: ['form-control'],
    backgroundForm: ['input-group-text'],
    bounce: false,
@@ -22,13 +23,13 @@ class Item extends React.Component {
   this.setState({ checked: !this.state.checked })
 
   if(!this.state.checked) {
-   this.props.performed('plus')
+   this.props.performed('plus', this.props.index)
    this.setState({
     task: [...this.state.task, 'task'],
     backgroundForm: [...this.state.backgroundForm, 'success'],
    })
   } else {
-     this.props.performed('minus')
+     this.props.performed('minus', this.props.index)
      this.setState({
        task: [...this.state.task].splice(0,1),
        backgroundForm: [...this.state.backgroundForm].splice(0,1),
@@ -36,11 +37,21 @@ class Item extends React.Component {
     }
  }
 
- render() {
+//  componentDidUpdate() {
+//   console.log(this.props.items);
+//  }
+
+//  componentDidMount() {
+//   console.log(this.props.index);
+//  }
+
+//  componentDidMount() {}
+
+render() {
   return(
     <div className="todoItem input-group col-6">
      <div className={[...this.state.backgroundForm].join(' ')}>
-      <input className="form-check-input mt-0" type="checkbox" onChange={this.done} defaultChecked={this.props.checked}/>
+      <input className="form-check-input mt-0" type="checkbox" onChange={this.done} key={this.props.key}/>
      </div>
      <input type="text" className={[...this.state.task].join(' ')} defaultValue={this.props.value}/>
      <Trash className="trash" size={25} onClick={this.remove}/>

@@ -1,9 +1,12 @@
-import React, {Component} from "react";
+import React from "react";
 import { Dropdown } from "react-bootstrap";
 import {
- Moon, BrightnessHigh,
- Person, PersonFill,
- Gear, GearFill
+ Moon, 
+ Person, 
+ Gear, 
+//  GearFill,
+//  BrightnessHigh,
+//  PersonFill,
 } from "react-bootstrap-icons";
 
 class StatusBar extends React.Component {

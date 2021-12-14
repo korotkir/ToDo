@@ -17,16 +17,36 @@ class TodoList extends React.Component {
   }
  }
 
- performed = (condition) => {
+ performed = (condition, index) => {
   if(condition === 'plus') {
-   this.setState({done: this.state.done + 1})
-   if (this.state.done + 1 === this.state.items.length) {
+    this.setState({ done: this.state.done + 1 })
+
+    // Реализация передачи состояния чекбокса родителю
+    // TODO: реализуй тут функцию!
+   let copyItems = this.state.items.slice()
+   copyItems[index].checked = true
+   this.setState({ items: [...copyItems] })
+   console.log('items2', this.state.items);
+   
+
+    if (this.state.done + 1 === this.state.items.length) {
     this.setState( {showModal: true} )
    }
+
   }
+
   if(condition === 'minus') {
    this.setState({done: this.state.done - 1})
+
+     // Реализация передачи состояния чекбокса родителю
+    // TODO: реализуй тут функцию!
+    let copyItems = this.state.items.slice()
+    copyItems[index].checked = false
+    this.setState({ items: [...copyItems] })
+    console.log('items2', this.state.items);
+
   }
+
  }
 
  itemChange = (event) => {
@@ -39,7 +59,7 @@ class TodoList extends React.Component {
   value === ''
    ? this.setState({value: ''})
    : this.setState({
-    items: [...this.state.items, {id: Math.random(), value: value}],
+    items: [...this.state.items, {id: Math.random(), value: value, checked: false}, ],
     value: '',
     isAnimation: true
    })
@@ -59,6 +79,7 @@ class TodoList extends React.Component {
  }
 
  componentDidMount() {
+  console.log('items', this.state.items);
   if(localStorage.items) {
     this.setState( {items: [...JSON.parse(localStorage.getItem('items'))]} )
   }
