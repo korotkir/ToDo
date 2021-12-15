@@ -18,35 +18,27 @@ class TodoList extends React.Component {
  }
 
  performed = (condition, index) => {
-  if(condition === 'plus') {
-    this.setState({ done: this.state.done + 1 })
-
-    // Реализация передачи состояния чекбокса родителю
-    // TODO: реализуй тут функцию!
+  
+  let checkboxState = (i, bool) => {
    let copyItems = this.state.items.slice()
-   copyItems[index].checked = true
+   copyItems[i].checked = bool
    this.setState({ items: [...copyItems] })
    console.log('items2', this.state.items);
+  }
+
+  if(condition === 'plus') {
+    this.setState({ done: this.state.done + 1 })
+    checkboxState(index, true)
    
-
     if (this.state.done + 1 === this.state.items.length) {
-    this.setState( {showModal: true} )
+      this.setState( {showModal: true} )
    }
-
   }
 
   if(condition === 'minus') {
    this.setState({done: this.state.done - 1})
-
-     // Реализация передачи состояния чекбокса родителю
-    // TODO: реализуй тут функцию!
-    let copyItems = this.state.items.slice()
-    copyItems[index].checked = false
-    this.setState({ items: [...copyItems] })
-    console.log('items2', this.state.items);
-
+   checkboxState(index, false)
   }
-
  }
 
  itemChange = (event) => {
@@ -59,7 +51,7 @@ class TodoList extends React.Component {
   value === ''
    ? this.setState({value: ''})
    : this.setState({
-    items: [...this.state.items, {id: Math.random(), value: value, checked: false}, ],
+    items: [...this.state.items, {id: Math.random(), value: value, checked: this.state.checked}, ],
     value: '',
     isAnimation: true
    })
@@ -104,7 +96,7 @@ class TodoList extends React.Component {
                    performed={this.performed}
                    series={this.state.series}
                    isAnimation={this.state.isAnimation}
-                  //  itemsDidMount={this.itemsDidMount}
+                   checked={this.state.checked}
         />
       </div>
       <div className="row justify-content-center">
