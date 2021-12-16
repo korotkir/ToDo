@@ -9,11 +9,11 @@ class TodoList extends React.Component {
   super(props)
   this.state = {
    value: '',
-   items: [/*{id: 0, value: 'Купить штаны'}*/],
+   items: [/*{id: 0, value: 'Купить штаны', checked: false}*/],
    checked: false,
    series: false,
-   done: 0,
-   showModal: false
+   showModal: false,
+   done: 0
   }
  }
 
@@ -62,6 +62,7 @@ class TodoList extends React.Component {
    items: this.state.items.filter(item => item.id !== element.id),
    series: true,
    isAnimation: false,
+  //  done: this.state.done - 1
   })
  }
 
@@ -70,12 +71,31 @@ class TodoList extends React.Component {
   this.setState({ showModal: false, done: 0, series: true } )
  }
 
+ componentDidUpdate() {
+  localStorage.setItem('done', JSON.stringify(this.state.done))
+ }
+
  componentDidMount() {
-  console.log('items', this.state.items);
+   let itemStorage = JSON.parse(localStorage.getItem('items'))
+   let doneStorage = localStorage.getItem('done')
+ 
   if(localStorage.items) {
-    this.setState( {items: [...JSON.parse(localStorage.getItem('items'))]} )
+    this.setState( {items: [...itemStorage] } )
+  }
+
+  if(Number(doneStorage) >= 1) {
+    this.setState( {done: Number(doneStorage) } )
+  } else {
+      this.setState( {done: 0 } )
   }
  }
+
+ componentWillUnmount() {
+  // fix Warning: Can't perform a React state update on an unmounted component
+  this.setState = (state,callback)=>{
+      return;
+  };
+}
 
  render() {
   return(
@@ -97,6 +117,7 @@ class TodoList extends React.Component {
                    series={this.state.series}
                    isAnimation={this.state.isAnimation}
                    checked={this.state.checked}
+                   done={this.state.done}
         />
       </div>
       <div className="row justify-content-center">
