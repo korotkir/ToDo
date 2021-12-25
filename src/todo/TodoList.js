@@ -36,7 +36,7 @@ class TodoList extends React.Component {
   }
 
   if(condition === 'minus') {
-   this.setState({done: this.state.done - 1})
+   this.setState({ done: this.state.done - 1 })
    checkboxState(index, false)
   }
  }
@@ -62,8 +62,9 @@ class TodoList extends React.Component {
    items: this.state.items.filter(item => item.id !== element.id),
    series: true,
    isAnimation: false,
-  //  done: this.state.done - 1
   })
+  
+  element.checked && this.setState({ done: this.state.done - 1 })
  }
 
  onClear = () => {
