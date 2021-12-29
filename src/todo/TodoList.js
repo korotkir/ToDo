@@ -1,13 +1,17 @@
 import React from "react"
+import { ThemeProvider } from "styled-components"
+import {lightTheme, darkTheme, GlobalStyles} from "./themes"
 import TodoItems from "./TodoItems"
 import NewItem from "./NewItem"
 import TodosSuccess from "./TodosSuccess"
 import StatusBar from "./StatusBar";
 
+
 class TodoList extends React.Component {
  constructor(props) {
   super(props)
   this.state = {
+   theme: 'dark',
    value: '',
    items: [/*{id: 0, value: 'Купить штаны', checked: false}*/],
    checked: false,
@@ -15,6 +19,10 @@ class TodoList extends React.Component {
    showModal: false,
    done: 0
   }
+ }
+
+ themeToggler = () => {
+   this.state.theme === 'light' ? this.setState({ theme: 'dark' }) : this.setState({ theme: 'light' })
  }
 
  performed = (condition, index) => {
@@ -100,37 +108,40 @@ class TodoList extends React.Component {
 
  render() {
   return(
-   <div className="todoList">
-    <div className="container-fluid">
-     <div className="row justify-content-center">
-     <div className="col-lg-8 order-lg-1 order-2">
-       <NewItem submit={this.itemSubmit} change={this.itemChange} value={this.state.value}/>
-      </div>
-      <div className="col-lg-2 order-xl-2 order-1">
-      <StatusBar />
-      </div>
-     </div>
-      <div className="mainBlock row justify-content-center">
-        <TodoItems add={this.itemSubmit}
-                   remove={this.removeItem}
-                   items={this.state.items}
-                   performed={this.performed}
-                   series={this.state.series}
-                   isAnimation={this.state.isAnimation}
-                   checked={this.state.checked}
-                   done={this.state.done}
+  <ThemeProvider theme={this.state.theme === 'light' ? lightTheme : darkTheme}>
+    <GlobalStyles />
+      <div className="todoList">
+        <div className="container-fluid">
+        <div className="row justify-content-center">
+        <div className="col-lg-8 order-lg-1 order-2">
+          <NewItem submit={this.itemSubmit} change={this.itemChange} value={this.state.value}/>
+          </div>
+          <div className="col-lg-2 order-xl-2 order-1">
+          <StatusBar  themeToggler={this.themeToggler} />
+          </div>
+        </div>
+          <div className="mainBlock row justify-content-center">
+            <TodoItems add={this.itemSubmit}
+                      remove={this.removeItem}
+                      items={this.state.items}
+                      performed={this.performed}
+                      series={this.state.series}
+                      isAnimation={this.state.isAnimation}
+                      checked={this.state.checked}
+                      done={this.state.done}
+            />
+          </div>
+          <div className="row justify-content-center">
+            <h3 className="status col-auto">Выполнено: {this.state.done} из {this.state.items.length}</h3>
+          </div>
+        </div>
+        <TodosSuccess
+        show={this.state.showModal}
+        onHide={() => this.setState({ showModal: false } )}
+        onClear={this.onClear}
         />
       </div>
-      <div className="row justify-content-center">
-        <h3 className="status col-auto">Выполнено: {this.state.done} из {this.state.items.length}</h3>
-      </div>
-     </div>
-    <TodosSuccess
-     show={this.state.showModal}
-     onHide={() => this.setState({ showModal: false } )}
-     onClear={this.onClear}
-    />
-   </div>
+  </ThemeProvider>
   )
  }
 }

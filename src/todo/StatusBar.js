@@ -14,13 +14,9 @@ class StatusBar extends React.Component {
   let size = '27'
   return (
    <ul className="statusBar">
-    <li><Moon size={size} /></li>
+    <li><Moon size={size} onClick={this.props.themeToggler} /></li>
     <li>
-        <Dropdown variant="none">
-            <Dropdown.Toggle>
-                <Gear size={size} />
-            </Dropdown.Toggle>
-        </Dropdown>
+        <Gear size={size} />
     </li>
     <li><Person size={size} /></li>
    </ul>
