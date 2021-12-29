@@ -11,7 +11,7 @@ class TodoList extends React.Component {
  constructor(props) {
   super(props)
   this.state = {
-   theme: 'dark',
+   theme: 'light',
    value: '',
    items: [/*{id: 0, value: 'Купить штаны', checked: false}*/],
    checked: false,
