@@ -129,6 +129,7 @@ class TodoList extends React.Component {
                       isAnimation={this.state.isAnimation}
                       checked={this.state.checked}
                       done={this.state.done}
+                      theme={this.state.theme}
             />
           </div>
           <div className="row justify-content-center">

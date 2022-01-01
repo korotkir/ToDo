@@ -1,6 +1,7 @@
 import React from "react";
 import { Player } from '@lottiefiles/react-lottie-player';
-import start from "./icon/start.json"
+import startLight from "./icon/start_light.json"
+import startDark from "./icon/start_dark.json"
 
 class Start extends React.Component {
  constructor(props) {
@@ -15,7 +16,7 @@ class Start extends React.Component {
     autoplay={true}
     loop={false}
     controls={false}
-    src={start}
+    src={this.props.theme === 'light' ? startLight : startDark}
     style={{ height: '300px', width: '300px' }}
    ></Player>
   );

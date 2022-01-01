@@ -1,42 +1,62 @@
 import { createGlobalStyle } from "styled-components"
 
 export const lightTheme = {
-  body: '#fdsfsd',
+  background: '#fdsfsd',
   color: 'black',
-  trash: "darkgray",
-  success: "rgba(0,255,43,0.62)", // background
-  status: "darkgray",
-  statusBar: "gray"
+  mainStyle: 'darkgray',
+  status: 'darkgray',
+  success: 'rgba(0,255,43,0.62)',
+  statusHover: '#ff8725',
+  modal: 'white'
 }
 
 export const darkTheme = {
-  body: '#181a1b',
+  background: '#181a1b',
   color: 'white',
-  trash: "rgb(178, 171, 161)",
-  success: "rgb(232, 230, 227)", // background
-  status: "rgb(178, 171, 161)",
-  statusBar: "rgb(152, 143, 129)"
+  mainStyle: '#ff8725',
+  status: 'white',
+  success: '#ff8725',
+  statusHover: 'white',
+  modal: '#2f3031'
 }
 
 export const GlobalStyles = createGlobalStyle`
 
   body {
-    background-color: ${props => props.theme.body};
+    background-color: ${props => props.theme.background};
     color: ${props => props.theme.color};
   }
 
   .form-control {
-    background-color: ${props => props.theme.body};
-    border-color: #6c757d;
-}
-
-  .input-group-text {
-    background-color: ${props => props.theme.body}
-    border-color: #6c757d;
+    background-color: ${props => props.theme.background};
+    border-color: ${props => props.theme.mainStyle};
+    color: ${props => props.theme.color}
   }
 
+  .form-control:focus {
+    background-color: ${props => props.theme.background};
+    color: ${props => props.theme.color};
+  }
+
+  .input-group-text {
+    background-color: ${props => props.theme.background};
+    border-color: ${props => props.theme.mainStyle};
+    color: ${props => props.theme.color}
+  }
+
+  .btn-submit {
+    border-color: ${props => props.theme.color};
+    color: ${props => props.theme.color};
+  }
+    
+  .btn-submit:hover {
+    color: ${props => props.theme.color};
+    background-color: ${props => props.theme.mainStyle};
+    border-color: ${props => props.theme.mainStyle};
+    }
+
   .trash {
-    color: ${props => props.theme.trash};
+    color: ${props => props.theme.mainStyle};
   }
 
   .success {
@@ -48,7 +68,26 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .statusBar {
-    color: ${props => props.theme.statusBar};
+    color: ${props => props.theme.mainStyle};
+  }
+
+  .moon:hover {
+    transition-delay: .3s;
+    color: ${props => props.theme.statusHover};
+  }
+  
+  .gear:hover {
+    transition-delay: .3s;
+    color: ${props => props.theme.statusHover};
+  }
+  
+  .person:hover {
+    transition-delay: .3s;    
+    color: ${props => props.theme.statusHover};
+  }
+
+  .modal-content {
+    background-color: ${props => props.theme.modal}
   }
 
 `

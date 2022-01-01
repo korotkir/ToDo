@@ -4,9 +4,6 @@ import {
  Moon, 
  Person, 
  Gear, 
-//  GearFill,
-//  BrightnessHigh,
-//  PersonFill,
 } from "react-bootstrap-icons";
 
 class StatusBar extends React.Component {
@@ -14,11 +11,11 @@ class StatusBar extends React.Component {
   let size = '27'
   return (
    <ul className="statusBar">
-    <li><Moon size={size} onClick={this.props.themeToggler} /></li>
+    <li><Moon className="moon" size={size} onClick={this.props.themeToggler} /></li>
     <li>
-        <Gear size={size} />
+        <Gear className="gear" size={size} />
     </li>
-    <li><Person size={size} /></li>
+    <li><Person className="person" size={size} /></li>
    </ul>
   )
  }

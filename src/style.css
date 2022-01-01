@@ -17,6 +17,15 @@ input {
   height: 50px;
 }
 
+.btn-submit {
+  border: 1px solid;
+}
+
+.btn-submit:hover {
+  -webkit-transition-delay: .1s;
+          transition-delay: .1s;
+}
+
 .mainBlock {
   height: 81vh;
   overflow: auto;

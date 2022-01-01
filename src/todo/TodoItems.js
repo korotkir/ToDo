@@ -37,7 +37,7 @@ class TodoItems extends React.Component {
          </TransitionGroup>
         </div>
      : <div className="icons align-self-center">
-        { !this.props.series ? <Start /> : <Success /> }
+        { !this.props.series ? <Start theme={this.props.theme}/> : <Success theme={this.props.theme} /> }
        </div>
   )
  }

@@ -24,7 +24,7 @@ class NewItem extends React.Component {
      onChange={this.props.change}
      value={this.props.value}
     />
-    <button className="btn btn-outline-secondary" type="submit" >Добавить</button>
+    <button className="btn btn-submit" type="submit" >Добавить</button>
    </form>
   )
  }
