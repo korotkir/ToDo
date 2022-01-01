@@ -82,21 +82,26 @@ class TodoList extends React.Component {
 
  componentDidUpdate() {
   localStorage.setItem('done', JSON.stringify(this.state.done))
+  localStorage.setItem('theme', JSON.stringify(this.state.theme))
  }
 
  componentDidMount() {
    let itemStorage = JSON.parse(localStorage.getItem('items'))
    let doneStorage = localStorage.getItem('done')
+   let themeStorage = JSON.parse(localStorage.getItem('theme'))
+
+   this.setState({ theme: themeStorage  }) 
  
   if(localStorage.items) {
-    this.setState( {items: [...itemStorage] } )
+    this.setState({ items: [...itemStorage] })
   }
 
   if(Number(doneStorage) >= 1) {
-    this.setState( {done: Number(doneStorage) } )
+    this.setState({ done: Number(doneStorage) })
   } else {
-      this.setState( {done: 0 } )
+      this.setState({ done: 0 })
   }
+
  }
 
  componentWillUnmount() {
