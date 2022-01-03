@@ -46,7 +46,7 @@ export const GlobalStyles = createGlobalStyle`
 
   .btn-submit {
     border-color: ${props => props.theme.color};
-    color: ${props => props.theme.color};
+    color: ${props => props.theme.mainStyle};
   }
     
   .btn-submit:hover {
@@ -71,21 +71,24 @@ export const GlobalStyles = createGlobalStyle`
     color: ${props => props.theme.mainStyle};
   }
 
-  .moon:hover {
-    transition-delay: .3s;
-    color: ${props => props.theme.statusHover};
-  }
-  
-  .gear:hover {
-    transition-delay: .3s;
-    color: ${props => props.theme.statusHover};
-  }
-  
-  .person:hover {
-    transition-delay: .3s;    
-    color: ${props => props.theme.statusHover};
+  .gear, .person {
+    color: ${props => props.theme.mainStyle};
+    background: none;
+    border: none;
   }
 
+  .moon:hover, .gear:hover, .person:hover {
+    transition-delay: .3s;
+    color: ${props => props.theme.statusHover};
+    background: none;
+    border: none;
+  }
+
+  .moon:active, .gear:active, .person:active {
+    background: none;
+    border: none;
+  }
+  
   .modal-content {
     background-color: ${props => props.theme.modal}
   }

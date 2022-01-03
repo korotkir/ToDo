@@ -122,7 +122,10 @@ class TodoList extends React.Component {
           <NewItem submit={this.itemSubmit} change={this.itemChange} value={this.state.value}/>
           </div>
           <div className="col-lg-2 order-xl-2 order-1">
-          <StatusBar  themeToggler={this.themeToggler} />
+          <StatusBar  
+            themeToggler={this.themeToggler}
+            theme={this.state.theme}
+            />
           </div>
         </div>
           <div className="mainBlock row justify-content-center">
