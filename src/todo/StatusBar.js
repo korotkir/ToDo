@@ -21,7 +21,7 @@ class StatusBar extends React.Component {
             </Dropdown.Toggle>
             <Dropdown.Menu variant={theme}>
                 
-                <Dropdown.Item href="#/action-1">
+                <Dropdown.ItemText>
                     <Form>
                         <Form.Check 
                             type="switch"
@@ -29,9 +29,9 @@ class StatusBar extends React.Component {
                             label="Подстраивать тему под системную"
                         />
                     </Form>
-                </Dropdown.Item>
+                </Dropdown.ItemText>
 
-                <Dropdown.Item href="#/action-2">
+                <Dropdown.ItemText>
                     <Form>
                         <Form.Check 
                             type="switch"
@@ -39,8 +39,8 @@ class StatusBar extends React.Component {
                             label="Показывать модальное окно, когда все выполнено"
                         />
                     </Form>
-                </Dropdown.Item>
-
+                </Dropdown.ItemText>
+                <Dropdown.Divider />
                 <Dropdown.Item href="#/action-3">О приложении</Dropdown.Item>
             </Dropdown.Menu>
         </Dropdown>

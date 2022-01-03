@@ -8,6 +8,7 @@ input {
 }
 
 .dropdown-menu {
+  width: 13vw;
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
 }
