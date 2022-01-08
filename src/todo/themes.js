@@ -6,7 +6,7 @@ export const lightTheme = {
   mainStyle: 'darkgray',
   status: 'darkgray',
   success: 'rgba(0,255,43,0.62)',
-  statusHover: '#ff8725',
+  statusHover: 'gray',
   modal: 'white'
 }
 
@@ -87,6 +87,10 @@ export const GlobalStyles = createGlobalStyle`
   .moon:active, .gear:active, .person:active {
     background: none;
     border: none;
+  }
+
+  .moon:focus, .gear:focus, .person:focus {
+    color: ${props => props.theme.statusHover};
   }
   
   .modal-content {

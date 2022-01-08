@@ -12,6 +12,7 @@ class TodoList extends React.Component {
   super(props)
   this.state = {
    theme: 'light',
+   autoTheme: true,
    value: '',
    items: [/*{id: 0, value: 'Купить штаны', checked: false}*/],
    checked: false,
@@ -23,6 +24,10 @@ class TodoList extends React.Component {
 
  themeToggler = () => {
    this.state.theme === 'light' ? this.setState({ theme: 'dark' }) : this.setState({ theme: 'light' })
+ }
+
+ themeSwitch = () => {
+   this.state.autoTheme === true ? this.setState({ autoTheme: false }) : this.setState({ autoTheme: true })
  }
 
  performed = (condition, index) => {
@@ -83,14 +88,22 @@ class TodoList extends React.Component {
  componentDidUpdate() {
   localStorage.setItem('done', JSON.stringify(this.state.done))
   localStorage.setItem('theme', JSON.stringify(this.state.theme))
+  localStorage.setItem('autoTheme', JSON.stringify(this.state.autoTheme))
  }
 
  componentDidMount() {
    let itemStorage = JSON.parse(localStorage.getItem('items'))
    let doneStorage = localStorage.getItem('done')
    let themeStorage = JSON.parse(localStorage.getItem('theme'))
+   let autoThemeStorage = JSON.parse(localStorage.getItem('autoTheme'))
 
-   this.setState({ theme: themeStorage  }) 
+   this.setState({ theme: themeStorage  })
+   this.setState({ autoTheme: autoThemeStorage  })
+
+  if (this.state.autoTheme === true) {
+    const isDark = matchMedia('(prefers-color-scheme: dark)')
+    this.setState( {theme: isDark.matches ? 'dark' : 'light' || 'light'} )
+  }
  
   if(localStorage.items) {
     this.setState({ items: [...itemStorage] })
@@ -125,6 +138,8 @@ class TodoList extends React.Component {
           <StatusBar  
             themeToggler={this.themeToggler}
             theme={this.state.theme}
+            themeSwitch={this.themeSwitch}
+            themeChecked={this.state.autoTheme}
             />
           </div>
         </div>
