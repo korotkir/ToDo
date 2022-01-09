@@ -11,14 +11,15 @@ class TodoList extends React.Component {
  constructor(props) {
   super(props)
   this.state = {
-   theme: 'light',
-   autoTheme: true,
    value: '',
    items: [/*{id: 0, value: 'Купить штаны', checked: false}*/],
    checked: false,
    series: false,
+   done: 0,
+   theme: matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light' || 'light',
    showModal: false,
-   done: 0
+   autoThemeSwitch: true,
+   showModalSwitch: true,
   }
  }
 
@@ -27,11 +28,14 @@ class TodoList extends React.Component {
  }
 
  themeSwitch = () => {
-   this.state.autoTheme === true ? this.setState({ autoTheme: false }) : this.setState({ autoTheme: true })
+   this.state.autoThemeSwitch === true ? this.setState({ autoThemeSwitch: false }) : this.setState({ autoThemeSwitch: true })
+ }
+
+ modalSwitch = () => {
+  this.state.showModalSwitch === true ? this.setState({ showModalSwitch: false }) : this.setState({ showModalSwitch: true })
  }
 
  performed = (condition, index) => {
-  
   let checkboxState = (i, bool) => {
    let copyItems = this.state.items.slice()
    copyItems[i].checked = bool
@@ -42,8 +46,9 @@ class TodoList extends React.Component {
   if(condition === 'plus') {
     this.setState({ done: this.state.done + 1 })
     checkboxState(index, true)
-   
-    if (this.state.done + 1 === this.state.items.length) {
+    
+    // TODO: костыль!!
+    if (this.state.done + 1 === this.state.items.length && (this.state.showModalSwitch === true || this.state.showModalSwitch === 'true' ) ) {
       this.setState( {showModal: true} )
    }
   }
@@ -88,21 +93,32 @@ class TodoList extends React.Component {
  componentDidUpdate() {
   localStorage.setItem('done', JSON.stringify(this.state.done))
   localStorage.setItem('theme', JSON.stringify(this.state.theme))
-  localStorage.setItem('autoTheme', JSON.stringify(this.state.autoTheme))
+  localStorage.setItem('autoThemeSwitch', JSON.stringify(this.state.autoThemeSwitch))
+  localStorage.setItem('showModalSwitch', JSON.stringify(this.state.showModalSwitch))
  }
 
  componentDidMount() {
    let itemStorage = JSON.parse(localStorage.getItem('items'))
    let doneStorage = localStorage.getItem('done')
    let themeStorage = JSON.parse(localStorage.getItem('theme'))
-   let autoThemeStorage = JSON.parse(localStorage.getItem('autoTheme'))
+   let autoThemeStorage = JSON.parse(localStorage.getItem('autoThemeSwitch'))
+   let modalStorage = JSON.parse(localStorage.getItem('showModalSwitch'))
 
-   this.setState({ theme: themeStorage  })
-   this.setState({ autoTheme: autoThemeStorage  })
+  if(localStorage.autoThemeSwitch) {
+    this.setState({ autoThemeSwitch: autoThemeStorage})
+  }
+  
+  if(localStorage.theme) {
+    this.setState({ theme: themeStorage})
+  }
+   
+  if (localStorage.showModalSwitch) {
+    this.setState({ showModalSwitch: modalStorage})
+  }
 
-  if (this.state.autoTheme === true) {
+  if (localStorage.autoThemeSwitch === 'true') {
     const isDark = matchMedia('(prefers-color-scheme: dark)')
-    this.setState( {theme: isDark.matches ? 'dark' : 'light' || 'light'} )
+    this.setState( { theme: isDark.matches ? 'dark' : 'light' || 'light' } )
   }
  
   if(localStorage.items) {
@@ -139,7 +155,9 @@ class TodoList extends React.Component {
             themeToggler={this.themeToggler}
             theme={this.state.theme}
             themeSwitch={this.themeSwitch}
-            themeChecked={this.state.autoTheme}
+            themeChecked={this.state.autoThemeSwitch}
+            modalSwitch={this.modalSwitch}
+            modalChecked={this.state.showModalSwitch}
             />
           </div>
         </div>

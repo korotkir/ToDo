@@ -26,8 +26,8 @@ class StatusBar extends React.Component {
                         <Form.Check 
                             type="switch"
                             id="custom-switch"
-                            label="Подстраивать тему под системную"
                             onChange={this.props.themeSwitch}
+                            label="Подстраивать тему под системную"
                             defaultChecked
                             checked={this.props.themeChecked}
                         />
@@ -39,8 +39,10 @@ class StatusBar extends React.Component {
                         <Form.Check 
                             type="switch"
                             id="custom-switch"
+                            onChange={this.props.modalSwitch}
                             label="Показывать модальное окно, когда все выполнено"
                             defaultChecked
+                            checked={this.props.modalChecked}
                         />
                     </Form>
                 </Dropdown.ItemText>
