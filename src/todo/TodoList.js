@@ -5,6 +5,7 @@ import TodoItems from "./TodoItems"
 import NewItem from "./NewItem"
 import TodosSuccess from "./TodosSuccess"
 import StatusBar from "./StatusBar";
+import About from "./About"
 
 
 class TodoList extends React.Component {
@@ -20,6 +21,7 @@ class TodoList extends React.Component {
    showModal: false,
    autoThemeSwitch: true,
    showModalSwitch: true,
+   showAbout: false,
   }
  }
 
@@ -90,6 +92,10 @@ class TodoList extends React.Component {
   this.setState({ showModal: false, done: 0, series: true } )
  }
 
+ about = () => {
+   this.setState({ showAbout: true })
+ }
+
  componentDidUpdate() {
   localStorage.setItem('done', JSON.stringify(this.state.done))
   localStorage.setItem('theme', JSON.stringify(this.state.theme))
@@ -158,6 +164,7 @@ class TodoList extends React.Component {
             themeChecked={this.state.autoThemeSwitch}
             modalSwitch={this.modalSwitch}
             modalChecked={this.state.showModalSwitch}
+            about={this.about}
             />
           </div>
         </div>
@@ -178,9 +185,13 @@ class TodoList extends React.Component {
           </div>
         </div>
         <TodosSuccess
-        show={this.state.showModal}
-        onHide={() => this.setState({ showModal: false } )}
-        onClear={this.onClear}
+          show={this.state.showModal}
+          onHide={() => this.setState({ showModal: false } )}
+          onClear={this.onClear}
+          />
+        <About 
+          show={this.state.showAbout}
+          onHide={() => this.setState({ showAbout: false } )}
         />
       </div>
   </ThemeProvider>

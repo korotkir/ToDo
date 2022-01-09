@@ -47,7 +47,7 @@ class StatusBar extends React.Component {
                     </Form>
                 </Dropdown.ItemText>
                 <Dropdown.Divider />
-                <Dropdown.Item href="#/action-3">О приложении</Dropdown.Item>
+                <Dropdown.Item onClick={this.props.about} >О приложении</Dropdown.Item>
             </Dropdown.Menu>
         </Dropdown>
 
