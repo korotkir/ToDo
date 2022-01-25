@@ -2,7 +2,7 @@ import React from "react"
 import { Modal, Button } from 'react-bootstrap';
 
 class About extends React.Component {
- 
+
  render() {
   return(
    <Modal
@@ -18,9 +18,10 @@ class About extends React.Component {
      </Modal.Title>
     </Modal.Header>
     <Modal.Body className="modalBody" style={ {'fontSize': '22px'} }>
-     <p>Данное приложение разработано мной для изучения концепций ReactJS .</p>
-     <p>На данный момент реализиована только Frontend часть.</p>
+     <p>Данное приложение разработано мной для изучения концепций ReactJS.
+      На данный момент реализована только Frontend часть.</p>
      <p>Создано в 2021 - 2022г.</p>
+     <p align="right">- korotkir -</p>
     </Modal.Body>
     <Modal.Footer style={ {'justifyContent': 'center'} }>
      <Button onClick={this.props.onHide} size="lg" variant="success">Закрыть</Button>
