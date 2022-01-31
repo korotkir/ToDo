@@ -1,11 +1,12 @@
-import React from "react";
-import { Dropdown, Form } from "react-bootstrap";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import {Dropdown, Form} from 'react-bootstrap'
 import {
- Moon, 
- Person, 
- Gear, 
-} from "react-bootstrap-icons";
-import DropdownToggle from "react-bootstrap/esm/DropdownToggle";
+  Moon,
+  Person,
+  Gear,
+} from 'react-bootstrap-icons'
+import DropdownToggle from 'react-bootstrap/esm/DropdownToggle'
 
 class StatusBar extends React.Component {
  render() {
@@ -20,10 +21,10 @@ class StatusBar extends React.Component {
                 <li><Gear size={size} /></li>
             </Dropdown.Toggle>
             <Dropdown.Menu variant={theme}>
-                
+
                 <Dropdown.ItemText>
                     <Form>
-                        <Form.Check 
+                        <Form.Check
                             type="switch"
                             id="custom-switch"
                             onChange={this.props.themeSwitch}
@@ -36,7 +37,7 @@ class StatusBar extends React.Component {
 
                 <Dropdown.ItemText>
                     <Form>
-                        <Form.Check 
+                        <Form.Check
                             type="switch"
                             id="custom-switch"
                             onChange={this.props.modalSwitch}
@@ -56,7 +57,8 @@ class StatusBar extends React.Component {
             <li><Person size={size} /></li>
             </Dropdown.Toggle>
             <Dropdown.Menu variant={theme}>
-                <Dropdown.Item href="#/action-1" disabled>Выйти</Dropdown.Item>
+              <Dropdown.Item><Link className="authLink" to="/auth">Авторизация</Link></Dropdown.Item>
+                <Dropdown.Item href="#" disabled>Выйти</Dropdown.Item>
             </Dropdown.Menu>
         </Dropdown>
    </ul>

@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 input {
@@ -9,7 +9,7 @@ input {
 
 .dropdown-menu {
   width: 13vw;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
 }
 
@@ -28,8 +28,7 @@ input {
 }
 
 .btn-submit:hover {
-  -webkit-transition-delay: .1s;
-          transition-delay: .1s;
+  transition-delay: 0.1s;
 }
 
 .mainBlock {
@@ -45,9 +44,7 @@ input {
 
 .trash {
   position: absolute;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
+  align-self: center;
   left: 95%;
 }
 
@@ -65,20 +62,24 @@ input {
   padding-top: 2%;
 }
 
+.authLink {
+  text-decoration: none;
+  color: inherit;
+}
+.authLink:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
 .alert-enter {
   opacity: 0;
-  -webkit-transform: scale(0.9);
-          transform: scale(0.9);
+  transform: scale(0.9);
 }
 
 .alert-enter-active {
   opacity: 1;
-  -webkit-transform: translateX(0);
-          transform: translateX(0);
-  -webkit-transition: opacity 300ms, -webkit-transform 300ms;
-  transition: opacity 300ms, -webkit-transform 300ms;
+  transform: translateX(0);
   transition: opacity 300ms, transform 300ms;
-  transition: opacity 300ms, transform 300ms, -webkit-transform 300ms;
 }
 
 .alert-exit {
@@ -87,12 +88,8 @@ input {
 
 .alert-exit-active {
   opacity: 0;
-  -webkit-transform: scale(0.9);
-          transform: scale(0.9);
-  -webkit-transition: opacity 300ms, -webkit-transform 300ms;
-  transition: opacity 300ms, -webkit-transform 300ms;
+  transform: scale(0.9);
   transition: opacity 300ms, transform 300ms;
-  transition: opacity 300ms, transform 300ms, -webkit-transform 300ms;
 }
 
 ul {
@@ -101,16 +98,11 @@ ul {
 }
 
 ul.statusBar {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   height: 100%;
   width: 100%;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: space-around;
+  align-items: center;
 }
 
 ul.statusBar li {
@@ -121,11 +113,14 @@ ul.statusBar li {
   .newItem {
     margin: 0 0 25px 0;
   }
+
   ul.statusBar {
     padding: 15px;
   }
+
   .trash {
     left: 90%;
   }
 }
+
 /*# sourceMappingURL=style.css.map */

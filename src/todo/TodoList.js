@@ -13,7 +13,7 @@ class TodoList extends React.Component {
   super(props)
   this.state = {
    value: '',
-   items: [/*{id: 0, value: 'Купить штаны', checked: false}*/],
+   items: [{id: 0, value: 'Купить штаны', checked: false}],
    checked: false,
    series: false,
    done: 0,
@@ -48,7 +48,7 @@ class TodoList extends React.Component {
   if(condition === 'plus') {
     this.setState({ done: this.state.done + 1 })
     checkboxState(index, true)
-    
+
     // TODO: костыль!!
     if (this.state.done + 1 === this.state.items.length && (this.state.showModalSwitch === true || this.state.showModalSwitch === 'true' ) ) {
       this.setState( {showModal: true} )
@@ -83,7 +83,7 @@ class TodoList extends React.Component {
    series: true,
    isAnimation: false,
   })
-  
+
   element.checked && this.setState({ done: this.state.done - 1 })
  }
 
@@ -113,11 +113,11 @@ class TodoList extends React.Component {
   if(localStorage.autoThemeSwitch) {
     this.setState({ autoThemeSwitch: autoThemeStorage})
   }
-  
+
   if(localStorage.theme) {
     this.setState({ theme: themeStorage})
   }
-   
+
   if (localStorage.showModalSwitch) {
     this.setState({ showModalSwitch: modalStorage})
   }
@@ -126,7 +126,7 @@ class TodoList extends React.Component {
     const isDark = matchMedia('(prefers-color-scheme: dark)')
     this.setState( { theme: isDark.matches ? 'dark' : 'light' || 'light' } )
   }
- 
+
   if(localStorage.items) {
     this.setState({ items: [...itemStorage] })
   }
@@ -157,7 +157,7 @@ class TodoList extends React.Component {
           <NewItem submit={this.itemSubmit} change={this.itemChange} value={this.state.value}/>
           </div>
           <div className="col-lg-2 order-xl-2 order-1">
-          <StatusBar  
+          <StatusBar
             themeToggler={this.themeToggler}
             theme={this.state.theme}
             themeSwitch={this.themeSwitch}
@@ -189,7 +189,7 @@ class TodoList extends React.Component {
           onHide={() => this.setState({ showModal: false } )}
           onClear={this.onClear}
           />
-        <About 
+        <About
           show={this.state.showAbout}
           onHide={() => this.setState({ showAbout: false } )}
         />

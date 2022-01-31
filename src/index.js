@@ -1,10 +1,7 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import 'bootstrap/dist/css/bootstrap.css'
-import './style.css'
-import TodoList from "./todo/TodoList"
+import ReactDOM from 'react-dom'
+import App from './App'
 
 ReactDOM.render(
- <TodoList />,
+ <App />,
  document.getElementById('root')
 );
