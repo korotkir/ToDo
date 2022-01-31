@@ -13,8 +13,8 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<TodoList />}/>
-        <Route path="/auth" element={<Auth />}/>
+        <Route path="/ToDo" element={<TodoList />}/>
+        <Route path="/ToDo/auth" element={<Auth />}/>
       </Routes>
     </BrowserRouter>
   )
