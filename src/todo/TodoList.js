@@ -6,6 +6,7 @@ import NewItem from "./NewItem"
 import TodosSuccess from "./TodosSuccess"
 import StatusBar from "./StatusBar";
 import About from "./About"
+import TodoStatus from './TodoStatus'
 
 
 class TodoList extends React.Component {
@@ -147,55 +148,56 @@ class TodoList extends React.Component {
 }
 
  render() {
-  return(
-  <ThemeProvider theme={this.state.theme === 'light' ? lightTheme : darkTheme}>
-    <GlobalStyles />
-      <div className="todoList">
-        <div className="container-fluid">
-        <div className="row justify-content-center">
-        <div className="col-lg-8 order-lg-1 order-2">
-          <NewItem submit={this.itemSubmit} change={this.itemChange} value={this.state.value}/>
-          </div>
-          <div className="col-lg-2 order-xl-2 order-1">
-          <StatusBar
-            themeToggler={this.themeToggler}
-            theme={this.state.theme}
-            themeSwitch={this.themeSwitch}
-            themeChecked={this.state.autoThemeSwitch}
-            modalSwitch={this.modalSwitch}
-            modalChecked={this.state.showModalSwitch}
-            about={this.about}
-            />
-          </div>
-        </div>
-          <div className="mainBlock row justify-content-center">
-            <TodoItems add={this.itemSubmit}
-                      remove={this.removeItem}
-                      items={this.state.items}
-                      performed={this.performed}
-                      series={this.state.series}
-                      isAnimation={this.state.isAnimation}
-                      checked={this.state.checked}
-                      done={this.state.done}
-                      theme={this.state.theme}
-            />
-          </div>
-          <div className="row justify-content-center">
-            <h3 className="status col-auto">Выполнено: {this.state.done} из {this.state.items.length}</h3>
-          </div>
-        </div>
-        <TodosSuccess
-          show={this.state.showModal}
-          onHide={() => this.setState({ showModal: false } )}
-          onClear={this.onClear}
-          />
-        <About
-          show={this.state.showAbout}
-          onHide={() => this.setState({ showAbout: false } )}
-        />
-      </div>
-  </ThemeProvider>
-  )
+   return (
+     <ThemeProvider theme={this.state.theme === 'light' ? lightTheme : darkTheme}>
+       <GlobalStyles/>
+       <div className="todoList">
+         <div className="container-fluid">
+           <div className="header row justify-content-center">
+             <div className="col-lg-8 order-lg-1 order-2">
+               <NewItem submit={this.itemSubmit} change={this.itemChange} value={this.state.value}/>
+             </div>
+             <div className="col-lg-2 order-xl-2 order-1">
+               <StatusBar
+                 themeToggler={this.themeToggler}
+                 theme={this.state.theme}
+                 themeSwitch={this.themeSwitch}
+                 themeChecked={this.state.autoThemeSwitch}
+                 modalSwitch={this.modalSwitch}
+                 modalChecked={this.state.showModalSwitch}
+                 about={this.about}
+               />
+             </div>
+           </div>
+           <div className="mainBlock row justify-content-center">
+             <TodoItems add={this.itemSubmit}
+                        remove={this.removeItem}
+                        items={this.state.items}
+                        performed={this.performed}
+                        series={this.state.series}
+                        isAnimation={this.state.isAnimation}
+                        checked={this.state.checked}
+                        done={this.state.done}
+                        theme={this.state.theme}
+             />
+           </div>
+           <TodoStatus done={this.state.done} values={this.state.items.length}/>
+         </div>
+
+
+
+         <TodosSuccess
+           show={this.state.showModal}
+           onHide={() => this.setState({showModal: false})}
+           onClear={this.onClear}
+         />
+         <About
+           show={this.state.showAbout}
+           onHide={() => this.setState({showAbout: false})}
+         />
+       </div>
+     </ThemeProvider>
+   )
  }
 }
 

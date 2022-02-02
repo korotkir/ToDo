@@ -3,6 +3,19 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+.header {
+  height: 10vh;
+}
+
+.mainBlock {
+  height: 80vh;
+  overflow: auto;
+}
+
+.TodoStatus {
+  height: 10vh;
+}
+
 input {
   height: 50px;
 }
@@ -29,11 +42,6 @@ input {
 
 .btn-submit:hover {
   transition-delay: 0.1s;
-}
-
-.mainBlock {
-  height: 81vh;
-  overflow: auto;
 }
 
 .todoItem {
@@ -110,6 +118,10 @@ ul.statusBar li {
 }
 
 @media (max-width: 992px) {
+  .header {
+    height: 20vh;
+  }
+
   .newItem {
     margin: 0 0 25px 0;
   }
@@ -120,6 +132,10 @@ ul.statusBar li {
 
   .trash {
     left: 90%;
+  }
+
+  .mainBlock {
+    height: 70vh;
   }
 }
 

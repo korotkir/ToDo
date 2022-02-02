@@ -6,6 +6,16 @@ body
   // background-color: #fdsfsd
   font-family: 'Roboto', sans-serif
 
+.header
+  height: 10vh
+
+.mainBlock
+  height: 80vh // TODO: управлять для адаптива!
+  overflow: auto
+
+.TodoStatus
+  height: 10vh
+
 input
   height: 50px
 
@@ -37,10 +47,6 @@ input
   // background-color: darkgray
   // border-color: darkgray
   transition-delay: .1s
-
-.mainBlock
-  height: 81vh // TODO: управлять для адаптива!
-  overflow: auto
 
 .todoItem
   position: relative
@@ -110,6 +116,9 @@ ul.statusBar li
   display: inline
 
 @media (max-width: 992px)
+  .header
+    height: 20vh
+
   .newItem
     margin: 0 0 25px 0
 
@@ -118,6 +127,9 @@ ul.statusBar li
 
   .trash
     left: 90%
+
+  .mainBlock
+    height: 70vh // TODO: управлять для адаптива!
 
 
 
