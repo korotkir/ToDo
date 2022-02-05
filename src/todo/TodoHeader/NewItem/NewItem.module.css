@@ -1,0 +1,13 @@
+.NewItem {
+  display: flex;
+  height: 50px;
+  margin-bottom: 25px;
+}
+
+.NewItem form {
+  height: 100%;
+  align-items: center;
+  width: 200px;
+}
+
+/*# sourceMappingURL=NewItem.module.css.map */

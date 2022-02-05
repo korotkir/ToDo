@@ -1,6 +1,5 @@
 import React from "react"
 import { Modal, Button } from 'react-bootstrap';
-import styles from './About.module.css'
 
 class About extends React.Component {
 

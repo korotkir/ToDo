@@ -1,7 +1,7 @@
 import React from 'react'
-import Item from './items/Item'
-import Start from './items/animation/Start'
-import Success from './items/animation/Success'
+import Item from './item/Item'
+import Start from './item/animation/Start'
+import Success from './item/animation/Success'
 import {CSSTransition, TransitionGroup} from 'react-transition-group'
 import styles from './TodoItems.module.css'
 
@@ -16,7 +16,7 @@ class TodoItems extends React.Component {
       <div className={styles.TodoItems}>
         {
           this.props.items.length
-            ? <div className="col-xs-12 col-sm-9 col-md-7">
+            ? <div className="col-12 col-sm-10 col-md-8">
               <TransitionGroup>{
                 [...this.props.items].map((el, i) =>
                   <CSSTransition

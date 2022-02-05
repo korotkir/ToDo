@@ -5,4 +5,10 @@
   overflow: auto;
 }
 
+@media (max-width: 992px) {
+  .TodoItems {
+    height: 76vh;
+  }
+}
+
 /*# sourceMappingURL=TodoItems.module.css.map */

@@ -2,7 +2,7 @@ import React from "react"
 import {
   BrowserRouter,
   Routes,
-  Route
+  Route,
 } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css'
 import './style.css'
@@ -13,6 +13,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<TodoList />}/>
         <Route path="/ToDo" element={<TodoList />}/>
         <Route path="/auth" element={<Auth />}/>
       </Routes>

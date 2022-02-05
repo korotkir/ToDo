@@ -1,5 +1,6 @@
-import React from "react";
-import {Trash} from "react-bootstrap-icons";
+import React from 'react'
+import {Trash} from 'react-bootstrap-icons'
+import styles from './Item.module.css'
 
 class Item extends React.Component {
  constructor(props) {
@@ -19,45 +20,27 @@ class Item extends React.Component {
   this.props.remove()
  }
 
-//  done = () => {
-//   this.setState({ checked: !this.state.checked })
-
-//   if(!this.state.checked) {
-//    this.props.performed('plus', this.props.index)
-//    this.setState({
-//     task: [...this.state.task, 'task'],
-//     backgroundForm: [...this.state.backgroundForm, 'success'],
-//    })
-//   } else {
-//      this.props.performed('minus', this.props.index)
-//      this.setState({
-//        task: [...this.state.task].splice(0,1),
-//        backgroundForm: [...this.state.backgroundForm].splice(0,1),
-//      })
-//     }
-//  }
-
 handleStylization = (condition) => {
   if (condition === 'add') {
     this.setState({
       task: [...this.state.task, 'task'],
       backgroundForm: [...this.state.backgroundForm, 'success'],
      })
-  } 
+  }
   if (condition === 'remove') {
     this.setState({
       task: [...this.state.task].splice(0,1),
       backgroundForm: [...this.state.backgroundForm].splice(0,1),
     })
   }
-  
+
 }
 
 handleChange = () => {
   if (!this.props.checked) {
    this.props.performed('plus', this.props.index)
    this.handleStylization('add')
-   
+
   } else {
      this.props.performed('minus', this.props.index)
      this.handleStylization('remove')
@@ -71,13 +54,20 @@ handleChange = () => {
  }
 
  render() {
+   const cls = [
+     styles.Item,
+     'input-group',
+     'col-6',
+     'col-lg-1'
+   ]
+
   return(
-    <div className="todoItem input-group col-6">
+    <div className={cls.join(' ')}>
      <div className={[...this.state.backgroundForm].join(' ')}>
-      <input 
+      <input
         key={this.props.key}
-        className="form-check-input mt-0" 
-        type="checkbox" 
+        className="form-check-input mt-0"
+        type="checkbox"
         onChange={this.handleChange}
         checked={this.props.checked}
         />

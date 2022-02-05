@@ -152,7 +152,7 @@ class TodoList extends React.Component {
      <ThemeProvider theme={this.state.theme === 'light' ? lightTheme : darkTheme}>
        <GlobalStyles/>
        <div className={styles.TodoList}>
-         <div className="container-fluid">
+         <div className="container">
 
            <TodoHeader
              submit={this.itemSubmit}

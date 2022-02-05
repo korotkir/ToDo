@@ -117,25 +117,30 @@ class Auth extends React.Component {
 
   render() {
     return (
-      <div className={styles.Auth}>
-        <div>
-          <h1>Авторизация</h1>
+        <div className="container">
+          <div className="row justify-content-center">
+          <div className="col-12 col-md-4">
+          <div className={styles.Auth}>
 
-          <form className={styles.authForm}>
 
-            {this.renderInputs()}
+            <h1>Авторизация</h1>
 
-            <Button
-              className={styles.Button}
-              variant="secondary"
-              size="lg"
-              disabled={!this.state.isFormValid}
-            >
-              Войти
-            </Button>
-          </form>
+            <form className={styles.authForm}>
+
+              {this.renderInputs()}
+
+              <Button
+                className={styles.Button}
+                variant="success"
+                size="lg"
+                disabled={!this.state.isFormValid}
+              >
+                Войти
+              </Button>
+            </form>
+          </div>
         </div>
-
+          </div>
       </div>
     )
   }

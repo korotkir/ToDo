@@ -5,7 +5,8 @@ class NewItem extends React.Component {
  render() {
   const cls = [
     styles.NewItem,
-    'input-group'
+    'input-group',
+    'items'
   ]
 
   const dictNewItem = [
@@ -19,19 +20,21 @@ class NewItem extends React.Component {
   let placeholderNewItem = `Например: ${dictNewItem[randomizerForNewItem]}`
 
   return(
-   <form
-    className={cls.join(' ')}
-    onSubmit={this.props.submit}
-   >
-    <input
-     className="form-control"
-     type="text"
-     placeholder={placeholderNewItem}
-     onChange={this.props.change}
-     value={this.props.value}
-    />
-    <button className="btn btn-submit" type="submit" >Добавить</button>
-   </form>
+     <form
+       className={cls.join(' ')}
+       onSubmit={this.props.submit}
+     >
+      <input
+        className="form-control"
+        type="text"
+        placeholder={placeholderNewItem}
+        onChange={this.props.change}
+        value={this.props.value}
+      />
+      <button className="btn btn-submit" type="submit" >Добавить</button>
+     </form>
+
+
   )
  }
 }
