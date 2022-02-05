@@ -1,0 +1,22 @@
+.StatusBar {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.StatusBar li {
+  display: inline;
+}
+
+.StatusBar a {
+  text-decoration: none;
+  color: inherit;
+}
+.StatusBar a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+/*# sourceMappingURL=StatusBar.module.css.map */

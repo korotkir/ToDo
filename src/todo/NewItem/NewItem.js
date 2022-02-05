@@ -1,7 +1,13 @@
-import React from "react";
+import React from 'react'
+import styles from './NewItem.module.css'
 
 class NewItem extends React.Component {
  render() {
+  const cls = [
+    styles.NewItem,
+    'input-group'
+  ]
+
   const dictNewItem = [
    'Сходить в спортзал',
    'Купить молоко',
@@ -14,7 +20,7 @@ class NewItem extends React.Component {
 
   return(
    <form
-    className="newItem input-group"
+    className={cls.join(' ')}
     onSubmit={this.props.submit}
    >
     <input

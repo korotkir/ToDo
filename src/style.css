@@ -3,23 +3,6 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
-.header {
-  height: 10vh;
-}
-
-.mainBlock {
-  height: 80vh;
-  overflow: auto;
-}
-
-.TodoStatus {
-  height: 10vh;
-}
-
-input {
-  height: 50px;
-}
-
 .dropdown-menu {
   width: 13vw;
   font-family: "Roboto", sans-serif;
@@ -29,11 +12,6 @@ input {
 .empty {
   margin: 0 auto;
   color: darkGray;
-}
-
-.newItem {
-  margin: 25px 0;
-  height: 50px;
 }
 
 .btn-submit {
@@ -70,15 +48,6 @@ input {
   padding-top: 2%;
 }
 
-.authLink {
-  text-decoration: none;
-  color: inherit;
-}
-.authLink:hover {
-  text-decoration: none;
-  color: inherit;
-}
-
 .alert-enter {
   opacity: 0;
   transform: scale(0.9);
@@ -103,18 +72,6 @@ input {
 ul {
   margin: 0;
   padding: 0;
-}
-
-ul.statusBar {
-  display: flex;
-  height: 100%;
-  width: 100%;
-  justify-content: space-around;
-  align-items: center;
-}
-
-ul.statusBar li {
-  display: inline;
 }
 
 @media (max-width: 992px) {

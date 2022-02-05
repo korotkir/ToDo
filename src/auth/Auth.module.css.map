@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["Auth.module.sass"],"names":[],"mappings":"AAAA;EACE;EACA;EACA;EACA;;AAEA;EACE;EACA;;;AAGF;EACE;EACA;EACA;;AAEF;EACE;;;AAEJ;EACE;EACA","file":"Auth.module.css"}
+{"version":3,"sourceRoot":"","sources":["auth.module.sass"],"names":[],"mappings":"AAEA;EACE;EACA;EACA;EACA;EACA;;AAEA;EACE;EACA;;;AAGF;EACE;EACA;EACA;;AAEF;EACE;EACA;;;AAEJ;EACE;EACA","file":"auth.module.css"}

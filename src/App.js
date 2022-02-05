@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css'
 import './style.css'
-import TodoList from "./todo/TodoList"
+import TodoList from "./todo/TodoList/TodoList"
 import Auth from "./auth/Auth"
 
 export default function App() {

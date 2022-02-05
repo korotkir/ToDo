@@ -67,7 +67,7 @@ export const GlobalStyles = createGlobalStyle`
     color: ${props => props.theme.status};
   }
 
-  .statusBar {
+  .StatusBar {
     color: ${props => props.theme.mainStyle};
   }
 

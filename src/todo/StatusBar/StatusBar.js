@@ -6,14 +6,14 @@ import {
   Person,
   Gear,
 } from 'react-bootstrap-icons'
-import DropdownToggle from 'react-bootstrap/esm/DropdownToggle'
+import styles from './StatusBar.module.css'
 
 class StatusBar extends React.Component {
  render() {
   let size = '27'
   let theme = this.props.theme === 'light' ? 'light' : 'dark'
   return (
-   <ul className="statusBar">
+   <ul className={styles.StatusBar}>
        <li><Moon className="moon" size={size} onClick={this.props.themeToggler} /></li>
 
         <Dropdown>
@@ -57,7 +57,7 @@ class StatusBar extends React.Component {
             <li><Person size={size} /></li>
             </Dropdown.Toggle>
             <Dropdown.Menu variant={theme}>
-              <Dropdown.Item><Link className="authLink" to="/auth">Авторизация</Link></Dropdown.Item>
+              <Dropdown.Item><Link to="/auth">Авторизация</Link></Dropdown.Item>
                 <Dropdown.Item href="#" disabled>Выйти</Dropdown.Item>
             </Dropdown.Menu>
         </Dropdown>

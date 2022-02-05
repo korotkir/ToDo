@@ -1,12 +1,12 @@
 import React from "react"
 import { ThemeProvider } from "styled-components"
-import {lightTheme, darkTheme, GlobalStyles} from "./themes"
-import TodoItems from "./TodoItems"
-import NewItem from "./NewItem"
-import TodosSuccess from "./TodosSuccess"
-import StatusBar from "./StatusBar";
-import About from "./About"
-import TodoStatus from './TodoStatus'
+import {lightTheme, darkTheme, GlobalStyles} from "../themes/themes"
+import TodoHeader from '../TodoHeader/TodoHeader'
+import TodoItems from "../TodoItems/TodoItems"
+import TodosSuccess from "../TodosSuccess/TodosSuccess"
+import About from "../About/About"
+import TodoStatus from '../TodoStatus/TodoStatus'
+import styles from './TodoList.module.css'
 
 
 class TodoList extends React.Component {
@@ -151,40 +151,39 @@ class TodoList extends React.Component {
    return (
      <ThemeProvider theme={this.state.theme === 'light' ? lightTheme : darkTheme}>
        <GlobalStyles/>
-       <div className="todoList">
+       <div className={styles.TodoList}>
          <div className="container-fluid">
-           <div className="header row justify-content-center">
-             <div className="col-lg-8 order-lg-1 order-2">
-               <NewItem submit={this.itemSubmit} change={this.itemChange} value={this.state.value}/>
-             </div>
-             <div className="col-lg-2 order-xl-2 order-1">
-               <StatusBar
-                 themeToggler={this.themeToggler}
-                 theme={this.state.theme}
-                 themeSwitch={this.themeSwitch}
-                 themeChecked={this.state.autoThemeSwitch}
-                 modalSwitch={this.modalSwitch}
-                 modalChecked={this.state.showModalSwitch}
-                 about={this.about}
-               />
-             </div>
-           </div>
-           <div className="mainBlock row justify-content-center">
-             <TodoItems add={this.itemSubmit}
-                        remove={this.removeItem}
-                        items={this.state.items}
-                        performed={this.performed}
-                        series={this.state.series}
-                        isAnimation={this.state.isAnimation}
-                        checked={this.state.checked}
-                        done={this.state.done}
-                        theme={this.state.theme}
-             />
-           </div>
-           <TodoStatus done={this.state.done} values={this.state.items.length}/>
+
+           <TodoHeader
+             submit={this.itemSubmit}
+             change={this.itemChange}
+             value={this.state.value}
+             themeToggler={this.themeToggler}
+             theme={this.state.theme}
+             themeSwitch={this.themeSwitch}
+             themeChecked={this.state.autoThemeSwitch}
+             modalSwitch={this.modalSwitch}
+             modalChecked={this.state.showModalSwitch}
+             about={this.about}
+           />
+
+           <TodoItems add={this.itemSubmit}
+                      remove={this.removeItem}
+                      items={this.state.items}
+                      performed={this.performed}
+                      series={this.state.series}
+                      isAnimation={this.state.isAnimation}
+                      checked={this.state.checked}
+                      done={this.state.done}
+                      theme={this.state.theme}
+           />
+
+           <TodoStatus
+             done={this.state.done}
+             values={this.state.items.length}
+           />
+
          </div>
-
-
 
          <TodosSuccess
            show={this.state.showModal}

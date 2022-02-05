@@ -3,49 +3,25 @@
 $textColor: darkGray
 
 body
-  // background-color: #fdsfsd
   font-family: 'Roboto', sans-serif
 
-.header
-  height: 10vh
 
-.mainBlock
-  height: 80vh // TODO: управлять для адаптива!
-  overflow: auto
-
-.TodoStatus
-  height: 10vh
-
-input
-  height: 50px
 
 .dropdown-menu
   width: 13vw
   font-family: 'Roboto', sans-serif
   font-size: 16px
 
-//.todoList
-//  display: flex
-//  flex-direction: column
-//  padding-top: 3%
-//  margin: 0 auto
-
 .empty
   margin: 0 auto
   color: $textColor
 
-.newItem
-  margin: 25px 0
-  height: 50px
+
 
 .btn-submit
-  // color: gray
   border: 1px solid
 
 .btn-submit:hover
-  // color: white
-  // background-color: darkgray
-  // border-color: darkgray
   transition-delay: .1s
 
 .todoItem
@@ -57,7 +33,6 @@ input
   position: absolute
   align-self: center
   left: 95%
-  // color: darkgray
 
 .trash:hover
   color: gray
@@ -67,19 +42,9 @@ input
   background-color: lightgrey
   color: gray
 
-.success
-  // background-color: rgba(0,255,43,0.62)
 
 .status
-  // color: $textColor
   padding-top: 2%
-
-.authLink
-  text-decoration: none
-  color: inherit
-  &:hover
-    text-decoration: none
-    color: inherit
 
 // animation
 
@@ -104,16 +69,7 @@ ul
   margin: 0
   padding: 0
 
-ul.statusBar
-  display: flex
-  height: 100%
-  width: 100%
-  justify-content: space-around
-  align-items: center
-  // color: gray
 
-ul.statusBar li
-  display: inline
 
 @media (max-width: 992px)
   .header

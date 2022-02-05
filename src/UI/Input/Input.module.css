@@ -1,3 +1,9 @@
+.Input span {
+  color: red;
+}
 
+.Input.invalid label {
+  color: red;
+}
 
 /*# sourceMappingURL=Input.module.css.map */
