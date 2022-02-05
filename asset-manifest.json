@@ -1,13 +1,17 @@
 {
   "files": {
-    "main.css": "/ToDo/static/css/main.762e5a1d.css",
-    "main.js": "/ToDo/static/js/main.73a472a7.js",
+    "main.css": "/ToDo/static/css/main.d575c34c.chunk.css",
+    "main.js": "/ToDo/static/js/main.d0fc2ffb.chunk.js",
+    "main.js.map": "/ToDo/static/js/main.d0fc2ffb.chunk.js.map",
+    "runtime~main.js": "/ToDo/static/js/runtime~main.a5b7b4e0.js",
+    "runtime~main.js.map": "/ToDo/static/js/runtime~main.a5b7b4e0.js.map",
+    "static/css/2.171a7357.chunk.css": "/ToDo/static/css/2.171a7357.chunk.css",
+    "static/js/2.108d632d.chunk.js": "/ToDo/static/js/2.108d632d.chunk.js",
+    "static/js/2.108d632d.chunk.js.map": "/ToDo/static/js/2.108d632d.chunk.js.map",
     "index.html": "/ToDo/index.html",
-    "main.762e5a1d.css.map": "/ToDo/static/css/main.762e5a1d.css.map",
-    "main.73a472a7.js.map": "/ToDo/static/js/main.73a472a7.js.map"
-  },
-  "entrypoints": [
-    "static/css/main.762e5a1d.css",
-    "static/js/main.73a472a7.js"
-  ]
+    "precache-manifest.02797fb10f2c3d402c049a24a70d0234.js": "/ToDo/precache-manifest.02797fb10f2c3d402c049a24a70d0234.js",
+    "service-worker.js": "/ToDo/service-worker.js",
+    "static/css/2.171a7357.chunk.css.map": "/ToDo/static/css/2.171a7357.chunk.css.map",
+    "static/css/main.d575c34c.chunk.css.map": "/ToDo/static/css/main.d575c34c.chunk.css.map"
+  }
 }
