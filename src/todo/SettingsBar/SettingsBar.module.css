@@ -1,0 +1,10 @@
+.SettingsBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  width: 100%;
+  padding: 30px 0;
+  font-size: 18px;
+}
+
+/*# sourceMappingURL=SettingsBar.module.css.map */

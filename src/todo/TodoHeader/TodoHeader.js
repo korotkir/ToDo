@@ -2,6 +2,7 @@ import React from 'react'
 import NewItem from './NewItem/NewItem'
 import StatusBar from './StatusBar/StatusBar'
 import styles from './TodoHeader.module.css'
+import SettingsBar from '../SettingsBar/SettingsBar'
 
 
 const  TodoHeader = props => {
@@ -15,6 +16,10 @@ const  TodoHeader = props => {
         modalSwitch={props.modalSwitch}
         modalChecked={props.modalChecked}
         about={props.about}
+      />
+      <SettingsBar
+        themeSwitch={props.themeSwitch}
+        themeChecked={props.themeChecked}
       />
       <NewItem
         submit={props.submit}

@@ -8,7 +8,6 @@ import About from "../About/About"
 import TodoStatus from '../TodoStatus/TodoStatus'
 import styles from './TodoList.module.css'
 
-
 class TodoList extends React.Component {
  constructor(props) {
   super(props)
