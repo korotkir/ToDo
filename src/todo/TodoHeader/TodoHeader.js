@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import NewItem from './NewItem/NewItem'
 import StatusBar from './StatusBar/StatusBar'
 import styles from './TodoHeader.module.css'
@@ -6,6 +6,13 @@ import SettingsBar from '../SettingsBar/SettingsBar'
 
 
 const  TodoHeader = props => {
+  const [status, setStatus] = useState()
+
+  function adaptiveSettings() {
+    const switcher = status
+    setStatus(!switcher)
+  }
+
   return (
     <div className={styles.TodoHeader}>
       <StatusBar
@@ -16,10 +23,15 @@ const  TodoHeader = props => {
         modalSwitch={props.modalSwitch}
         modalChecked={props.modalChecked}
         about={props.about}
+        adaptiveSettings={adaptiveSettings}
       />
       <SettingsBar
         themeSwitch={props.themeSwitch}
         themeChecked={props.themeChecked}
+        modalSwitch={props.modalSwitch}
+        modalChecked={props.modalChecked}
+        about={props.about}
+        status={status}
       />
       <NewItem
         submit={props.submit}

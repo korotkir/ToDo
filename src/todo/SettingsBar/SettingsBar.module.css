@@ -1,10 +1,18 @@
 .SettingsBar {
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: start;
   width: 100%;
   padding: 30px 0;
   font-size: 18px;
+}
+
+.status {
+  display: flex;
+}
+
+.SettingsBar > p {
+  margin-top: 30px;
 }
 
 /*# sourceMappingURL=SettingsBar.module.css.map */

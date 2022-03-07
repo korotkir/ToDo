@@ -10,7 +10,8 @@ import styles from './StatusBar.module.css'
 
 
 class StatusBar extends React.Component {
- render() {
+
+  render() {
    const cls = [
      styles.StatusBar,
      'items'
@@ -18,46 +19,50 @@ class StatusBar extends React.Component {
 
   let size = '27'
   let theme = this.props.theme === 'light' ? 'light' : 'dark'
+
+
    return (
        <ul className={cls.join(' ')}>
          <li><Moon className="moon" size={size} onClick={this.props.themeToggler}/></li>
 
+         {
+           window.innerWidth <= 768
+            ? <li><Gear className="gear" size={size} onClick={this.props.adaptiveSettings}/></li>
+             : <Dropdown>
+               <Dropdown.Toggle variant="custom" className="gear">
+                 <li><Gear size={size}/></li>
+               </Dropdown.Toggle>
+               <Dropdown.Menu variant={theme}>
 
-         <Dropdown>
-             <Dropdown.Toggle variant="custom" className="gear">
-               <li><Gear size={size}/></li>
-             </Dropdown.Toggle>
-           <Dropdown.Menu variant={theme}>
+                 <Dropdown.ItemText>
+                   <Form>
+                     <Form.Check
+                       type="switch"
+                       id="custom-switch"
+                       onChange={this.props.themeSwitch}
+                       label="Подстраивать тему под системную"
+                       checked={this.props.themeChecked}
+                     />
+                   </Form>
+                 </Dropdown.ItemText>
 
-             <Dropdown.ItemText>
-               <Form>
-                 <Form.Check
-                   type="switch"
-                   id="custom-switch"
-                   onChange={this.props.themeSwitch}
-                   label="Подстраивать тему под системную"
-                   defaultChecked
-                   checked={this.props.themeChecked}
-                 />
-               </Form>
-             </Dropdown.ItemText>
+                 <Dropdown.ItemText>
+                   <Form>
+                     <Form.Check
+                       type="switch"
+                       id="custom-switch"
+                       onChange={this.props.modalSwitch}
+                       label="Показывать модальное окно, когда все выполнено"
+                       checked={this.props.modalChecked}
+                     />
+                   </Form>
+                 </Dropdown.ItemText>
+                 <Dropdown.Divider/>
+                 <Dropdown.Item onClick={this.props.about}>О приложении</Dropdown.Item>
+               </Dropdown.Menu>
+             </Dropdown>
 
-             <Dropdown.ItemText>
-               <Form>
-                 <Form.Check
-                   type="switch"
-                   id="custom-switch"
-                   onChange={this.props.modalSwitch}
-                   label="Показывать модальное окно, когда все выполнено"
-                   defaultChecked
-                   checked={this.props.modalChecked}
-                 />
-               </Form>
-             </Dropdown.ItemText>
-             <Dropdown.Divider/>
-             <Dropdown.Item onClick={this.props.about}>О приложении</Dropdown.Item>
-           </Dropdown.Menu>
-         </Dropdown>
+         }
 
          <Dropdown>
            <Dropdown.Toggle variant="custom" className="person">
