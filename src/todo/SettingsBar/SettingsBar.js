@@ -1,17 +1,25 @@
-import React, {useState} from 'react'
+import React from 'react'
 import styles from './SettingsBar.module.css'
 import {Form} from 'react-bootstrap'
+import {CSSTransition} from 'react-transition-group'
 
-function SettingsBar(props)  {
-
-    let cls = [styles.SettingsBar]
-
-    if (props.status) {
-      cls.push(styles.status)
-    }
-
-    return (
-      <div className={cls.join(' ')}>
+const SettingsBar = (props) =>  (
+      <CSSTransition
+        in={props.status}
+        timeout={{
+          enter: 1000,
+          exit: 500
+        }}
+        classNames={{
+          enter: styles.BarEnter,
+          enterActive: styles.BarEnterActive,
+          exit: styles.BarExit,
+          exitActive: styles.BarExitActive
+        }}
+        mountOnEnter
+        unmountOnExit
+      >
+        <div className={styles.SettingsBar}>
           <Form>
             <Form.Check
               type="switch"
@@ -28,13 +36,13 @@ function SettingsBar(props)  {
               type="switch"
               id="custom-switch"
               onChange={props.modalSwitch}
-              label="Показывать модальное окно, когда все выполнено"
+              label="Уведомлять когда все выполнено"
               checked={props.modalChecked}
             />
           </Form>
-        <p onClick={props.about}>О приложении</p>
-      </div>
+          <p style={{'textDecoration': 'underline'}} onClick={props.about}>О приложении</p>
+        </div>
+      </CSSTransition>
     )
-}
 
 export default SettingsBar

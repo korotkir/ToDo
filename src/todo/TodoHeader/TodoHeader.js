@@ -6,11 +6,12 @@ import SettingsBar from '../SettingsBar/SettingsBar'
 
 
 const  TodoHeader = props => {
-  const [status, setStatus] = useState()
+  const [status, setStatus] = useState(false)
 
   function adaptiveSettings() {
     const switcher = status
     setStatus(!switcher)
+    console.log(status)
   }
 
   return (

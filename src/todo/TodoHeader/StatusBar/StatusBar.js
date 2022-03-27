@@ -33,7 +33,6 @@ class StatusBar extends React.Component {
                  <li><Gear size={size}/></li>
                </Dropdown.Toggle>
                <Dropdown.Menu variant={theme}>
-
                  <Dropdown.ItemText>
                    <Form>
                      <Form.Check

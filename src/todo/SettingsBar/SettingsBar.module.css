@@ -1,18 +1,40 @@
 .SettingsBar {
-  display: none;
+  position: relative;
   flex-direction: column;
-  justify-content: start;
   width: 100%;
   padding: 30px 0;
   font-size: 18px;
 }
 
-.status {
-  display: flex;
-}
-
 .SettingsBar > p {
   margin-top: 30px;
+}
+
+.BarEnter {
+  animation: settings-in 1000ms;
+}
+
+.BarExit {
+  animation: settings-out 500ms;
+}
+
+@keyframes settings-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-100);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes settings-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 /*# sourceMappingURL=SettingsBar.module.css.map */
