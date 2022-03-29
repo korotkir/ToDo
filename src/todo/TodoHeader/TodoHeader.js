@@ -2,8 +2,7 @@ import React, {useState} from 'react'
 import NewItem from './NewItem/NewItem'
 import StatusBar from './StatusBar/StatusBar'
 import styles from './TodoHeader.module.css'
-import SettingsBar from '../SettingsBar/SettingsBar'
-
+import SettingsBar from './SettingsBar/SettingsBar'
 
 const  TodoHeader = props => {
   const [status, setStatus] = useState(false)
