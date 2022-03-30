@@ -13,7 +13,9 @@ class TodoList extends React.Component {
   super(props)
   this.state = {
    value: '',
-   items: [{id: 0, value: 'Купить штаны', checked: false}],
+   items: [
+     // {id: 0, value: 'Купить штаны', checked: false}
+   ],
    checked: false,
    series: false,
    done: 0,
@@ -42,7 +44,6 @@ class TodoList extends React.Component {
    let copyItems = this.state.items.slice()
    copyItems[i].checked = bool
    this.setState({ items: [...copyItems] })
-   console.log('items2', this.state.items);
   }
 
   if(condition === 'plus') {
@@ -96,16 +97,16 @@ class TodoList extends React.Component {
    this.setState({ showAbout: true })
  }
 
- componentDidUpdate() {
-  localStorage.setItem('done', JSON.stringify(this.state.done))
-  localStorage.setItem('theme', JSON.stringify(this.state.theme))
-  localStorage.setItem('autoThemeSwitch', JSON.stringify(this.state.autoThemeSwitch))
-  localStorage.setItem('showModalSwitch', JSON.stringify(this.state.showModalSwitch))
- }
+  componentDidUpdate() {
+    localStorage.setItem('done', JSON.stringify(this.state.done))
+    localStorage.setItem('theme', JSON.stringify(this.state.theme))
+    localStorage.setItem('autoThemeSwitch', JSON.stringify(this.state.autoThemeSwitch))
+    localStorage.setItem('showModalSwitch', JSON.stringify(this.state.showModalSwitch))
+  }
 
  componentDidMount() {
    let itemStorage = JSON.parse(localStorage.getItem('items'))
-   let doneStorage = localStorage.getItem('done')
+   let doneStorage = JSON.parse(localStorage.getItem('done'))
    let themeStorage = JSON.parse(localStorage.getItem('theme'))
    let autoThemeStorage = JSON.parse(localStorage.getItem('autoThemeSwitch'))
    let modalStorage = JSON.parse(localStorage.getItem('showModalSwitch'))

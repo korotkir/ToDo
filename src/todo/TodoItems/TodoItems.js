@@ -29,7 +29,7 @@ export default function TodoItems(props) {
                     <Item key={el.id}
                           index={i}
                           value={el.value}
-                          checked={el.checked}
+                          checkeds={el.checked}
                           remove={() => props.remove(props.items[i])}
                           items={props.items}
                           performed={props.performed}

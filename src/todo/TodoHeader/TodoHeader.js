@@ -10,8 +10,9 @@ const  TodoHeader = props => {
   function adaptiveSettings() {
     const switcher = status
     setStatus(!switcher)
-    console.log(status)
   }
+
+  const closeSettingsHandler = () => setStatus(false)
 
   return (
     <div className={styles.TodoHeader}>
@@ -37,6 +38,8 @@ const  TodoHeader = props => {
         submit={props.submit}
         change={props.change}
         value={props.value}
+        close={closeSettingsHandler}
+
       />
     </div>
   )

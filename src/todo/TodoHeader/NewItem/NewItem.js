@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import styles from './NewItem.module.css'
 
-class NewItem extends React.Component {
- render() {
+export default function NewItem(props) {
+
   const cls = [
     styles.NewItem,
     'input-group',
@@ -15,28 +15,31 @@ class NewItem extends React.Component {
    'Заплатить налоги',
    'Заказать телефон',
    'Позвонить Лехе',
-   'Навестить бабулю']
-  let randomizerForNewItem = Math.floor(Math.random() * dictNewItem.length)
-  let placeholderNewItem = `Например: ${dictNewItem[randomizerForNewItem]}`
+   'Навестить бабулю'
+  ]
 
-  return(
+  let randomizerForNewItem = Math.floor(Math.random() * dictNewItem.length)
+  let placeholderNewItem = dictNewItem[randomizerForNewItem]
+
+  return (
      <form
        className={cls.join(' ')}
-       onSubmit={this.props.submit}
+       onSubmit={props.submit}
      >
       <input
         className="form-control"
         type="text"
         placeholder={placeholderNewItem}
-        onChange={this.props.change}
-        value={this.props.value}
+        onChange={props.change}
+        value={props.value}
+        onClick={props.close}
       />
-      <button className="btn btn-submit" type="submit" >Добавить</button>
+      <button
+        className="btn btn-submit"
+        type="submit"
+      >
+        Добавить
+      </button>
      </form>
-
-
   )
- }
 }
-
-export default NewItem

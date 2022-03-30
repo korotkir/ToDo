@@ -1,82 +1,69 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import { connect } from 'react-redux'
 import {Trash} from 'react-bootstrap-icons'
 import styles from './Item.module.css'
 
-class Item extends React.Component {
- constructor(props) {
-  super(props);
-  this.state = {
-   checked: false,
-   success: {},
-   task: ['form-control'],
-   backgroundForm: ['input-group-text'],
-   bounce: false,
-  }
- }
+function Item(props) {
 
- remove = () => {
-  this.setState({ bounce: '2s' })
-  this.state.checked && this.props.performed('minus')
-  this.props.remove()
- }
+  const [task, setTask] = useState(['form-control'])
+  const [backgroundForm, setBackgroundForm] = useState(['input-group-text'])
+  const [checked] = useState(false)
 
-handleStylization = (condition) => {
-  if (condition === 'add') {
-    this.setState({
-      task: [...this.state.task, 'task'],
-      backgroundForm: [...this.state.backgroundForm, 'success'],
-     })
-  }
-  if (condition === 'remove') {
-    this.setState({
-      task: [...this.state.task].splice(0,1),
-      backgroundForm: [...this.state.backgroundForm].splice(0,1),
-    })
+  const remove = () => {
+    checked && props.performed('minus')
+    props.remove()
   }
 
-}
-
-handleChange = () => {
-  if (!this.props.checked) {
-   this.props.performed('plus', this.props.index)
-   this.handleStylization('add')
-
-  } else {
-     this.props.performed('minus', this.props.index)
-     this.handleStylization('remove')
+  const handleStylization = (condition) => {
+    if (condition === 'add') {
+      setTask([...task, 'task'])
+      setBackgroundForm([...backgroundForm, 'success'])
     }
- }
+    if (condition === 'remove') {
+      setTask([...task].splice(0, 1))
+      setBackgroundForm([...backgroundForm].splice(0, 1))
+    }
+  }
 
- componentDidMount() {
-   if (this.props.checked) {
-    this.handleStylization('add')
-   }
- }
+  const handleChange = () => {
+    if (!props.checkeds) {
+      props.performed('plus', props.index)
+      handleStylization('add')
 
- render() {
-   const cls = [
-     styles.Item,
-     'input-group',
-     'col-6',
-     'col-lg-1'
-   ]
+    } else {
+      props.performed('minus', props.index)
+      handleStylization('remove')
+    }
+  }
+
+  useEffect(() => {
+    if (props.checkeds) {
+      handleStylization('add')
+    }
+  }, [props.checkeds])
+
+  const cls = [
+    styles.Item,
+    'input-group',
+    'col-6',
+    'col-lg-1'
+  ]
 
   return(
     <div className={cls.join(' ')}>
-     <div className={[...this.state.backgroundForm].join(' ')}>
+     <div className={[...backgroundForm].join(' ')}>
       <input
-        key={this.props.key}
+        key={props.key}
         className="form-check-input mt-0"
         type="checkbox"
-        onChange={this.handleChange}
-        checked={this.props.checked}
+        onChange={handleChange}
+        checked={props.checkeds}
         />
      </div>
-     <input type="text" className={[...this.state.task].join(' ')} defaultValue={this.props.value}/>
-     <Trash className="trash" size={25} onClick={this.remove}/>
+     <input type="text" className={[...task].join(' ')} defaultValue={props.value}/>
+     <Trash className="trash" size={25} onClick={remove}/>
     </div>
   )
- }
 }
 
 export default Item

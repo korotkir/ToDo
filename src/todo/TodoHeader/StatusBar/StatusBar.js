@@ -26,7 +26,7 @@ class StatusBar extends React.Component {
          <li><Moon className="moon" size={size} onClick={this.props.themeToggler}/></li>
 
          {
-           window.innerWidth <= 768
+           window.innerWidth <= 1000
             ? <li><Gear className="gear" size={size} onClick={this.props.adaptiveSettings}/></li>
              : <Dropdown>
                <Dropdown.Toggle variant="custom" className="gear">
