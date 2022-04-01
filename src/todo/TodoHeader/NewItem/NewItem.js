@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import styles from './NewItem.module.css'
 
 export default function NewItem(props) {
@@ -18,8 +18,8 @@ export default function NewItem(props) {
    'Навестить бабулю'
   ]
 
-  let randomizerForNewItem = Math.floor(Math.random() * dictNewItem.length)
-  let placeholderNewItem = dictNewItem[randomizerForNewItem]
+  const randomizerForNewItem = Math.floor(Math.random() * dictNewItem.length)
+  const placeholderNewItem = dictNewItem[randomizerForNewItem]
 
   return (
      <form
@@ -32,7 +32,6 @@ export default function NewItem(props) {
         placeholder={placeholderNewItem}
         onChange={props.change}
         value={props.value}
-        onClick={props.close}
       />
       <button
         className="btn btn-submit"

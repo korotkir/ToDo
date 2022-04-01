@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import { connect } from 'react-redux'
 import {Trash} from 'react-bootstrap-icons'
 import styles from './Item.module.css'
 

@@ -5,16 +5,14 @@ import {CSSTransition} from 'react-transition-group'
 
 const SettingsBar = (props) =>  (
       <CSSTransition
-        in={props.status}
+        in={props.visible}
         timeout={{
           enter: 1000,
           exit: 500
         }}
         classNames={{
           enter: styles.BarEnter,
-          enterActive: styles.BarEnterActive,
           exit: styles.BarExit,
-          exitActive: styles.BarExitActive
         }}
         mountOnEnter
         unmountOnExit

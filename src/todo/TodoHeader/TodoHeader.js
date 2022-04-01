@@ -1,19 +1,12 @@
-import React, {useState} from 'react'
+import React from 'react'
 import NewItem from './NewItem/NewItem'
 import StatusBar from './StatusBar/StatusBar'
 import styles from './TodoHeader.module.css'
 import SettingsBar from './SettingsBar/SettingsBar'
+import {connect} from 'react-redux'
+import {adaptiveSettingsStatus} from '../../store/actions/header'
 
-const  TodoHeader = props => {
-  const [status, setStatus] = useState(false)
-
-  function adaptiveSettings() {
-    const switcher = status
-    setStatus(!switcher)
-  }
-
-  const closeSettingsHandler = () => setStatus(false)
-
+const TodoHeader = props => {
   return (
     <div className={styles.TodoHeader}>
       <StatusBar
@@ -24,7 +17,7 @@ const  TodoHeader = props => {
         modalSwitch={props.modalSwitch}
         modalChecked={props.modalChecked}
         about={props.about}
-        adaptiveSettings={adaptiveSettings}
+        adaptiveSettings={props.adaptiveSettingsStatus}
       />
       <SettingsBar
         themeSwitch={props.themeSwitch}
@@ -32,17 +25,27 @@ const  TodoHeader = props => {
         modalSwitch={props.modalSwitch}
         modalChecked={props.modalChecked}
         about={props.about}
-        status={status}
+        visible={props.status}
       />
       <NewItem
         submit={props.submit}
         change={props.change}
         value={props.value}
-        close={closeSettingsHandler}
-
       />
     </div>
   )
 }
 
-export default TodoHeader
+function mapStateToProps(state) {
+  return {
+    status: state.header.status
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    adaptiveSettingsStatus: () => dispatch(adaptiveSettingsStatus())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoHeader)

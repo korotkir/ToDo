@@ -1,5 +1,4 @@
 import React from "react"
-import store from './redux/store'
 import {
   BrowserRouter,
   Routes,
@@ -9,11 +8,9 @@ import 'bootstrap/dist/css/bootstrap.css'
 import './style.css'
 import TodoList from "./todo/TodoList/TodoList"
 import Auth from "./auth/Auth"
-import {Provider} from 'react-redux'
 
 export default function App() {
   return (
-    <Provider store={store}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<TodoList/>}/>
@@ -21,7 +18,6 @@ export default function App() {
           <Route path="/auth" element={<Auth/>}/>
         </Routes>
       </BrowserRouter>
-    </Provider>
   )
 }
 
