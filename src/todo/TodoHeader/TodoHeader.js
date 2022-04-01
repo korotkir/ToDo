@@ -4,7 +4,7 @@ import StatusBar from './StatusBar/StatusBar'
 import styles from './TodoHeader.module.css'
 import SettingsBar from './SettingsBar/SettingsBar'
 import {connect} from 'react-redux'
-import {adaptiveSettingsStatus} from '../../store/actions/header'
+import {adaptiveSettingsStatus, setSettingsBarVisible} from '../../store/actions/header'
 
 const TodoHeader = props => {
   return (
@@ -31,6 +31,7 @@ const TodoHeader = props => {
         submit={props.submit}
         change={props.change}
         value={props.value}
+        settingsBarVisible={props.setSettingsBarVisible}
       />
     </div>
   )
@@ -44,7 +45,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    adaptiveSettingsStatus: () => dispatch(adaptiveSettingsStatus())
+    adaptiveSettingsStatus: () => dispatch(adaptiveSettingsStatus()),
+    setSettingsBarVisible: bool => dispatch(setSettingsBarVisible(bool))
   }
 }
 

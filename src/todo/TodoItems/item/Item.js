@@ -39,7 +39,7 @@ function Item(props) {
     if (props.checkeds) {
       handleStylization('add')
     }
-  }, [props.checkeds])
+  }, [props.checkeds, ])
 
   const cls = [
     styles.Item,
