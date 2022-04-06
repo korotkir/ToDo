@@ -19,7 +19,12 @@ import {
   removeTask,
   onClear,
   about,
-  newTask
+  newTask,
+  autoThemeLocalStorage,
+  modalSwitchLocalStorage,
+  itemsLocalStorage,
+  doneLocalStorage,
+  themeLocalStorage, autoDarkTheme,
 } from '../../store/actions/todoList'
 
 class TodoList extends React.Component {
@@ -65,48 +70,48 @@ class TodoList extends React.Component {
  }
 
   componentDidUpdate() {
-    console.log('items > ', this.props.items)
-    // localStorage.setItem('done', JSON.stringify(this.props.done))
-    // localStorage.setItem('theme', JSON.stringify(this.props.theme))
-    // localStorage.setItem('autoThemeSwitch', JSON.stringify(this.props.autoThemeSwitch))
-    // localStorage.setItem('showModalSwitch', JSON.stringify(this.props.showModalSwitch))
+    localStorage.setItem('done', JSON.stringify(this.props.done))
+    localStorage.setItem('theme', JSON.stringify(this.props.theme))
+    localStorage.setItem('autoThemeSwitch', JSON.stringify(this.props.autoThemeSwitch))
+    localStorage.setItem('showModalSwitch', JSON.stringify(this.props.showModalSwitch))
   }
- //
- // componentDidMount() {
- //   let itemStorage = JSON.parse(localStorage.getItem('items'))
- //   let doneStorage = JSON.parse(localStorage.getItem('done'))
- //   let themeStorage = JSON.parse(localStorage.getItem('theme'))
- //   let autoThemeStorage = JSON.parse(localStorage.getItem('autoThemeSwitch'))
- //   let modalStorage = JSON.parse(localStorage.getItem('showModalSwitch'))
- //
- //  if(localStorage.autoThemeSwitch) {
- //    this.setState({ autoThemeSwitch: autoThemeStorage})
- //  }
- //
- //  if(localStorage.theme) {
- //    this.setState({ theme: themeStorage})
- //  }
- //
- //  if (localStorage.showModalSwitch) {
- //    this.setState({ showModalSwitch: modalStorage})
- //  }
- //
- //  if (localStorage.autoThemeSwitch === 'true') {
- //    const isDark = matchMedia('(prefers-color-scheme: dark)')
- //    this.setState( { theme: isDark.matches ? 'dark' : 'light' || 'light' } )
- //  }
- //
- //  if(localStorage.items) {
- //    this.setState({ items: [...itemStorage] })
- //  }
- //
- //  if(Number(doneStorage) >= 1) {
- //    this.setState({ done: Number(doneStorage) })
- //  } else {
- //      this.setState({ done: 0 })
- //  }
- //
- // }
+
+ componentDidMount() {
+   // this.props.storageHandler()
+
+   let itemStorage = JSON.parse(localStorage.getItem('items'))
+   let doneStorage = JSON.parse(localStorage.getItem('done'))
+   let themeStorage = JSON.parse(localStorage.getItem('theme'))
+   let autoThemeStorage = JSON.parse(localStorage.getItem('autoThemeSwitch'))
+   let modalStorage = JSON.parse(localStorage.getItem('showModalSwitch'))
+
+   if(localStorage.autoThemeSwitch) {
+     this.props.autoThemeLocalStorage(autoThemeStorage)
+   }
+
+   if(localStorage.theme) {
+     this.props.themeLocalStorage(themeStorage)
+   }
+
+   if (localStorage.showModalSwitch) {
+     this.props.modalSwitchLocalStorage(modalStorage)
+   }
+
+   if (localStorage.autoThemeSwitch === 'true') {
+     const isDark = matchMedia('(prefers-color-scheme: dark)')
+     this.setState( { theme: isDark.matches ? 'dark' : 'light' || 'light' } )
+     this.props.autoDarkTheme(isDark.matches)
+   }
+
+   if(localStorage.items) {
+     this.props.itemsLocalStorage([...itemStorage])
+   }
+
+   if(Number(doneStorage)) {
+     this.props.doneLocalStorage(Number(doneStorage))
+   }
+
+ }
 
  render() {
    return (
@@ -185,11 +190,17 @@ function mapDispatchToProps(dispatch) {
     setItems: item => dispatch(setItems(item)),
     modal: bool => dispatch(modal(bool)),
     about: bool => dispatch(about(bool)),
-    // Возможно нужно передать event?
     setValue: value => dispatch(setValue(value)),
     newTask: value => dispatch(newTask(value)),
     removeTask: task => dispatch(removeTask(task)),
     onClear: () => dispatch(onClear()),
+    // Storage
+    autoThemeLocalStorage: (autoThemeStorage, isDark) => dispatch(autoThemeLocalStorage(autoThemeStorage, isDark)),
+    modalSwitchLocalStorage: modalStorage => dispatch(modalSwitchLocalStorage(modalStorage)),
+    itemsLocalStorage: ([...itemStorage]) => dispatch(itemsLocalStorage([...itemStorage])),
+    doneLocalStorage: doneStorage => dispatch(doneLocalStorage(Number(doneStorage))),
+    themeLocalStorage: themeStorage => dispatch(themeLocalStorage(themeStorage)),
+    autoDarkTheme: isDark => dispatch(autoDarkTheme(isDark))
   }
 }
 

@@ -3,7 +3,6 @@ import {Trash} from 'react-bootstrap-icons'
 import styles from './Item.module.css'
 
 function Item(props) {
-
   const [task, setTask] = useState(['form-control'])
   const [backgroundForm, setBackgroundForm] = useState(['input-group-text'])
   const [checked] = useState(false)
