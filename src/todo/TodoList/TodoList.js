@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from 'react'
 import { ThemeProvider } from "styled-components"
 import {lightTheme, darkTheme, GlobalStyles} from "../themes/themes"
 import TodoHeader from '../TodoHeader/TodoHeader'
@@ -27,143 +27,137 @@ import {
   themeLocalStorage, autoDarkTheme,
 } from '../../store/actions/todoList'
 
-class TodoList extends React.Component {
-  performed = (condition, index) => {
+function TodoList(props) {
 
+  const performed = (condition, index) => {
     let checkboxState = (i, bool) => {
-      let copyItems = this.props.items.slice()
+      let copyItems = props.items.slice()
       copyItems[i].checked = bool
-      this.props.setItems([...copyItems])
+      props.setItems([...copyItems])
     }
 
     if (condition === 'plus') {
-      this.props.changeDone('sum')
+      props.changeDone('sum')
       checkboxState(index, true)
 
       // TODO: костыль!!
-      if (this.props.done + 1 === this.props.items.length && (this.props.showModalSwitch === true || this.props.showModalSwitch === 'true')) {
-        this.props.modal(true)
+      if (props.done + 1 === props.items.length && (props.showModalSwitch === true || props.showModalSwitch === 'true')) {
+        props.modal(true)
       }
     }
 
     if (condition === 'minus') {
-      this.props.changeDone('sub')
+      props.changeDone('sub')
       checkboxState(index, false)
     }
   }
 
-  itemChange = (event) => {
-    this.props.setValue(event.target.value)
+  const itemChange = (event) => {
+    props.setValue(event.target.value)
   }
 
-  itemSubmit = (event) => {
+  const itemSubmit = (event) => {
   event.preventDefault()
-  let value = this.props.value.trim('')
+  let value = props.value.trim('')
   value === ''
-   ? this.props.setValue('')
-    : this.props.newTask(value)
+    ? props.setValue('')
+    : props.newTask(value)
    }
 
-  removeItem = (element) => {
-   this.props.removeTask(element)
-   element.checked && this.props.changeDone('sub')
+  const removeItem = (element) => {
+   props.removeTask(element)
+   element.checked && props.changeDone('sub')
  }
 
-  componentDidUpdate() {
-    localStorage.setItem('done', JSON.stringify(this.props.done))
-    localStorage.setItem('theme', JSON.stringify(this.props.theme))
-    localStorage.setItem('autoThemeSwitch', JSON.stringify(this.props.autoThemeSwitch))
-    localStorage.setItem('showModalSwitch', JSON.stringify(this.props.showModalSwitch))
-  }
+ // useEffect(() => {
+ //   localStorage.setItem('done', JSON.stringify(props.done))
+ //   localStorage.setItem('theme', JSON.stringify(props.theme))
+ //   localStorage.setItem('autoThemeSwitch', JSON.stringify(props.autoThemeSwitch))
+ //   localStorage.setItem('showModalSwitch', JSON.stringify(props.showModalSwitch))
+ // })
+ //
+ //  useEffect(() => {
+ //    let itemStorage = JSON.parse(localStorage.getItem('items'))
+ //    let doneStorage = JSON.parse(localStorage.getItem('done'))
+ //    let themeStorage = JSON.parse(localStorage.getItem('theme'))
+ //    let autoThemeStorage = JSON.parse(localStorage.getItem('autoThemeSwitch'))
+ //    let modalStorage = JSON.parse(localStorage.getItem('showModalSwitch'))
+ //
+ //    if(localStorage.autoThemeSwitch) {
+ //      props.autoThemeLocalStorage(autoThemeStorage)
+ //    }
+ //
+ //    if(localStorage.theme) {
+ //      props.themeLocalStorage(themeStorage)
+ //    }
+ //
+ //    if (localStorage.showModalSwitch) {
+ //      props.modalSwitchLocalStorage(modalStorage)
+ //    }
+ //
+ //    if (localStorage.autoThemeSwitch === 'true') {
+ //      const isDark = matchMedia('(prefers-color-scheme: dark)')
+ //      props.autoDarkTheme(isDark.matches)
+ //    }
+ //
+ //    if(localStorage.items) {
+ //      props.itemsLocalStorage([...itemStorage])
+ //    }
+ //
+ //    if(Number(doneStorage)) {
+ //      props.doneLocalStorage(Number(doneStorage))
+ //    }
+ //  }, [localStorage])
 
- componentDidMount() {
-   // this.props.storageHandler()
+  return (
+    <ThemeProvider theme={props.theme === 'light' ? lightTheme : darkTheme}>
+      <GlobalStyles/>
+      <div className={styles.TodoList}>
+        <div className="container">
 
-   let itemStorage = JSON.parse(localStorage.getItem('items'))
-   let doneStorage = JSON.parse(localStorage.getItem('done'))
-   let themeStorage = JSON.parse(localStorage.getItem('theme'))
-   let autoThemeStorage = JSON.parse(localStorage.getItem('autoThemeSwitch'))
-   let modalStorage = JSON.parse(localStorage.getItem('showModalSwitch'))
+          <TodoHeader
+            submit={itemSubmit}
+            change={itemChange}
+            value={props.value}
+            themeToggler={props.themeToggler}
+            theme={props.theme}
+            themeSwitch={props.themeSwitch}
+            themeChecked={props.autoThemeSwitch}
+            modalSwitch={props.modalSwitch}
+            modalChecked={props.showModalSwitch}
+            about={props.about}
+          />
 
-   if(localStorage.autoThemeSwitch) {
-     this.props.autoThemeLocalStorage(autoThemeStorage)
-   }
+          <TodoItems add={itemSubmit}
+                     remove={removeItem}
+                     items={props.items}
+                     performed={performed}
+                     series={props.series}
+                     isAnimation={props.isAnimation}
+                     checked={props.checked}
+                     done={props.done}
+                     theme={props.theme}
+          />
 
-   if(localStorage.theme) {
-     this.props.themeLocalStorage(themeStorage)
-   }
+          <TodoStatus
+            done={props.done}
+            values={props.items.length}
+          />
 
-   if (localStorage.showModalSwitch) {
-     this.props.modalSwitchLocalStorage(modalStorage)
-   }
+        </div>
 
-   if (localStorage.autoThemeSwitch === 'true') {
-     const isDark = matchMedia('(prefers-color-scheme: dark)')
-     this.setState( { theme: isDark.matches ? 'dark' : 'light' || 'light' } )
-     this.props.autoDarkTheme(isDark.matches)
-   }
-
-   if(localStorage.items) {
-     this.props.itemsLocalStorage([...itemStorage])
-   }
-
-   if(Number(doneStorage)) {
-     this.props.doneLocalStorage(Number(doneStorage))
-   }
-
- }
-
- render() {
-   return (
-     <ThemeProvider theme={this.props.theme === 'light' ? lightTheme : darkTheme}>
-       <GlobalStyles/>
-       <div className={styles.TodoList}>
-         <div className="container">
-
-           <TodoHeader
-             submit={this.itemSubmit}
-             change={this.itemChange}
-             value={this.props.value}
-             themeToggler={this.props.themeToggler}
-             theme={this.props.theme}
-             themeSwitch={this.props.themeSwitch}
-             themeChecked={this.props.autoThemeSwitch}
-             modalSwitch={this.props.modalSwitch}
-             modalChecked={this.props.showModalSwitch}
-             about={this.props.about}
-           />
-
-           <TodoItems add={this.itemSubmit}
-                      remove={this.removeItem}
-                      items={this.props.items}
-                      performed={this.performed}
-                      series={this.props.series}
-                      isAnimation={this.props.isAnimation}
-                      checked={this.props.checked}
-                      done={this.props.done}
-                      theme={this.props.theme}
-           />
-
-           <TodoStatus
-             done={this.props.done}
-             values={this.props.items.length}
-           />
-
-         </div>
-
-         <TodosSuccess
-           show={this.props.showModal}
-           onHide={() => this.props.modal(false)}
-           onClear={this.props.onClear}
-         />
-         <About
-           show={this.props.showAbout}
-           onHide={() => this.props.about(false)}
-         />
-       </div>
-     </ThemeProvider>
-   )
- }
+        <TodosSuccess
+          show={props.showModal}
+          onHide={() => props.modal(false)}
+          onClear={props.onClear}
+        />
+        <About
+          show={props.showAbout}
+          onHide={() => props.about(false)}
+        />
+      </div>
+    </ThemeProvider>
+  )
 }
 
 function mapStateToProps(state) {

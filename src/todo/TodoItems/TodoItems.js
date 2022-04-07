@@ -7,9 +7,9 @@ import styles from './TodoItems.module.css'
 
 export default function TodoItems(props) {
 
-   useEffect(() => {
-     localStorage.setItem('items', JSON.stringify(props.items))
-   }, [props.items])
+   // useEffect(() => {
+   //   localStorage.setItem('items', JSON.stringify(props.items))
+   // }, [props.items])
 
     return (
       <div className={styles.TodoItems}>
