@@ -10,11 +10,8 @@ import {
   REMOVE_TASK,
   ON_CLEAR,
   ABOUT,
-  AUTO_THEME_LOCAL_STORAGE,
-  THEME_LOCAL_STORAGE,
-  MODAL_SWITCH_LOCAL_STORAGE, ITEMS_LOCAL_STORAGE, DONE_LOCAL_STORAGE, AUTO_DARK_THEME
+  AUTO_DARK_THEME
 } from '../actions/actionType'
-import {logDOM} from '@testing-library/react'
 
 const initialState = {
   value: '',
@@ -108,31 +105,6 @@ export function todoListReducer(state = initialState, action) {
       return {
         ...state,
         showAbout: action.value
-      }
-    case AUTO_THEME_LOCAL_STORAGE:
-      return {
-        ...state,
-        autoThemeSwitch: action.value,
-      }
-    case THEME_LOCAL_STORAGE:
-      return {
-        ...state,
-        theme: action.value
-      }
-    case MODAL_SWITCH_LOCAL_STORAGE:
-      return {
-        ...state,
-        showModalSwitch: action.value
-      }
-    case ITEMS_LOCAL_STORAGE:
-      return {
-        ...state,
-        items: action.value
-      }
-    case DONE_LOCAL_STORAGE:
-      return {
-        ...state,
-        done: action.value >= 1 ? action.value : 0
       }
     case AUTO_DARK_THEME:
       console.log('AUTO_DARK_THEME')

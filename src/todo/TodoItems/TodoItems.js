@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import Item from './item/Item'
 import Start from './item/animation/Start'
 import Success from './item/animation/Success'

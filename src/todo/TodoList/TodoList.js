@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import { ThemeProvider } from "styled-components"
 import {lightTheme, darkTheme, GlobalStyles} from "../themes/themes"
 import TodoHeader from '../TodoHeader/TodoHeader'
@@ -20,11 +20,6 @@ import {
   onClear,
   about,
   newTask,
-  autoThemeLocalStorage,
-  modalSwitchLocalStorage,
-  itemsLocalStorage,
-  doneLocalStorage,
-  themeLocalStorage, autoDarkTheme,
 } from '../../store/actions/todoList'
 
 function TodoList(props) {
@@ -69,45 +64,48 @@ function TodoList(props) {
    element.checked && props.changeDone('sub')
  }
 
- // useEffect(() => {
- //   localStorage.setItem('done', JSON.stringify(props.done))
- //   localStorage.setItem('theme', JSON.stringify(props.theme))
- //   localStorage.setItem('autoThemeSwitch', JSON.stringify(props.autoThemeSwitch))
- //   localStorage.setItem('showModalSwitch', JSON.stringify(props.showModalSwitch))
- // })
- //
- //  useEffect(() => {
- //    let itemStorage = JSON.parse(localStorage.getItem('items'))
- //    let doneStorage = JSON.parse(localStorage.getItem('done'))
- //    let themeStorage = JSON.parse(localStorage.getItem('theme'))
- //    let autoThemeStorage = JSON.parse(localStorage.getItem('autoThemeSwitch'))
- //    let modalStorage = JSON.parse(localStorage.getItem('showModalSwitch'))
- //
- //    if(localStorage.autoThemeSwitch) {
- //      props.autoThemeLocalStorage(autoThemeStorage)
- //    }
- //
- //    if(localStorage.theme) {
- //      props.themeLocalStorage(themeStorage)
- //    }
- //
- //    if (localStorage.showModalSwitch) {
- //      props.modalSwitchLocalStorage(modalStorage)
- //    }
- //
- //    if (localStorage.autoThemeSwitch === 'true') {
- //      const isDark = matchMedia('(prefers-color-scheme: dark)')
- //      props.autoDarkTheme(isDark.matches)
- //    }
- //
- //    if(localStorage.items) {
- //      props.itemsLocalStorage([...itemStorage])
- //    }
- //
- //    if(Number(doneStorage)) {
- //      props.doneLocalStorage(Number(doneStorage))
- //    }
- //  }, [localStorage])
+  // componentDidUpdate() {
+  //   localStorage.setItem('done', JSON.stringify(this.state.done))
+  //   localStorage.setItem('theme', JSON.stringify(this.state.theme))
+  //   localStorage.setItem('autoThemeSwitch', JSON.stringify(this.state.autoThemeSwitch))
+  //   localStorage.setItem('showModalSwitch', JSON.stringify(this.state.showModalSwitch))
+  // }
+  //
+  // componentDidMount() {
+  //   let itemStorage = JSON.parse(localStorage.getItem('items'))
+  //   let doneStorage = JSON.parse(localStorage.getItem('done'))
+  //   let themeStorage = JSON.parse(localStorage.getItem('theme'))
+  //   let autoThemeStorage = JSON.parse(localStorage.getItem('autoThemeSwitch'))
+  //   let modalStorage = JSON.parse(localStorage.getItem('showModalSwitch'))
+  //
+  //   if(localStorage.autoThemeSwitch) {
+  //     this.setState({ autoThemeSwitch: autoThemeStorage})
+  //   }
+  //
+  //   if(localStorage.theme) {
+  //     this.setState({ theme: themeStorage})
+  //   }
+  //
+  //   if (localStorage.showModalSwitch) {
+  //     this.setState({ showModalSwitch: modalStorage})
+  //   }
+  //
+  //   if (localStorage.autoThemeSwitch === 'true') {
+  //     const isDark = matchMedia('(prefers-color-scheme: dark)')
+  //     this.setState( { theme: isDark.matches ? 'dark' : 'light' || 'light' } )
+  //   }
+  //
+  //   if(localStorage.items) {
+  //     this.setState({ items: [...itemStorage] })
+  //   }
+  //
+  //   if(Number(doneStorage) >= 1) {
+  //     this.setState({ done: Number(doneStorage) })
+  //   } else {
+  //     this.setState({ done: 0 })
+  //   }
+  //
+  // }
 
   return (
     <ThemeProvider theme={props.theme === 'light' ? lightTheme : darkTheme}>
@@ -188,13 +186,6 @@ function mapDispatchToProps(dispatch) {
     newTask: value => dispatch(newTask(value)),
     removeTask: task => dispatch(removeTask(task)),
     onClear: () => dispatch(onClear()),
-    // Storage
-    autoThemeLocalStorage: (autoThemeStorage, isDark) => dispatch(autoThemeLocalStorage(autoThemeStorage, isDark)),
-    modalSwitchLocalStorage: modalStorage => dispatch(modalSwitchLocalStorage(modalStorage)),
-    itemsLocalStorage: ([...itemStorage]) => dispatch(itemsLocalStorage([...itemStorage])),
-    doneLocalStorage: doneStorage => dispatch(doneLocalStorage(Number(doneStorage))),
-    themeLocalStorage: themeStorage => dispatch(themeLocalStorage(themeStorage)),
-    autoDarkTheme: isDark => dispatch(autoDarkTheme(isDark))
   }
 }
 

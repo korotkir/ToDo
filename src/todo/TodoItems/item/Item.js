@@ -34,11 +34,13 @@ function Item(props) {
     }
   }
 
+
+
   useEffect(() => {
     if (props.checkeds) {
-      handleStylization('add')
+      handleStylization()
     }
-  }, [props.checkeds])
+  }, [props.checkeds, handleStylization])
 
   const cls = [
     styles.Item,
