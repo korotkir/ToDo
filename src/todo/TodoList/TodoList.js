@@ -12,13 +12,8 @@ import {
   changeDone,
   setValue,
   modal,
-  modalSwitch,
   setItems,
-  themeSwitch,
-  themeToggler,
   removeTask,
-  onClear,
-  about,
   newTask,
 } from '../../store/actions/todoList'
 
@@ -109,50 +104,17 @@ function TodoList(props) {
 
   return (
     <ThemeProvider theme={props.theme === 'light' ? lightTheme : darkTheme}>
-      <GlobalStyles/>
+      <GlobalStyles />
       <div className={styles.TodoList}>
+
         <div className="container">
-
-          <TodoHeader
-            submit={itemSubmit}
-            change={itemChange}
-            value={props.value}
-            themeToggler={props.themeToggler}
-            theme={props.theme}
-            themeSwitch={props.themeSwitch}
-            themeChecked={props.autoThemeSwitch}
-            modalSwitch={props.modalSwitch}
-            modalChecked={props.showModalSwitch}
-            about={props.about}
-          />
-
-          <TodoItems add={itemSubmit}
-                     remove={removeItem}
-                     items={props.items}
-                     performed={performed}
-                     series={props.series}
-                     isAnimation={props.isAnimation}
-                     checked={props.checked}
-                     done={props.done}
-                     theme={props.theme}
-          />
-
-          <TodoStatus
-            done={props.done}
-            values={props.items.length}
-          />
-
+          <TodoHeader submit={itemSubmit} change={itemChange} />
+          <TodoItems add={itemSubmit} remove={removeItem} performed={performed}/>
+          <TodoStatus />
         </div>
 
-        <TodosSuccess
-          show={props.showModal}
-          onHide={() => props.modal(false)}
-          onClear={props.onClear}
-        />
-        <About
-          show={props.showAbout}
-          onHide={() => props.about(false)}
-        />
+        <TodosSuccess />
+        <About/>
       </div>
     </ThemeProvider>
   )
@@ -160,32 +122,23 @@ function TodoList(props) {
 
 function mapStateToProps(state) {
   return {
-    autoThemeSwitch: state.todoList.autoThemeSwitch,
     showModalSwitch: state.todoList.showModalSwitch,
     done: state.todoList.done,
     items: state.todoList.items,
     value: state.todoList.value,
     checked: state.todoList.checked,
-    series: state.todoList.series,
-    theme: state.todoList.theme,
-    showModal: state.todoList.showModal,
-    showAbout: state.todoList.showAbout,
+    theme: state.todoList.theme
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    themeToggler: () => dispatch(themeToggler()),
-    themeSwitch: () => dispatch(themeSwitch()),
-    modalSwitch: () => dispatch(modalSwitch()),
     changeDone: value => dispatch(changeDone(value)),
     setItems: item => dispatch(setItems(item)),
     modal: bool => dispatch(modal(bool)),
-    about: bool => dispatch(about(bool)),
     setValue: value => dispatch(setValue(value)),
     newTask: value => dispatch(newTask(value)),
     removeTask: task => dispatch(removeTask(task)),
-    onClear: () => dispatch(onClear()),
   }
 }
 

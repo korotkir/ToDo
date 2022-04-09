@@ -2,10 +2,12 @@ import React from 'react'
 import styles from './SettingsBar.module.css'
 import {Form} from 'react-bootstrap'
 import {CSSTransition} from 'react-transition-group'
+import {connect} from 'react-redux'
+import {about, modalSwitch, themeSwitch} from '../../../store/actions/todoList'
 
 const SettingsBar = (props) =>  (
       <CSSTransition
-        in={props.visible}
+        in={props.status}
         timeout={{
           enter: 1000,
           exit: 500
@@ -24,7 +26,7 @@ const SettingsBar = (props) =>  (
               id="custom-switch"
               onChange={props.themeSwitch}
               label="Подстраивать тему под системную"
-              checked={props.themeChecked}
+              checked={props.autoThemeSwitch}
               data-size="lg"
             />
           </Form>
@@ -35,7 +37,7 @@ const SettingsBar = (props) =>  (
               id="custom-switch"
               onChange={props.modalSwitch}
               label="Уведомлять когда все выполнено"
-              checked={props.modalChecked}
+              checked={props.showModalSwitch}
             />
           </Form>
           <p style={{'textDecoration': 'underline'}} onClick={props.about}>О приложении</p>
@@ -43,4 +45,21 @@ const SettingsBar = (props) =>  (
       </CSSTransition>
     )
 
-export default SettingsBar
+function mapStateToProps(state) {
+  return {
+    status: state.header.status,
+    autoThemeSwitch: state.todoList.autoThemeSwitch,
+    showModalSwitch: state.todoList.showModalSwitch,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    themeSwitch: () => dispatch(themeSwitch()),
+    modalSwitch: () => dispatch(modalSwitch()),
+    about: bool => dispatch(about(bool)),
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsBar)

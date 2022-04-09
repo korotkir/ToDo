@@ -7,9 +7,11 @@ import {
   Gear,
 } from 'react-bootstrap-icons'
 import styles from './StatusBar.module.css'
+import {connect} from 'react-redux'
+import {about, modalSwitch, themeSwitch, themeToggler} from '../../../store/actions/todoList'
+import {adaptiveSettingsStatus} from '../../../store/actions/header'
 
-
-export default function StatusBar(props) {
+function StatusBar(props) {
   const cls = [
     styles.StatusBar,
     'items'
@@ -24,7 +26,7 @@ export default function StatusBar(props) {
 
       {
         window.innerWidth <= 1000
-          ? <li><Gear className="gear" size={size} onClick={props.adaptiveSettings}/></li>
+          ? <li><Gear className="gear" size={size} onClick={props.adaptiveSettingsStatus}/></li>
           : <Dropdown>
             <Dropdown.Toggle variant="custom" className="gear">
               <li><Gear size={size}/></li>
@@ -37,7 +39,7 @@ export default function StatusBar(props) {
                     id="custom-switch"
                     onChange={props.themeSwitch}
                     label="Подстраивать тему под системную"
-                    checked={props.themeChecked}
+                    checked={props.autoThemeSwitch}
                   />
                 </Form>
               </Dropdown.ItemText>
@@ -49,7 +51,7 @@ export default function StatusBar(props) {
                     id="custom-switch"
                     onChange={props.modalSwitch}
                     label="Показывать модальное окно, когда все выполнено"
-                    checked={props.modalChecked}
+                    checked={props.showModalSwitch}
                   />
                 </Form>
               </Dropdown.ItemText>
@@ -72,3 +74,23 @@ export default function StatusBar(props) {
     </ul>
   )
 }
+
+function mapStateToProps(state) {
+  return {
+    theme: state.todoList.theme,
+    autoThemeSwitch: state.todoList.autoThemeSwitch,
+    showModalSwitch: state.todoList.showModalSwitch,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    themeToggler: () => dispatch(themeToggler()),
+    adaptiveSettingsStatus: () => dispatch(adaptiveSettingsStatus()),
+    themeSwitch: () => dispatch(themeSwitch()),
+    modalSwitch: () => dispatch(modalSwitch()),
+    about: bool => dispatch(about(bool)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StatusBar)

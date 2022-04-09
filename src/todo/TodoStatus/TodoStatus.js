@@ -1,5 +1,7 @@
 import React from 'react'
 import styles from './TodoStatus.module.css'
+import {connect} from 'react-redux'
+
 
 const TodoStatus = props => {
   return (
@@ -14,4 +16,11 @@ const TodoStatus = props => {
   )
 }
 
-export default TodoStatus
+let mapStateToProps = (state) => {
+  return {
+    done: state.todoList.done,
+    values: state.todoList.items.length,
+  }
+}
+
+export default connect(mapStateToProps)(TodoStatus)

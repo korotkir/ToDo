@@ -1,12 +1,12 @@
 import React from "react"
 import { Modal, Button } from 'react-bootstrap';
+import {connect} from 'react-redux'
+import {about} from '../../store/actions/todoList'
 
-class About extends React.Component {
- render() {
-  return(
+const About = (props) => (
    <Modal
-    show={this.props.show}
-    onHide={this.props.onHide}
+    show={props.show}
+    onHide={() => props.onHide(false)}
     size="md"
     aria-labelledby="contained-modal-title-vcenter"
     centered
@@ -23,11 +23,21 @@ class About extends React.Component {
      <p align="right">- korotkir -</p>
     </Modal.Body>
     <Modal.Footer style={ {'justifyContent': 'center'} }>
-     <Button style={{'width': '100%'}} onClick={this.props.onHide} size="lg" variant="secondary">Закрыть</Button>
+     <Button style={{'width': '100%'}} onClick={() => props.onHide(false)} size="lg" variant="secondary">Закрыть</Button>
     </Modal.Footer>
    </Modal>
   )
+
+const mapStateToProps = (state) => {
+ return {
+  show: state.todoList.showAbout,
  }
 }
 
-export default About
+const mapDispatchToProps = (dispatch) => {
+ return {
+  onHide: bool => dispatch(about(bool)),
+ }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(About)

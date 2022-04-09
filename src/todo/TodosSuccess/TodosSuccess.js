@@ -1,13 +1,12 @@
 import React from "react"
 import { Modal, Button } from 'react-bootstrap';
+import {connect} from 'react-redux'
+import {modal, onClear} from '../../store/actions/todoList'
 
-class TodosSuccess extends React.Component {
- 
- render() {
-  return(
+const TodosSuccess = (props) => (
    <Modal
-    show={this.props.show}
-    onHide={this.props.onHide}
+    show={props.showModal}
+    onHide={() => props.onHide(false)}
     size="md"
     aria-labelledby="contained-modal-title-vcenter"
     centered
@@ -23,12 +22,23 @@ class TodosSuccess extends React.Component {
      </p>
     </Modal.Body>
     <Modal.Footer style={ {'justifyContent': 'center'} }>
-     <Button onClick={this.props.onClear} style={ {'width': '40%'} } size="lg" variant="success">Очистить</Button>
-     <Button onClick={this.props.onHide} style={ {'width': '40%'} } size="lg" variant="danger">Оставить</Button>
+     <Button onClick={() => props.onClear(false)} style={ {'width': '40%'} } size="lg" variant="success">Очистить</Button>
+     <Button onClick={() => props.onHide(false)} style={ {'width': '40%'} } size="lg" variant="danger">Оставить</Button>
     </Modal.Footer>
    </Modal>
-  )
+)
+
+const mapStateToProps = (state) => {
+ return {
+  showModal: state.todoList.showModal,
  }
 }
 
-export default TodosSuccess
+const mapDispatchToProps = (dispatch) => {
+ return {
+  onHide: bool => dispatch(modal(bool)),
+  onClear: bool => dispatch(onClear(bool)),
+ }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodosSuccess)

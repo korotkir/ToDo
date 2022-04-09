@@ -4,8 +4,9 @@ import Start from './item/animation/Start'
 import Success from './item/animation/Success'
 import {CSSTransition, TransitionGroup} from 'react-transition-group'
 import styles from './TodoItems.module.css'
+import {connect} from 'react-redux'
 
-export default function TodoItems(props) {
+function TodoItems(props) {
 
    // useEffect(() => {
    //   localStorage.setItem('items', JSON.stringify(props.items))
@@ -20,7 +21,6 @@ export default function TodoItems(props) {
                 [...props.items].map((el, i) =>
                   <CSSTransition
                     key={el.id}
-                    in={props.isAnimation}
                     classNames="alert"
                     timeout={150}
                     unmountOnExit
@@ -29,9 +29,8 @@ export default function TodoItems(props) {
                     <Item key={el.id}
                           index={i}
                           value={el.value}
-                          checkeds={el.checked}
+                          checked={el.checked}
                           remove={() => props.remove(props.items[i])}
-                          items={props.items}
                           performed={props.performed}
                     />
                   </CSSTransition>)}
@@ -44,3 +43,13 @@ export default function TodoItems(props) {
       </div>
     )
 }
+
+const mapStateToProps = (state) => {
+  return {
+    items: state.todoList.items,
+    series: state.todoList.series,
+    theme: state.todoList.theme,
+  }
+}
+
+export default connect(mapStateToProps)(TodoItems)
