@@ -2,64 +2,52 @@ import React from 'react'
 import styles from './SettingsBar.module.css'
 import {Form} from 'react-bootstrap'
 import {CSSTransition} from 'react-transition-group'
-import {connect} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {about, modalSwitch, themeSwitch} from '../../../store/actions/todoList'
 
-const SettingsBar = (props) =>  (
-      <CSSTransition
-        in={props.status}
-        timeout={{
-          enter: 1000,
-          exit: 500
-        }}
-        classNames={{
-          enter: styles.BarEnter,
-          exit: styles.BarExit,
-        }}
-        mountOnEnter
-        unmountOnExit
-      >
-        <div className={styles.SettingsBar}>
-          <Form>
-            <Form.Check
-              type="switch"
-              id="custom-switch"
-              onChange={props.themeSwitch}
-              label="Подстраивать тему под системную"
-              checked={props.autoThemeSwitch}
-              data-size="lg"
-            />
-          </Form>
+export default function SettingsBar() {
+  const dispatch = useDispatch()
+  const status = useSelector(state => state.header.status)
+  const autoThemeSwitch = useSelector(state => state.todoList.autoThemeSwitch)
+  const showModalSwitch = useSelector(state => state.todoList.showModalSwitch)
 
-          <Form>
-            <Form.Check
-              type="switch"
-              id="custom-switch"
-              onChange={props.modalSwitch}
-              label="Уведомлять когда все выполнено"
-              checked={props.showModalSwitch}
-            />
-          </Form>
-          <p style={{'textDecoration': 'underline'}} onClick={props.about}>О приложении</p>
-        </div>
-      </CSSTransition>
-    )
+  return (
+    <CSSTransition
+      in={status}
+      timeout={{
+        enter: 1000,
+        exit: 500
+      }}
+      classNames={{
+        enter: styles.BarEnter,
+        exit: styles.BarExit,
+      }}
+      mountOnEnter
+      unmountOnExit
+    >
+      <div className={styles.SettingsBar}>
+        <Form>
+          <Form.Check
+            type="switch"
+            id="custom-switch"
+            onChange={() => dispatch(themeSwitch())}
+            label="Подстраивать тему под системную"
+            checked={autoThemeSwitch}
+            data-size="lg"
+          />
+        </Form>
 
-function mapStateToProps(state) {
-  return {
-    status: state.header.status,
-    autoThemeSwitch: state.todoList.autoThemeSwitch,
-    showModalSwitch: state.todoList.showModalSwitch,
-  }
+        <Form>
+          <Form.Check
+            type="switch"
+            id="custom-switch"
+            onChange={() => dispatch(modalSwitch())}
+            label="Уведомлять когда все выполнено"
+            checked={showModalSwitch}
+          />
+        </Form>
+        <p style={{'textDecoration': 'underline'}} onClick={() => dispatch(about(true))}>О приложении</p>
+      </div>
+    </CSSTransition>
+  )
 }
-
-function mapDispatchToProps(dispatch) {
-  return {
-    themeSwitch: () => dispatch(themeSwitch()),
-    modalSwitch: () => dispatch(modalSwitch()),
-    about: bool => dispatch(about(bool)),
-  }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(SettingsBar)

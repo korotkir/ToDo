@@ -4,9 +4,12 @@ import Start from './item/animation/Start'
 import Success from './item/animation/Success'
 import {CSSTransition, TransitionGroup} from 'react-transition-group'
 import styles from './TodoItems.module.css'
-import {connect} from 'react-redux'
+import {useSelector} from 'react-redux'
 
-function TodoItems(props) {
+export default function TodoItems(props) {
+  const items = useSelector(state => state.todoList.items)
+  const series = useSelector(state => state.todoList.series)
+  const theme = useSelector(state => state.todoList.theme)
 
    // useEffect(() => {
    //   localStorage.setItem('items', JSON.stringify(props.items))
@@ -15,10 +18,10 @@ function TodoItems(props) {
     return (
       <div className={styles.TodoItems}>
         {
-          props.items.length
+          items.length
             ? <div className="col-12 col-sm-10 col-md-8">
               <TransitionGroup>{
-                [...props.items].map((el, i) =>
+                [...items].map((el, i) =>
                   <CSSTransition
                     key={el.id}
                     classNames="alert"
@@ -30,26 +33,16 @@ function TodoItems(props) {
                           index={i}
                           value={el.value}
                           checked={el.checked}
-                          remove={() => props.remove(props.items[i])}
+                          remove={() => props.remove(items[i])}
                           performed={props.performed}
                     />
                   </CSSTransition>)}
               </TransitionGroup>
             </div>
             : <div className="icons align-self-center">
-              {!props.series ? <Start theme={props.theme}/> : <Success theme={props.theme}/>}
+              {!series ? <Start theme={theme}/> : <Success theme={theme}/>}
             </div>
         }
       </div>
     )
 }
-
-const mapStateToProps = (state) => {
-  return {
-    items: state.todoList.items,
-    series: state.todoList.series,
-    theme: state.todoList.theme,
-  }
-}
-
-export default connect(mapStateToProps)(TodoItems)

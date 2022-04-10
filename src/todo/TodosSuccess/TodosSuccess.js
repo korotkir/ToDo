@@ -1,12 +1,16 @@
 import React from "react"
 import { Modal, Button } from 'react-bootstrap';
-import {connect} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {modal, onClear} from '../../store/actions/todoList'
 
-const TodosSuccess = (props) => (
+export default function TodosSuccess() {
+ const dispatch = useDispatch()
+ const showModal = useSelector(state => state.todoList.showModal)
+
+ return (
    <Modal
-    show={props.showModal}
-    onHide={() => props.onHide(false)}
+    show={showModal}
+    onHide={() => dispatch(modal(false))}
     size="md"
     aria-labelledby="contained-modal-title-vcenter"
     centered
@@ -22,23 +26,9 @@ const TodosSuccess = (props) => (
      </p>
     </Modal.Body>
     <Modal.Footer style={ {'justifyContent': 'center'} }>
-     <Button onClick={() => props.onClear(false)} style={ {'width': '40%'} } size="lg" variant="success">Очистить</Button>
-     <Button onClick={() => props.onHide(false)} style={ {'width': '40%'} } size="lg" variant="danger">Оставить</Button>
+     <Button onClick={() => dispatch(onClear(false))} style={ {'width': '40%'} } size="lg" variant="success">Очистить</Button>
+     <Button onClick={() => dispatch(modal(false))} style={ {'width': '40%'} } size="lg" variant="danger">Оставить</Button>
     </Modal.Footer>
    </Modal>
-)
-
-const mapStateToProps = (state) => {
- return {
-  showModal: state.todoList.showModal,
- }
+ )
 }
-
-const mapDispatchToProps = (dispatch) => {
- return {
-  onHide: bool => dispatch(modal(bool)),
-  onClear: bool => dispatch(onClear(bool)),
- }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TodosSuccess)

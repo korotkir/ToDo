@@ -56,28 +56,28 @@ export function changeDone(value) {
 export function setItems(item) {
   return {
     type: SET_ITEMS,
-    item: item
+    item
   }
 }
 
 export function setValue(value) {
   return {
     type: SET_VALUE,
-    value: value
+    value
   }
 }
 
 export function newTask(value) {
   return {
     type: NEW_TASK,
-    value: value
+   value
   }
 }
 
 export function removeTask(task) {
   return {
     type: REMOVE_TASK,
-    task: task
+    task
   }
 }
 
@@ -90,7 +90,7 @@ export function onClear() {
 export function autoDarkTheme(isDark) {
   return {
     type: AUTO_DARK_THEME,
-    isDark: isDark
+    isDark
   }
 }
 

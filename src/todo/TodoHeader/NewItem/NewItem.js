@@ -1,9 +1,11 @@
 import React from 'react'
 import styles from './NewItem.module.css'
-import {connect} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {setSettingsBarVisible} from '../../../store/actions/header'
 
-function NewItem(props) {
+export default function NewItem(props) {
+  const dispatch = useDispatch()
+  const value = useSelector(state => state.todoList.value)
 
   const cls = [
     styles.NewItem,
@@ -21,7 +23,7 @@ function NewItem(props) {
   ]
 
   const closeSettings = () => {
-    props.setSettingsBarVisible(false)
+    dispatch(setSettingsBarVisible(false))
   }
 
   const randomizerForNewItem = Math.floor(Math.random() * dictNewItem.length)
@@ -37,7 +39,7 @@ function NewItem(props) {
         type="text"
         placeholder={placeholderNewItem}
         onChange={props.change}
-        value={props.value}
+        value={value}
         onFocus={closeSettings}
       />
       <button
@@ -49,17 +51,3 @@ function NewItem(props) {
      </form>
   )
 }
-
-function mapStateToProps(state) {
-  return {
-    value: state.todoList.value,
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    setSettingsBarVisible: bool => dispatch(setSettingsBarVisible(bool))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(NewItem)

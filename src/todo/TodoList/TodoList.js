@@ -7,7 +7,7 @@ import TodosSuccess from "../TodosSuccess/TodosSuccess"
 import About from "../About/About"
 import TodoStatus from '../TodoStatus/TodoStatus'
 import styles from './TodoList.module.css'
-import {connect} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 import {
   changeDone,
   setValue,
@@ -17,46 +17,52 @@ import {
   newTask,
 } from '../../store/actions/todoList'
 
-function TodoList(props) {
+export default function TodoList() {
+  const dispatch = useDispatch()
+  const showModalSwitch = useSelector(state => state.todoList.showModalSwitch)
+  const done = useSelector(state => state.todoList.done)
+  const items = useSelector(state => state.todoList.items)
+  const text = useSelector(state => state.todoList.value)
+  const theme = useSelector(state => state.todoList.theme)
 
   const performed = (condition, index) => {
     let checkboxState = (i, bool) => {
-      let copyItems = props.items.slice()
+      let copyItems = items.slice()
       copyItems[i].checked = bool
-      props.setItems([...copyItems])
+      dispatch(setItems([...copyItems]))
     }
 
     if (condition === 'plus') {
-      props.changeDone('sum')
+      dispatch(changeDone('sum'))
       checkboxState(index, true)
 
       // TODO: костыль!!
-      if (props.done + 1 === props.items.length && (props.showModalSwitch === true || props.showModalSwitch === 'true')) {
-        props.modal(true)
+      if (done + 1 === items.length && (showModalSwitch === true || showModalSwitch === 'true')) {
+        dispatch(modal(true))
       }
     }
 
     if (condition === 'minus') {
-      props.changeDone('sub')
+      dispatch(changeDone('sub'))
       checkboxState(index, false)
     }
   }
 
   const itemChange = (event) => {
-    props.setValue(event.target.value)
+    dispatch(setValue(event.target.value))
   }
 
   const itemSubmit = (event) => {
   event.preventDefault()
-  let value = props.value.trim('')
+  let value = text.trim('')
   value === ''
-    ? props.setValue('')
-    : props.newTask(value)
+    ? dispatch(setValue(''))
+    : dispatch(newTask(value))
    }
 
   const removeItem = (element) => {
-   props.removeTask(element)
-   element.checked && props.changeDone('sub')
+   dispatch(removeTask(element))
+   element.checked && dispatch(changeDone('sub'))
  }
 
   // componentDidUpdate() {
@@ -103,7 +109,7 @@ function TodoList(props) {
   // }
 
   return (
-    <ThemeProvider theme={props.theme === 'light' ? lightTheme : darkTheme}>
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <GlobalStyles />
       <div className={styles.TodoList}>
 
@@ -119,27 +125,3 @@ function TodoList(props) {
     </ThemeProvider>
   )
 }
-
-function mapStateToProps(state) {
-  return {
-    showModalSwitch: state.todoList.showModalSwitch,
-    done: state.todoList.done,
-    items: state.todoList.items,
-    value: state.todoList.value,
-    checked: state.todoList.checked,
-    theme: state.todoList.theme
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    changeDone: value => dispatch(changeDone(value)),
-    setItems: item => dispatch(setItems(item)),
-    modal: bool => dispatch(modal(bool)),
-    setValue: value => dispatch(setValue(value)),
-    newTask: value => dispatch(newTask(value)),
-    removeTask: task => dispatch(removeTask(task)),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
