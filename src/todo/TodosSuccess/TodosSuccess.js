@@ -1,13 +1,16 @@
 import React from "react"
 import { Modal, Button } from 'react-bootstrap';
+import {useDispatch, useSelector} from 'react-redux'
+import {modal, onClear} from '../../store/actions/todoList'
 
-class TodosSuccess extends React.Component {
- 
- render() {
-  return(
+export default function TodosSuccess() {
+ const dispatch = useDispatch()
+ const showModal = useSelector(state => state.showModal)
+
+ return (
    <Modal
-    show={this.props.show}
-    onHide={this.props.onHide}
+    show={showModal}
+    onHide={() => dispatch(modal(false))}
     size="md"
     aria-labelledby="contained-modal-title-vcenter"
     centered
@@ -23,12 +26,9 @@ class TodosSuccess extends React.Component {
      </p>
     </Modal.Body>
     <Modal.Footer style={ {'justifyContent': 'center'} }>
-     <Button onClick={this.props.onClear} style={ {'width': '40%'} } size="lg" variant="success">Очистить</Button>
-     <Button onClick={this.props.onHide} style={ {'width': '40%'} } size="lg" variant="danger">Оставить</Button>
+     <Button onClick={() => dispatch(onClear(false))} style={ {'width': '40%'} } size="lg" variant="success">Очистить</Button>
+     <Button onClick={() => dispatch(modal(false))} style={ {'width': '40%'} } size="lg" variant="danger">Оставить</Button>
     </Modal.Footer>
    </Modal>
-  )
- }
+ )
 }
-
-export default TodosSuccess

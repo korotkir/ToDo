@@ -2,14 +2,13 @@ import React, {useEffect, useState} from 'react'
 import {Trash} from 'react-bootstrap-icons'
 import styles from './Item.module.css'
 
-function Item(props) {
-
+export default function Item(props) {
   const [task, setTask] = useState(['form-control'])
   const [backgroundForm, setBackgroundForm] = useState(['input-group-text'])
-  const [checked] = useState(false)
+  const [tick] = useState(false)
 
   const remove = () => {
-    checked && props.performed('minus')
+    tick && props.performed('minus')
     props.remove()
   }
 
@@ -25,7 +24,7 @@ function Item(props) {
   }
 
   const handleChange = () => {
-    if (!props.checkeds) {
+    if (!props.checked) {
       props.performed('plus', props.index)
       handleStylization('add')
 
@@ -36,10 +35,11 @@ function Item(props) {
   }
 
   useEffect(() => {
-    if (props.checkeds) {
+    console.log('Life cycle component for checkbox! >', props.checked)
+    if (props.checked) {
       handleStylization('add')
     }
-  }, [props.checkeds, ])
+  }, [])
 
   const cls = [
     styles.Item,
@@ -56,7 +56,7 @@ function Item(props) {
         className="form-check-input mt-0"
         type="checkbox"
         onChange={handleChange}
-        checked={props.checkeds}
+        checked={props.checked}
         />
      </div>
      <input type="text" className={[...task].join(' ')} defaultValue={props.value}/>
@@ -64,5 +64,3 @@ function Item(props) {
     </div>
   )
 }
-
-export default Item

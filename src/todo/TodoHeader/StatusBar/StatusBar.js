@@ -7,24 +7,32 @@ import {
   Gear,
 } from 'react-bootstrap-icons'
 import styles from './StatusBar.module.css'
+import {useDispatch, useSelector} from 'react-redux'
+import {about, modalSwitch, themeSwitch, themeToggler} from '../../../store/actions/todoList'
+import {adaptiveSettingsStatus} from '../../../store/actions/todoList'
+
+export default function StatusBar() {
+  const dispatch = useDispatch()
+  const themeState = useSelector(state => state.theme)
+  const autoThemeSwitch = useSelector(state => state.autoThemeSwitch)
+  const showModalSwitch = useSelector(state => state.showModalSwitch)
 
 
-export default function StatusBar(props) {
   const cls = [
     styles.StatusBar,
     'items'
   ]
 
   let size = '27'
-  let theme = props.theme === 'light' ? 'light' : 'dark'
+  let theme = themeState === 'light' ? 'light' : 'dark'
 
   return (
     <ul className={cls.join(' ')}>
-      <li><Moon className="moon" size={size} onClick={props.themeToggler}/></li>
+      <li><Moon className="moon" size={size} onClick={() => dispatch(themeToggler())}/></li>
 
       {
         window.innerWidth <= 1000
-          ? <li><Gear className="gear" size={size} onClick={props.adaptiveSettings}/></li>
+          ? <li><Gear className="gear" size={size} onClick={() => dispatch(adaptiveSettingsStatus())}/></li>
           : <Dropdown>
             <Dropdown.Toggle variant="custom" className="gear">
               <li><Gear size={size}/></li>
@@ -35,9 +43,9 @@ export default function StatusBar(props) {
                   <Form.Check
                     type="switch"
                     id="custom-switch"
-                    onChange={props.themeSwitch}
+                    onChange={() => dispatch(themeSwitch())}
                     label="Подстраивать тему под системную"
-                    checked={props.themeChecked}
+                    checked={autoThemeSwitch}
                   />
                 </Form>
               </Dropdown.ItemText>
@@ -47,14 +55,14 @@ export default function StatusBar(props) {
                   <Form.Check
                     type="switch"
                     id="custom-switch"
-                    onChange={props.modalSwitch}
+                    onChange={() => dispatch(modalSwitch())}
                     label="Показывать модальное окно, когда все выполнено"
-                    checked={props.modalChecked}
+                    checked={showModalSwitch}
                   />
                 </Form>
               </Dropdown.ItemText>
               <Dropdown.Divider/>
-              <Dropdown.Item onClick={props.about}>О приложении</Dropdown.Item>
+              <Dropdown.Item onClick={() => dispatch(about())}>О приложении</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
 
@@ -72,3 +80,4 @@ export default function StatusBar(props) {
     </ul>
   )
 }
+

@@ -1,7 +1,11 @@
 import React from 'react'
 import styles from './NewItem.module.css'
+import {useDispatch, useSelector} from 'react-redux'
+import {setSettingsBarVisible} from '../../../store/actions/todoList'
 
 export default function NewItem(props) {
+  const dispatch = useDispatch()
+  const value = useSelector(state => state.value)
 
   const cls = [
     styles.NewItem,
@@ -19,7 +23,7 @@ export default function NewItem(props) {
   ]
 
   const closeSettings = () => {
-    props.settingsBarVisible(false)
+    dispatch(setSettingsBarVisible(false))
   }
 
   const randomizerForNewItem = Math.floor(Math.random() * dictNewItem.length)
@@ -35,7 +39,7 @@ export default function NewItem(props) {
         type="text"
         placeholder={placeholderNewItem}
         onChange={props.change}
-        value={props.value}
+        value={value}
         onFocus={closeSettings}
       />
       <button
