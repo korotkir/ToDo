@@ -36,8 +36,7 @@ export default function TodoList() {
       dispatch(changeDone('sum'))
       checkboxState(index, true)
 
-      // TODO: костыль!!
-      if (done + 1 === items.length && (showModalSwitch === true || showModalSwitch === 'true')) {
+      if (done + 1 === items.length && (showModalSwitch === true)) {
         dispatch(modal(true))
       }
     }
@@ -64,49 +63,6 @@ export default function TodoList() {
    dispatch(removeTask(element))
    element.checked && dispatch(changeDone('sub'))
  }
-
-  // componentDidUpdate() {
-  //   localStorage.setItem('done', JSON.stringify(this.state.done))
-  //   localStorage.setItem('theme', JSON.stringify(this.state.theme))
-  //   localStorage.setItem('autoThemeSwitch', JSON.stringify(this.state.autoThemeSwitch))
-  //   localStorage.setItem('showModalSwitch', JSON.stringify(this.state.showModalSwitch))
-  // }
-  //
-  // componentDidMount() {
-  //   let itemStorage = JSON.parse(localStorage.getItem('items'))
-  //   let doneStorage = JSON.parse(localStorage.getItem('done'))
-  //   let themeStorage = JSON.parse(localStorage.getItem('theme'))
-  //   let autoThemeStorage = JSON.parse(localStorage.getItem('autoThemeSwitch'))
-  //   let modalStorage = JSON.parse(localStorage.getItem('showModalSwitch'))
-  //
-  //   if(localStorage.autoThemeSwitch) {
-  //     this.setState({ autoThemeSwitch: autoThemeStorage})
-  //   }
-  //
-  //   if(localStorage.theme) {
-  //     this.setState({ theme: themeStorage})
-  //   }
-  //
-  //   if (localStorage.showModalSwitch) {
-  //     this.setState({ showModalSwitch: modalStorage})
-  //   }
-  //
-  //   if (localStorage.autoThemeSwitch === 'true') {
-  //     const isDark = matchMedia('(prefers-color-scheme: dark)')
-  //     this.setState( { theme: isDark.matches ? 'dark' : 'light' || 'light' } )
-  //   }
-  //
-  //   if(localStorage.items) {
-  //     this.setState({ items: [...itemStorage] })
-  //   }
-  //
-  //   if(Number(doneStorage) >= 1) {
-  //     this.setState({ done: Number(doneStorage) })
-  //   } else {
-  //     this.setState({ done: 0 })
-  //   }
-  //
-  // }
 
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
