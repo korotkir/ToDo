@@ -64,8 +64,10 @@ export default function TodoList() {
    element.checked && dispatch(changeDone('sub'))
  }
 
+  const checkTheme = theme === 'light' ? lightTheme : darkTheme
+
   return (
-    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+    <ThemeProvider theme={checkTheme}>
       <GlobalStyles />
       <div className={styles.TodoList}>
 
