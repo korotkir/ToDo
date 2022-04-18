@@ -11,8 +11,23 @@ import {
   ON_CLEAR,
   ABOUT,
   AUTO_DARK_THEME,
+  SET_STATUS,
+  SETTINGS_BAR_VISIBLE,
 
 } from './actionType'
+
+export function adaptiveSettingsStatus() {
+  return {
+    type: SET_STATUS
+  }
+}
+
+export function setSettingsBarVisible(bool) {
+  return {
+    type: SETTINGS_BAR_VISIBLE,
+    value: bool
+  }
+}
 
 export function themeToggler() {
   return {
@@ -70,7 +85,7 @@ export function setValue(value) {
 export function newTask(value) {
   return {
     type: NEW_TASK,
-   value
+    value
   }
 }
 

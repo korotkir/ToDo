@@ -1,11 +1,11 @@
 import React from 'react'
 import styles from './NewItem.module.css'
 import {useDispatch, useSelector} from 'react-redux'
-import {setSettingsBarVisible} from '../../../store/actions/header'
+import {setSettingsBarVisible} from '../../../store/actions/todoList'
 
 export default function NewItem(props) {
   const dispatch = useDispatch()
-  const value = useSelector(state => state.todoList.value)
+  const value = useSelector(state => state.value)
 
   const cls = [
     styles.NewItem,

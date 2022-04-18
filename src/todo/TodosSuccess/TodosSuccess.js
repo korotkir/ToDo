@@ -5,7 +5,7 @@ import {modal, onClear} from '../../store/actions/todoList'
 
 export default function TodosSuccess() {
  const dispatch = useDispatch()
- const showModal = useSelector(state => state.todoList.showModal)
+ const showModal = useSelector(state => state.showModal)
 
  return (
    <Modal

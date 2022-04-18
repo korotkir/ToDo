@@ -10,10 +10,13 @@ import {
   REMOVE_TASK,
   ON_CLEAR,
   ABOUT,
-  AUTO_DARK_THEME
+  AUTO_DARK_THEME,
+  SET_STATUS,
+  SETTINGS_BAR_VISIBLE
 } from '../actions/actionType'
 
 const initialState = {
+  status: false,
   value: '',
   items: [
     // {id: 0, value: 'Купить штаны', checked: false}
@@ -28,8 +31,20 @@ const initialState = {
   showAbout: false,
 }
 
-export function todoListReducer(state = initialState, action) {
+export function reducer(state = initialState, action) {
   switch (action.type) {
+    case SET_STATUS:
+      console.log('SET_STATUS > ', state.status)
+      return {
+        ...state,
+        status: !state.status
+      }
+    case SETTINGS_BAR_VISIBLE:
+      console.log('SETTINGS_BAR_VISIBLE > ', state.status)
+      return {
+        ...state,
+        status: action.value
+      }
     case TOGGLE_THEME:
       console.log('TOGGLE_THEME')
       return {

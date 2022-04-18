@@ -19,11 +19,11 @@ import {
 
 export default function TodoList() {
   const dispatch = useDispatch()
-  const showModalSwitch = useSelector(state => state.todoList.showModalSwitch)
-  const done = useSelector(state => state.todoList.done)
-  const items = useSelector(state => state.todoList.items)
-  const text = useSelector(state => state.todoList.value)
-  const theme = useSelector(state => state.todoList.theme)
+  const showModalSwitch = useSelector(state => state.showModalSwitch)
+  const done = useSelector(state => state.done)
+  const items = useSelector(state => state.items)
+  const text = useSelector(state => state.value)
+  const theme = useSelector(state => state.theme)
 
   const performed = (condition, index) => {
     let checkboxState = (i, bool) => {

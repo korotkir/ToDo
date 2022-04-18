@@ -9,13 +9,13 @@ import {
 import styles from './StatusBar.module.css'
 import {useDispatch, useSelector} from 'react-redux'
 import {about, modalSwitch, themeSwitch, themeToggler} from '../../../store/actions/todoList'
-import {adaptiveSettingsStatus} from '../../../store/actions/header'
+import {adaptiveSettingsStatus} from '../../../store/actions/todoList'
 
 export default function StatusBar() {
   const dispatch = useDispatch()
-  const themeState = useSelector(state => state.todoList.theme)
-  const autoThemeSwitch = useSelector(state => state.todoList.autoThemeSwitch)
-  const showModalSwitch = useSelector(state => state.todoList.showModalSwitch)
+  const themeState = useSelector(state => state.theme)
+  const autoThemeSwitch = useSelector(state => state.autoThemeSwitch)
+  const showModalSwitch = useSelector(state => state.showModalSwitch)
 
 
   const cls = [

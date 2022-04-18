@@ -5,7 +5,7 @@ import {about} from '../../store/actions/todoList'
 
 const About = () => {
  const dispatch = useDispatch()
- const show = useSelector((state) => state.todoList.showAbout)
+ const show = useSelector((state) => state.showAbout)
 
  return (
  <Modal
