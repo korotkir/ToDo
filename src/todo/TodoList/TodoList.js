@@ -71,7 +71,7 @@ export default function TodoList() {
    console.log('isDark.matches >', isDark.matches)
    if (autoThemeSwitch) dispatch(autoTheme(isDark.matches))
    else {return null}
- }, [])
+ }, [autoThemeSwitch, dispatch])
 
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>

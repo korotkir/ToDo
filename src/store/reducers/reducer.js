@@ -34,32 +34,27 @@ const initialState = {
 export function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_STATUS:
-      console.log('SET_STATUS > ', state.status)
       return {
         ...state,
         status: !state.status
       }
     case SETTINGS_BAR_VISIBLE:
-      console.log('SETTINGS_BAR_VISIBLE > ', state.status)
       return {
         ...state,
         status: action.value
       }
     case TOGGLE_THEME:
-      console.log('TOGGLE_THEME')
       return {
         ...state,
         theme: state.theme === 'light' ? 'dark' : 'light',
         autoThemeSwitch: false
       }
     case THEME_SWITCH:
-      console.log('THEME_SWITCH')
       return {
         ...state,
         autoThemeSwitch: !state.autoThemeSwitch
       }
     case AUTO_THEME:
-      console.log('AUTO_THEME')
       return {
         ...state,
         theme: state.autoThemeSwitch && action.isDark
@@ -68,13 +63,11 @@ export function reducer(state = initialState, action) {
           || 'light'
       }
     case MODAL_SWITCH:
-      console.log('MODAL_SWITCH')
       return {
         ...state,
         showModalSwitch: !state.showModalSwitch
       }
     case CHANGE_DONE:
-      console.log('CHANGE_DONE')
       return {
         ...state,
         done: action.done === 'sum'
@@ -82,25 +75,21 @@ export function reducer(state = initialState, action) {
                 : state.done - 1
       }
     case SET_ITEMS:
-      console.log('SET_ITEMS')
       return {
         ...state,
         items: action.item
       }
     case MODAL:
-      console.log('MODAL')
       return {
         ...state,
         showModal: action.value
       }
     case SET_VALUE:
-      console.log('SET_VALUE')
       return {
         ...state,
         value: action.value
       }
     case NEW_TASK:
-      console.log('NEW_TASK')
       return {
         ...state,
          items: [...state.items, {id: Math.random(), value: action.value, checked: state.checked} ],
@@ -108,7 +97,6 @@ export function reducer(state = initialState, action) {
          isAnimation: true
       }
     case REMOVE_TASK:
-      console.log('REMOVE_TASK')
       return {
         ...state,
         items: state.items.filter(item => item.id !== action.task.id),
@@ -116,7 +104,6 @@ export function reducer(state = initialState, action) {
         isAnimation: false,
       }
     case ON_CLEAR:
-      console.log('ON_CLEAR')
       return {
         ...state,
         items: [],
@@ -125,7 +112,6 @@ export function reducer(state = initialState, action) {
         series: true
       }
     case ABOUT:
-      console.log('ABOUT')
       return {
         ...state,
         showAbout: action.value

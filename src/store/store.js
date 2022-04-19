@@ -1,4 +1,4 @@
-import {configureStore, createStore} from '@reduxjs/toolkit'
+import {createStore} from 'redux'
 import {reducer} from './reducers/reducer'
 
 const loadFromLocalStorage = () => {
@@ -31,11 +31,6 @@ export const store = createStore (
 
 store.subscribe(() => {
   saveToLocalStorage(store.getState())
-})
-
-
-store.subscribe(() => {
-  console.log('real store >', store.getState())
 })
 
 

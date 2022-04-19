@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import {Trash} from 'react-bootstrap-icons'
 import styles from './Item.module.css'
 
@@ -12,7 +12,7 @@ export default function Item(props) {
     props.remove()
   }
 
-  const handleStylization = (condition) => {
+  const handleStylization = useCallback((condition) => {
     if (condition === 'add') {
       setTask([...task, 'task'])
       setBackgroundForm([...backgroundForm, 'success'])
@@ -21,7 +21,7 @@ export default function Item(props) {
       setTask([...task].splice(0, 1))
       setBackgroundForm([...backgroundForm].splice(0, 1))
     }
-  }
+  }, [task, backgroundForm])
 
   const handleChange = () => {
     if (!props.checked) {
@@ -37,9 +37,10 @@ export default function Item(props) {
   useEffect(() => {
     console.log('Life cycle component for checkbox! >', props.checked)
     if (props.checked) {
-      handleStylization('add')
+      return handleStylization('add')
     }
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.checked])
 
   const cls = [
     styles.Item,
