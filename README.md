@@ -5,7 +5,7 @@
   Реализован полностью на React 17 и Redux. Использованы библиотеки: react-router-dom v6, react-transition-group, is_js, react-lottie-player и проч. 
 Иконки - Bootstrap. Анимированные иконки - lordicon. 
 
-Ознакомиться с приложением можно по <a href="https://korotkir.github.com/ToDo/">ссылке</a>.
+Ознакомиться с приложением можно по <a href="https://korotkir.github.io/ToDo/">ссылке</a>.
 
 <h3>Светлая тема</h3>
 
