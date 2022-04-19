@@ -22,10 +22,6 @@ export default function NewItem(props) {
    'Навестить бабулю'
   ]
 
-  const closeSettings = () => {
-    dispatch(setSettingsBarVisible(false))
-  }
-
   const randomizerForNewItem = Math.floor(Math.random() * dictNewItem.length)
   const placeholderNewItem = dictNewItem[randomizerForNewItem]
 
@@ -40,7 +36,7 @@ export default function NewItem(props) {
         placeholder={placeholderNewItem}
         onChange={props.change}
         value={value}
-        onFocus={closeSettings}
+        onFocus={() => dispatch(setSettingsBarVisible(false))}
       />
       <button
         className="btn btn-submit"

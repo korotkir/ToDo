@@ -10,7 +10,7 @@ import {
   REMOVE_TASK,
   ON_CLEAR,
   ABOUT,
-  AUTO_DARK_THEME,
+  AUTO_THEME,
   SET_STATUS,
   SETTINGS_BAR_VISIBLE
 } from '../actions/actionType'
@@ -57,6 +57,15 @@ export function reducer(state = initialState, action) {
       return {
         ...state,
         autoThemeSwitch: !state.autoThemeSwitch
+      }
+    case AUTO_THEME:
+      console.log('AUTO_THEME')
+      return {
+        ...state,
+        theme: state.autoThemeSwitch && action.isDark
+          ? 'dark'
+          : 'light'
+          || 'light'
       }
     case MODAL_SWITCH:
       console.log('MODAL_SWITCH')
@@ -120,12 +129,6 @@ export function reducer(state = initialState, action) {
       return {
         ...state,
         showAbout: action.value
-      }
-    case AUTO_DARK_THEME:
-      console.log('AUTO_DARK_THEME')
-      return {
-        ...state,
-        theme: action.isDark ? 'dark' : 'light' || 'light'
       }
     default: return state
   }

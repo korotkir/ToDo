@@ -34,6 +34,8 @@ store.subscribe(() => {
 })
 
 
-
+store.subscribe(() => {
+  console.log('real store >', store.getState())
+})
 
 
