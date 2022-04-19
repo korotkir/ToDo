@@ -68,7 +68,6 @@ export default function TodoList() {
 
  useEffect(() => {
    const isDark = matchMedia('(prefers-color-scheme: dark)')
-   console.log('isDark.matches >', isDark.matches)
    if (autoThemeSwitch) dispatch(autoTheme(isDark.matches))
    else {return null}
  }, [autoThemeSwitch, dispatch])

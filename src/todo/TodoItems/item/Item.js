@@ -35,7 +35,6 @@ export default function Item(props) {
   }
 
   useEffect(() => {
-    console.log('Life cycle component for checkbox! >', props.checked)
     if (props.checked) {
       return handleStylization('add')
     }
