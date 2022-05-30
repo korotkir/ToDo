@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+.Login {
+  font-family: "Montserrat", sans-serif;
+  width: 100%;
+  height: 100vh;
+  background-color: #181a1b;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+.Login form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+}
+
+.Login h1 {
+  color: #ff8725;
+  margin-bottom: 20px;
+}
+
+.Login button {
+  width: 200px;
+}
+
+.Login button:disabled {
+  background-color: gray;
+  color: white;
+}
+.Login button:disabled:hover {
+  background-color: gray;
+  color: white;
+  border-color: white;
+}
+
+.Login a {
+  font-size: 12px;
+  margin-top: 10px;
+  color: #ff8725;
+}
+
+/*# sourceMappingURL=Login.module.css.map */

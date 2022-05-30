@@ -17,17 +17,18 @@ function isInvalid({valid, touched, shouldValidate}) {
 
     return (
       <div className={cls.join(' ')}>
-        <label htmlFor={htmlFor}>{props.title}</label>
+        {/*<label htmlFor={htmlFor}>{props.title}</label>*/}
+
         <input
           id={htmlFor}
           type={inputType}
           onChange={props.onChange}
-
+          placeholder={props.title}
         />
         {
           isInvalid(props)
-          ? <span>{props.errorMessage}</span>
-          : null
+            ? <span>{props.errorMessage}</span>
+            : <span>&nbsp;</span>
         }
       </div>
     )

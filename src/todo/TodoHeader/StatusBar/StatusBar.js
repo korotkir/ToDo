@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import {Dropdown, Form} from 'react-bootstrap'
 import {
@@ -10,6 +10,7 @@ import styles from './StatusBar.module.css'
 import {useDispatch, useSelector} from 'react-redux'
 import {about, modalSwitch, themeSwitch, themeToggler} from '../../../store/actions/todoList'
 import {adaptiveSettingsStatus} from '../../../store/actions/todoList'
+import About from '../../About/About'
 
 export default function StatusBar() {
   const dispatch = useDispatch()
@@ -62,7 +63,7 @@ export default function StatusBar() {
                 </Form>
               </Dropdown.ItemText>
               <Dropdown.Divider/>
-              <Dropdown.Item onClick={() => dispatch(about())}>О приложении</Dropdown.Item>
+              <Dropdown.Item onClick={() => dispatch(about(true))}>О приложении</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
 
@@ -73,7 +74,7 @@ export default function StatusBar() {
           <li><Person size={size}/></li>
         </Dropdown.Toggle>
         <Dropdown.Menu variant={theme}>
-          <Link className="dropdown-item" to="/auth">Авторизация</Link>
+          <Link className="dropdown-item" to="/login">Авторизация</Link>
           <Dropdown.Item href="#" disabled>Выйти</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
