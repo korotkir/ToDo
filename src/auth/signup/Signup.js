@@ -26,7 +26,7 @@ const Signup = () => {
         className="formInput"
         title={'Пароль'}
       />
-      <MainButton>Регистрация</MainButton>
+      <MainButton>Зарегистрироваться</MainButton>
       <Link to="/login">Уже есть аккаунт?</Link>
     </div>
   )
