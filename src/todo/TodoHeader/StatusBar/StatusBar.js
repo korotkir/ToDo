@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import {Dropdown, Form} from 'react-bootstrap'
 import {
@@ -10,7 +10,6 @@ import styles from './StatusBar.module.css'
 import {useDispatch, useSelector} from 'react-redux'
 import {about, modalSwitch, themeSwitch, themeToggler} from '../../../store/actions/todoList'
 import {adaptiveSettingsStatus} from '../../../store/actions/todoList'
-import About from '../../About/About'
 
 export default function StatusBar() {
   const dispatch = useDispatch()

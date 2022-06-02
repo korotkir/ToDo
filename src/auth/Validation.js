@@ -3,10 +3,11 @@ import is from 'is_js'
 import Input from '../UI/Input/Input'
 import {Link} from 'react-router-dom'
 import MainButton from '../UI/button/MainButton'
+import styles from './Validation.module.css'
 
 const Validation = (props) => {
 
-  const inputs = {
+  const rules = {
     email: {
       title: 'E-mail',
       value: '',
@@ -53,23 +54,8 @@ const Validation = (props) => {
     },
   }
 
-  // const renderInputs = () => {
-  //   console.log('initialState', initialState)
-  //   return props.inputs.email ? initialState.inputs['email'] = inputs.email : null
-  // }
-
-
-
-  const initialState = {
-    isFormValid: false,
-    inputs: {
-
-    }
-  }
-
-  const [validation, setValidation] = useState(initialState)
-
-  const [render, setRender] = useState({})
+  const [validation, setValidation] = useState({})
+  const [isFormValid, setFormValid] = useState(false)
 
   const validateControl = (value, rules) => {
     // Если правила валидации отсутствуют, прекращаем функцию
@@ -100,7 +86,7 @@ const Validation = (props) => {
 
   const onChangeHandler = (event, input) => {
     // Копируем объект со свойствами инпутов
-    const inputs = { ...validation.inputs }
+    const inputs = { ...validation }
     // Доступ к свойствам инпутов
     const control = { ...inputs[input] }
 
@@ -125,16 +111,43 @@ const Validation = (props) => {
 
     // Отправляем объект в глобальный state
 
-    setValidation({inputs, isFormValid})
+    setValidation(inputs)
+    setFormValid(isFormValid)
 
   }
 
+  useEffect(() => {
+    const renderInputs = () => {
+      const includes = {}
+
+      if(props.email) {
+        includes.email = rules.email
+      }
+      if(props.password) {
+        includes.password = rules.password
+      }
+      if(props.firstName) {
+        includes.firstName = rules.firstName
+      }
+      if(props.lastName) {
+        includes.lastName = rules.lastName
+      }
+
+      setValidation({
+        ...validation,
+        ...includes
+      })
+    }
+
+    renderInputs()
+  }, [])
 
   return (
-    <form>
+    <form className={styles.Validation}>
       <h1>{props.children}</h1>
-      {Object.keys(validation.inputs).length >= 1 ? Object.keys(validation.inputs).map((input, index) => {
-          const parent = validation.inputs[input]
+      {
+        Object.keys(validation).map((input, index) => {
+          const parent = validation[input]
           return (
             <Input
               key={index}
@@ -145,17 +158,17 @@ const Validation = (props) => {
               valid={parent.valid}
               errorMessage={parent.errorMessage}
               onChange={event => onChangeHandler(event, input)}
-              isValid={validation.isFormValid}
+              isValid={isFormValid}
               shouldValidate={!!parent.validation}
             />
           )
         }
-      ) : <h5 style={{color: 'red', padding: '15px'}}>Error! Object is empty!</h5>}
-      <MainButton disabled={!validation.isFormValid}>{props.button}</MainButton>
+      )
+      }
+      <MainButton disabled={!isFormValid}>{props.button}</MainButton>
       <Link to={props.link[0]}>{props.link[1]}</Link>
     </form>
   )
 }
 
 export default Validation
-
