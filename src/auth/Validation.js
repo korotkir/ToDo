@@ -4,6 +4,7 @@ import Input from '../UI/Input/Input'
 import {Link} from 'react-router-dom'
 import MainButton from '../UI/button/MainButton'
 import styles from './Validation.module.css'
+import Load from '../UI/Loader/Load'
 
 const Validation = (props) => {
 
@@ -50,12 +51,13 @@ const Validation = (props) => {
         required: true,
         minLength: 2
       },
-      errorMessage: '* Введите фамилия',
+      errorMessage: '* Введите фамилию',
     },
   }
 
   const [validation, setValidation] = useState({})
   const [isFormValid, setFormValid] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   const validateControl = (value, rules) => {
     // Если правила валидации отсутствуют, прекращаем функцию
@@ -137,6 +139,8 @@ const Validation = (props) => {
         ...validation,
         ...includes
       })
+
+      setTimeout(() => setLoading(false), 200)
     }
 
     renderInputs()
@@ -144,30 +148,37 @@ const Validation = (props) => {
 
   return (
     <form className={styles.Validation}>
-      <h1>{props.children}</h1>
       {
-        Object.keys(validation).map((input, index) => {
-          const parent = validation[input]
-          return (
-            <Input
-              key={index}
-              className="formInput"
-              type={input}
-              title={parent.title}
-              touched={parent.touched}
-              valid={parent.valid}
-              errorMessage={parent.errorMessage}
-              onChange={event => onChangeHandler(event, input)}
-              isValid={isFormValid}
-              shouldValidate={!!parent.validation}
-            />
-          )
-        }
-      )
+        loading ? <Load /> :
+        <>
+          <h1>{props.children}</h1>
+          {
+            Object.keys(validation).map((input, index) => {
+                const parent = validation[input]
+                return (
+                  <Input
+                    key={index}
+                    className="formInput"
+                    type={input}
+                    title={parent.title}
+                    touched={parent.touched}
+                    valid={parent.valid}
+                    errorMessage={parent.errorMessage}
+                    onChange={event => onChangeHandler(event, input)}
+                    isValid={isFormValid}
+                    shouldValidate={!!parent.validation}
+                  />
+                )
+              }
+            )
+          }
+          <MainButton disabled={!isFormValid}>{props.button}</MainButton>
+          <Link to={props.link[0]}>{props.link[1]}</Link>
+        </>
       }
-      <MainButton disabled={!isFormValid}>{props.button}</MainButton>
-      <Link to={props.link[0]}>{props.link[1]}</Link>
     </form>
+
+
   )
 }
 
