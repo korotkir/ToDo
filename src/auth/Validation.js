@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import MainButton from '../UI/button/MainButton'
 import styles from './Validation.module.css'
 import Load from '../UI/Loader/Load'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 const Validation = (props) => {
 
@@ -58,6 +59,9 @@ const Validation = (props) => {
   const [validation, setValidation] = useState({})
   const [isFormValid, setFormValid] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [alreadyInUse, setAlreadyInUse] = useState('')
+  const [userNotFound, setUserNotFound] = useState('')
+  const [wrongPassword, setWrongPassword] = useState('')
 
   const validateControl = (value, rules) => {
     // Если правила валидации отсутствуют, прекращаем функцию
@@ -146,8 +150,66 @@ const Validation = (props) => {
     renderInputs()
   }, [])
 
+  const submitHandler = (event) => {
+    event.preventDefault()
+
+    setAlreadyInUse('')
+    setUserNotFound('')
+    setWrongPassword('')
+
+    Object.keys(validation).map((el) => {
+      console.log(el, validation[el].value)
+    })
+
+    const email = validation.email.value
+    const password = validation.password.value
+
+    const auth = getAuth();
+
+    if (props.signup) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+
+          if (errorCode === 'auth/email-already-in-use') {
+            setAlreadyInUse('* Пользователь с таким email уже существует!')
+          }
+        })
+    }
+
+    if (props.login) {
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+
+          if (errorCode === 'auth/user-not-found') {
+            setUserNotFound('* Такого пользователя не существует!')
+          }
+
+          if (errorCode === 'auth/wrong-password') {
+            setWrongPassword('* Неверный пароль!')
+          }
+        })
+    }
+  }
+
   return (
-    <form className={styles.Validation}>
+    <form
+      className={styles.Validation}
+      onSubmit={submitHandler}
+    >
       {
         loading ? <Load /> :
         <>
@@ -172,7 +234,14 @@ const Validation = (props) => {
               }
             )
           }
-          <MainButton disabled={!isFormValid}>{props.button}</MainButton>
+          {alreadyInUse ? <p>{alreadyInUse}</p> : null}
+          {userNotFound ? <p>{userNotFound}</p> : null}
+          {wrongPassword ? <p>{wrongPassword}</p> : null}
+          <MainButton
+            type="submit"
+            disabled={!isFormValid}
+          >{props.button}
+          </MainButton>
           <Link to={props.link[0]}>{props.link[1]}</Link>
         </>
       }

@@ -3,9 +3,10 @@ import Validation from '../Validation'
 
 const Signup = () => (
       <Validation
+        signup
         email
-        firstName
-        lastName
+        // firstName
+        // lastName
         password
         button='Вход'
         link={['/login', 'Уже есть аккаунт?']}
