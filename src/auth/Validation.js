@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import is from 'is_js'
 import Input from '../UI/Input/Input'
 import {Link} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import MainButton from '../UI/button/MainButton'
 import styles from './Validation.module.css'
 import Load from '../UI/Loader/Load'
@@ -56,12 +57,13 @@ const Validation = (props) => {
     },
   }
 
+  const navigate = useNavigate()
+
   const [validation, setValidation] = useState({})
   const [isFormValid, setFormValid] = useState(false)
   const [loading, setLoading] = useState(true)
-  const [alreadyInUse, setAlreadyInUse] = useState('')
-  const [userNotFound, setUserNotFound] = useState('')
-  const [wrongPassword, setWrongPassword] = useState('')
+  const [error, setError] = useState('')
+
 
   const validateControl = (value, rules) => {
     // Если правила валидации отсутствуют, прекращаем функцию
@@ -153,9 +155,7 @@ const Validation = (props) => {
   const submitHandler = (event) => {
     event.preventDefault()
 
-    setAlreadyInUse('')
-    setUserNotFound('')
-    setWrongPassword('')
+    setError('')
 
     Object.keys(validation).map((el) => {
       console.log(el, validation[el].value)
@@ -169,40 +169,47 @@ const Validation = (props) => {
     if (props.signup) {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          // Signed in
           const user = userCredential.user;
-          // ...
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
 
           if (errorCode === 'auth/email-already-in-use') {
-            setAlreadyInUse('* Пользователь с таким email уже существует!')
+            setError('* Пользователь с таким email уже существует!')
           }
         })
     }
 
+    // TODO
+
     if (props.login) {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          // Signed in
           const user = userCredential.user;
-          // ...
+          console.log(user)
+          return navigate('/')
+
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
 
           if (errorCode === 'auth/user-not-found') {
-            setUserNotFound('* Такого пользователя не существует!')
+            setError('* Такого пользователя не существует!')
           }
 
           if (errorCode === 'auth/wrong-password') {
-            setWrongPassword('* Неверный пароль!')
+            setError('* Неверный пароль!')
           }
         })
     }
+  }
+
+  const successAuth = (user) => {
+    console.log('user', user)
+    console.log('last sign in', user.metadata.lastSignInTime)
+    console.log('last sign in', user.metadata.stsTokenManager.accessToken)
   }
 
   return (
@@ -211,43 +218,39 @@ const Validation = (props) => {
       onSubmit={submitHandler}
     >
       {
-        loading ? <Load /> :
-        <>
-          <h1>{props.children}</h1>
-          {
-            Object.keys(validation).map((input, index) => {
-                const parent = validation[input]
-                return (
-                  <Input
-                    key={index}
-                    className="formInput"
-                    type={input}
-                    title={parent.title}
-                    touched={parent.touched}
-                    valid={parent.valid}
-                    errorMessage={parent.errorMessage}
-                    onChange={event => onChangeHandler(event, input)}
-                    isValid={isFormValid}
-                    shouldValidate={!!parent.validation}
-                  />
-                )
-              }
-            )
-          }
-          {alreadyInUse ? <p>{alreadyInUse}</p> : null}
-          {userNotFound ? <p>{userNotFound}</p> : null}
-          {wrongPassword ? <p>{wrongPassword}</p> : null}
-          <MainButton
-            type="submit"
-            disabled={!isFormValid}
-          >{props.button}
-          </MainButton>
-          <Link to={props.link[0]}>{props.link[1]}</Link>
-        </>
+        loading ? <Load/> :
+          <>
+            <h1>{props.children}</h1>
+            {
+              Object.keys(validation).map((input, index) => {
+                  const parent = validation[input]
+                  return (
+                    <Input
+                      key={index}
+                      className="formInput"
+                      type={input}
+                      title={parent.title}
+                      touched={parent.touched}
+                      valid={parent.valid}
+                      errorMessage={parent.errorMessage}
+                      onChange={event => onChangeHandler(event, input)}
+                      isValid={isFormValid}
+                      shouldValidate={!!parent.validation}
+                    />
+                  )
+                }
+              )
+            }
+            {error ? <p>{error}</p> : null}
+            <MainButton
+              type="submit"
+              disabled={!isFormValid}
+            >{props.button}
+            </MainButton>
+            <Link to={props.link[0]}>{props.link[1]}</Link>
+          </>
       }
     </form>
-
-
   )
 }
 
