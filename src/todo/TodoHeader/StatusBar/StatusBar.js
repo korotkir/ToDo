@@ -62,7 +62,7 @@ export default function StatusBar() {
                 </Form>
               </Dropdown.ItemText>
               <Dropdown.Divider/>
-              <Dropdown.Item onClick={() => dispatch(about())}>О приложении</Dropdown.Item>
+              <Dropdown.Item onClick={() => dispatch(about(true))}>О приложении</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
 
@@ -73,7 +73,7 @@ export default function StatusBar() {
           <li><Person size={size}/></li>
         </Dropdown.Toggle>
         <Dropdown.Menu variant={theme}>
-          <Link className="dropdown-item" to="/auth">Авторизация</Link>
+          <Link className="dropdown-item" to="/login">Авторизация</Link>
           <Dropdown.Item href="#" disabled>Выйти</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>

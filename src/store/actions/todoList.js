@@ -10,7 +10,7 @@ import {
   REMOVE_TASK,
   ON_CLEAR,
   ABOUT,
-  AUTO_DARK_THEME,
+  AUTO_THEME,
   SET_STATUS,
   SETTINGS_BAR_VISIBLE,
 
@@ -102,9 +102,9 @@ export function onClear() {
   }
 }
 
-export function autoDarkTheme(isDark) {
+export function autoTheme(isDark) {
   return {
-    type: AUTO_DARK_THEME,
+    type: AUTO_THEME,
     isDark
   }
 }

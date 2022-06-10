@@ -1,0 +1,16 @@
+.MainButton {
+  width: 100px;
+  height: 40px;
+  background: none;
+  border: 1px solid white;
+  border-radius: 5px;
+  color: #ff8725;
+}
+.MainButton:hover {
+  transition: all 1s;
+  color: white;
+  background-color: #ff8725;
+  border-color: #ff8725;
+}
+
+/*# sourceMappingURL=MainButton.module.css.map */

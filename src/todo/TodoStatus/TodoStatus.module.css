@@ -1,7 +1,8 @@
 .TodoStatus {
-  display: flex;
-  justify-content: center;
-  height: 5vh;
+  position: absolute;
+  left: 48%;
+  right: 48%;
+  bottom: 10px;
 }
 
 /*# sourceMappingURL=TodoStatus.module.css.map */

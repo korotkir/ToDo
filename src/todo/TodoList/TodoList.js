@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { ThemeProvider } from "styled-components"
 import {lightTheme, darkTheme, GlobalStyles} from "../themes/themes"
 import TodoHeader from '../TodoHeader/TodoHeader'
@@ -15,6 +15,7 @@ import {
   setItems,
   removeTask,
   newTask,
+  autoTheme,
 } from '../../store/actions/todoList'
 
 export default function TodoList() {
@@ -24,6 +25,7 @@ export default function TodoList() {
   const items = useSelector(state => state.items)
   const text = useSelector(state => state.value)
   const theme = useSelector(state => state.theme)
+  const autoThemeSwitch = useSelector(state => state.autoThemeSwitch)
 
   const performed = (condition, index) => {
     let checkboxState = (i, bool) => {
@@ -63,6 +65,12 @@ export default function TodoList() {
    dispatch(removeTask(element))
    element.checked && dispatch(changeDone('sub'))
  }
+
+ useEffect(() => {
+   const isDark = matchMedia('(prefers-color-scheme: dark)')
+   if (autoThemeSwitch) dispatch(autoTheme(isDark.matches))
+   else {return null}
+ }, [autoThemeSwitch, dispatch])
 
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
