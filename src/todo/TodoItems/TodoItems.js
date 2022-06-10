@@ -7,9 +7,9 @@ import styles from './TodoItems.module.css'
 import {useSelector} from 'react-redux'
 
 export default function TodoItems(props) {
-  const items = useSelector(state => state.items)
-  const series = useSelector(state => state.series)
-  const theme = useSelector(state => state.theme)
+  const items = useSelector(state => state.todo.items)
+  const series = useSelector(state => state.todo.series)
+  const theme = useSelector(state => state.todo.theme)
 
     return (
       <div className={styles.TodoItems}>

@@ -7,9 +7,9 @@ import {about, modalSwitch, themeSwitch} from '../../../store/actions/todoList'
 
 export default function SettingsBar() {
   const dispatch = useDispatch()
-  const status = useSelector(state => state.status)
-  const autoThemeSwitch = useSelector(state => state.autoThemeSwitch)
-  const showModalSwitch = useSelector(state => state.showModalSwitch)
+  const status = useSelector(state => state.todo.status)
+  const autoThemeSwitch = useSelector(state => state.todo.autoThemeSwitch)
+  const showModalSwitch = useSelector(state => state.todo.showModalSwitch)
 
   return (
     <CSSTransition
