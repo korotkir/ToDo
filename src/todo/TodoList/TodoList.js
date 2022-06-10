@@ -20,12 +20,12 @@ import {
 
 export default function TodoList() {
   const dispatch = useDispatch()
-  const showModalSwitch = useSelector(state => state.showModalSwitch)
-  const done = useSelector(state => state.done)
-  const items = useSelector(state => state.items)
-  const text = useSelector(state => state.value)
-  const theme = useSelector(state => state.theme)
-  const autoThemeSwitch = useSelector(state => state.autoThemeSwitch)
+  const showModalSwitch = useSelector(state => state.todo.showModalSwitch)
+  const done = useSelector(state => state.todo.done)
+  const items = useSelector(state => state.todo.items)
+  const text = useSelector(state => state.todo.value)
+  const theme = useSelector(state => state.todo.theme)
+  const autoThemeSwitch = useSelector(state => state.todo.autoThemeSwitch)
 
   const performed = (condition, index) => {
     let checkboxState = (i, bool) => {
