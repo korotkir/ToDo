@@ -5,7 +5,7 @@ import {setSettingsBarVisible} from '../../../store/actions/todoList'
 
 export default function NewItem(props) {
   const dispatch = useDispatch()
-  const value = useSelector(state => state.value)
+  const value = useSelector(state => state.todo.value)
 
   const cls = [
     styles.NewItem,

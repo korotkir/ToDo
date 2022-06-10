@@ -3,8 +3,8 @@ import styles from './TodoStatus.module.css'
 import {useSelector} from 'react-redux'
 
 export default function TodoStatus() {
-  const done = useSelector(state => state.done)
-  const values = useSelector(state => state.items.length)
+  const done = useSelector(state => state.todo.done)
+  const values = useSelector(state => state.todo.items.length)
 
   return (
         <div className={styles.TodoStatus}>
