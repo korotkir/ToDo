@@ -1,3 +1,9 @@
+// Auth
+export const VALIDATION = 'VALIDATION'
+export const FORM_VALID = 'FORM_VALID'
+export const LOADING = 'LOADING'
+export const ERROR = 'ERROR'
+
 // ToDo header actions
 export const SET_STATUS = 'SET_STATUS'
 export const SETTINGS_BAR_VISIBLE = 'SETTINGS_BAR_VISIBLE'

@@ -1,4 +1,6 @@
-import {configureStore, createStore} from '@reduxjs/toolkit'
+import {
+
+  createStore} from '@reduxjs/toolkit'
 import rootReducer from './reducers/rootReducer'
 
 // const loadFromLocalStorage = () => {

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect } from 'react'
 import is from 'is_js'
 import Input from '../UI/Input/Input'
 import {Link} from 'react-router-dom'
@@ -7,63 +7,19 @@ import MainButton from '../UI/button/MainButton'
 import styles from './Validation.module.css'
 import Load from '../UI/Loader/Load'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { useDispatch, useSelector } from 'react-redux'
+import { setError, setFormValid, setLoading, setValidation } from '../store/actions/auth'
 
 const Validation = (props) => {
 
-  const rules = {
-    email: {
-      title: 'E-mail',
-      value: '',
-      touched: false,
-      valid: false,
-      validation: {
-        required: true,
-        email: true
-      },
-      errorMessage: '* Введите корректный e-mail',
-    },
-    password: {
-      title: 'Пароль',
-      value: '',
-      touched: false,
-      valid: false,
-      validation: {
-        required: true,
-        minLength: 6
-      },
-      errorMessage: '* Минимум 6 символов',
-    },
-    firstName: {
-      title: 'Имя',
-      value: '',
-      touched: false,
-      valid: false,
-      validation: {
-        required: true,
-        minLength: 2
-      },
-      errorMessage: '* Введите имя',
-    },
-    lastName: {
-      title: 'Фамилия',
-      value: '',
-      touched: false,
-      valid: false,
-      validation: {
-        required: true,
-        minLength: 2
-      },
-      errorMessage: '* Введите фамилию',
-    },
-  }
-
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const [validation, setValidation] = useState({})
-  const [isFormValid, setFormValid] = useState(false)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
-
+  const rules = useSelector(state => state.auth.rules)
+  const validation = useSelector(state => state.auth.validation)
+  const isFormValid = useSelector(state => state.auth.isFormValid)
+  const loading = useSelector(state => state.auth.loading)
+  const error = useSelector(state => state.auth.error)
 
   const validateControl = (value, rules) => {
     // Если правила валидации отсутствуют, прекращаем функцию
@@ -118,10 +74,57 @@ const Validation = (props) => {
     })
 
     // Отправляем объект в глобальный state
+    dispatch(setValidation(inputs))
+    dispatch(setFormValid(isFormValid))
+  }
 
-    setValidation(inputs)
-    setFormValid(isFormValid)
+  const submitHandler = (event) => {
+    event.preventDefault()
 
+    dispatch(setError(''))
+
+    const email = validation.email.value
+    const password = validation.password.value
+
+    const auth = getAuth()
+
+    if (props.signup) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+
+
+          if (errorCode === 'auth/email-already-in-use') {
+            dispatch(setError('* Пользователь с таким email уже существует!'))
+          }
+        })
+    }
+
+    if (props.login) {
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user)
+          return navigate('/')
+
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+
+          if (errorCode === 'auth/user-not-found') {
+            dispatch(setError('* Такого пользователя не существует!'))
+            console.log(errorCode)
+          }
+
+          if (errorCode === 'auth/wrong-password') {
+            dispatch(setError('* Неверный пароль!'))
+            console.log(errorCode)
+          }
+        })
+    }
   }
 
   useEffect(() => {
@@ -141,76 +144,14 @@ const Validation = (props) => {
         includes.lastName = rules.lastName
       }
 
-      setValidation({
-        ...validation,
-        ...includes
-      })
+      console.log('includes', includes)
+      dispatch(setValidation(includes))
 
-      setTimeout(() => setLoading(false), 200)
+      setTimeout(() => dispatch(setLoading(false)), 200)
     }
 
     renderInputs()
   }, [])
-
-  const submitHandler = (event) => {
-    event.preventDefault()
-
-    setError('')
-
-    Object.keys(validation).map((el) => {
-      console.log(el, validation[el].value)
-    })
-
-    const email = validation.email.value
-    const password = validation.password.value
-
-    const auth = getAuth();
-
-    if (props.signup) {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-
-          if (errorCode === 'auth/email-already-in-use') {
-            setError('* Пользователь с таким email уже существует!')
-          }
-        })
-    }
-
-    // TODO
-
-    if (props.login) {
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          console.log(user)
-          return navigate('/')
-
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-
-          if (errorCode === 'auth/user-not-found') {
-            setError('* Такого пользователя не существует!')
-          }
-
-          if (errorCode === 'auth/wrong-password') {
-            setError('* Неверный пароль!')
-          }
-        })
-    }
-  }
-
-  const successAuth = (user) => {
-    console.log('user', user)
-    console.log('last sign in', user.metadata.lastSignInTime)
-    console.log('last sign in', user.metadata.stsTokenManager.accessToken)
-  }
 
   return (
     <form
