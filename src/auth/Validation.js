@@ -34,7 +34,6 @@ const Validation = (props) => {
       isValid = value.trim() !== '' && isValid
     }
 
-
     // Если пользователь ввел неправильный email - isValid вернет false
     if (rules.email) {
       isValid = is.email(value) && isValid
@@ -107,6 +106,8 @@ const Validation = (props) => {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
+          const uid = user.uid
+          localStorage.setItem('id', JSON.stringify(uid))
           console.log(user)
           return navigate('/')
 

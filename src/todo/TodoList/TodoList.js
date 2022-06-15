@@ -15,8 +15,9 @@ import {
   setItems,
   removeTask,
   newTask,
-  autoTheme,
+  autoTheme, itemCreated,
 } from '../../store/actions/todoList'
+import {sendItems} from '../../store/store'
 
 export default function TodoList() {
   const dispatch = useDispatch()
@@ -54,17 +55,19 @@ export default function TodoList() {
   }
 
   const itemSubmit = (event) => {
-  event.preventDefault()
-  let value = text.trim('')
-  value === ''
-    ? dispatch(setValue(''))
-    : dispatch(newTask(value))
-   }
+    event.preventDefault()
+    let value = text.trim('')
+    value === ''
+      ? dispatch(setValue(''))
+      : dispatch(newTask(value))
+
+    sendItems()
+  }
 
   const removeItem = (element) => {
-   dispatch(removeTask(element))
-   element.checked && dispatch(changeDone('sub'))
- }
+    dispatch(removeTask(element))
+    element.checked && dispatch(changeDone('sub'))
+  }
 
  useEffect(() => {
    const isDark = matchMedia('(prefers-color-scheme: dark)')

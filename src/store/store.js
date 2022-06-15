@@ -1,7 +1,10 @@
-import {
-
-  createStore} from '@reduxjs/toolkit'
+import {createStore} from 'redux'
 import rootReducer from './reducers/rootReducer'
+import axios from 'axios'
+import {getDatabase, ref, set} from 'firebase/database'
+
+
+// LOCALSTORAGE
 
 // const loadFromLocalStorage = () => {
 //   try {
@@ -13,7 +16,7 @@ import rootReducer from './reducers/rootReducer'
 //       return undefined
 //   }
 // }
-//
+
 // const saveToLocalStorage = (state) => {
 //   try {
 //     const todolist = state
@@ -22,17 +25,34 @@ import rootReducer from './reducers/rootReducer'
 //     console.log(err)
 //   }
 // }
-//
+
 // const persistedStore = loadFromLocalStorage()
 
-// Original redux store (working variable)
+// store.subscribe(() => {
+//   saveToLocalStorage(store.getState())
+// })
+
+// store.subscribe(() => {
+//   itemCreated(store.getState())
+// })
+
+// FIREBASE
+
+export function sendItems() {
+  const db = getDatabase()
+  const id = localStorage.getItem('id')
+  set(ref(db, 'items/' + id), store.getState().todo.items)
+}
+
+// export function getItems() {
+//
+// }
+
 export const store = createStore (
   rootReducer,
   // persistedStore
 )
 
-// store.subscribe(() => {
-//   saveToLocalStorage(store.getState())
-// })
+
 
 

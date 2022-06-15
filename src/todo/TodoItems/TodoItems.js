@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Item from './item/Item'
 import Start from './item/animation/Start'
 import Success from './item/animation/Success'
@@ -14,6 +14,10 @@ export default function TodoItems(props) {
   const theme = useSelector(state => state.todo.theme)
   const dispatch = useDispatch()
 
+  // Загрузка тасков с сервера
+  // useEffect(() => {
+  //
+  // }, [])
 
     return (
       <div className={styles.TodoItems} onClick={() => dispatch(setSettingsBarVisible(false))}>
