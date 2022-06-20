@@ -1,3 +1,5 @@
+import {child, get, getDatabase, ref, set} from 'firebase/database'
+import {store} from '../store'
 import {
   TOGGLE_THEME,
   THEME_SWITCH,
@@ -15,6 +17,32 @@ import {
   SETTINGS_BAR_VISIBLE,
 
 } from './actionType'
+
+export function fetchItems() {
+  return () => {
+    const db = getDatabase()
+    const id = localStorage.getItem('id')
+
+    get(child(ref(db), `users/${id}/items`)).then((snapshot) => {
+      if (snapshot.exists()) {
+        console.log(snapshot.val())
+      } else {
+        console.log("No data available")
+      }
+    }).catch((error) => {
+      console.error(error)
+    });
+  }
+}
+
+export function sendItems() {
+  return () => {
+    const db = getDatabase()
+    const id = localStorage.getItem('id')
+
+    set(ref(db, `users/${id}/items`), store.getState().todo.items)
+  }
+}
 
 export function adaptiveSettingsStatus() {
   return {

@@ -15,9 +15,9 @@ import {
   setItems,
   removeTask,
   newTask,
-  autoTheme, itemCreated,
+  autoTheme,
 } from '../../store/actions/todoList'
-import {sendItems} from '../../store/store'
+import {fetchItems, sendItems} from '../../store/actions/todoList'
 
 export default function TodoList() {
   const dispatch = useDispatch()
@@ -61,7 +61,7 @@ export default function TodoList() {
       ? dispatch(setValue(''))
       : dispatch(newTask(value))
 
-    sendItems()
+    dispatch(sendItems())
   }
 
   const removeItem = (element) => {
@@ -74,6 +74,13 @@ export default function TodoList() {
    if (autoThemeSwitch) dispatch(autoTheme(isDark.matches))
    else {return null}
  }, [autoThemeSwitch, dispatch])
+
+  useEffect(() => {
+    dispatch(fetchItems())
+  }, [])
+
+
+
 
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>

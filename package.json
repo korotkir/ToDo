@@ -18,11 +18,13 @@
     "react-bootstrap": "^2.0.2",
     "react-bootstrap-icons": "^1.6.1",
     "react-dom": "^17.0.2",
+    "react-error-overlay": "^6.0.11",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "react-scripts": "^3.0.1",
     "react-transition-group": "^4.4.2",
     "redux": "^4.1.2",
+    "redux-thunk": "^2.4.1",
     "styled-components": "^5.3.3",
     "web-vitals": "^1.1.2"
   },

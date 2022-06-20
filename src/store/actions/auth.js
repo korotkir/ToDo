@@ -1,4 +1,8 @@
 import {ERROR, FORM_VALID, LOADING, VALIDATION} from './actionType'
+import {child, get, getDatabase, ref, set} from 'firebase/database'
+import {store} from '../store'
+
+// TODO: сюда промисы из Validation
 
 export const setValidation = (rules) => {
   return {

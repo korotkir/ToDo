@@ -1,7 +1,6 @@
-import {createStore} from 'redux'
+import {applyMiddleware, createStore} from 'redux'
 import rootReducer from './reducers/rootReducer'
-import axios from 'axios'
-import {getDatabase, ref, set} from 'firebase/database'
+import thunk from 'redux-thunk'
 
 
 // LOCALSTORAGE
@@ -36,20 +35,9 @@ import {getDatabase, ref, set} from 'firebase/database'
 //   itemCreated(store.getState())
 // })
 
-// FIREBASE
-
-export function sendItems() {
-  const db = getDatabase()
-  const id = localStorage.getItem('id')
-  set(ref(db, 'items/' + id), store.getState().todo.items)
-}
-
-// export function getItems() {
-//
-// }
-
 export const store = createStore (
   rootReducer,
+  applyMiddleware(thunk)
   // persistedStore
 )
 

@@ -1,6 +1,7 @@
 import {ERROR, FORM_VALID, LOADING, VALIDATION} from '../actions/actionType'
 
 const initialState = {
+  id: null,
   rules: {
     email: {
       title: 'E-mail',

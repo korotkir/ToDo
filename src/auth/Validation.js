@@ -108,6 +108,9 @@ const Validation = (props) => {
           const user = userCredential.user;
           const uid = user.uid
           localStorage.setItem('id', JSON.stringify(uid))
+          setTimeout(() => {
+            localStorage.setItem('id', null)
+          }, 5000)
           console.log(user)
           return navigate('/')
 
