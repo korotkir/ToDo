@@ -2,18 +2,16 @@ import React, { useEffect } from 'react'
 import is from 'is_js'
 import Input from '../UI/Input/Input'
 import {Link} from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
 import MainButton from '../UI/button/MainButton'
 import styles from './Validation.module.css'
 import Load from '../UI/Loader/Load'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { useDispatch, useSelector } from 'react-redux'
-import { setError, setFormValid, setLoading, setValidation } from '../store/actions/auth'
+import {login, setError, setFormValid, setLoading, setValidation, signup} from '../store/actions/auth'
 
 const Validation = (props) => {
 
   const dispatch = useDispatch()
-  const navigate = useNavigate()
 
   const rules = useSelector(state => state.auth.rules)
   const validation = useSelector(state => state.auth.validation)
@@ -82,52 +80,16 @@ const Validation = (props) => {
 
     dispatch(setError(''))
 
+    const auth = getAuth()
     const email = validation.email.value
     const password = validation.password.value
 
-    const auth = getAuth()
-
     if (props.signup) {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-
-
-          if (errorCode === 'auth/email-already-in-use') {
-            dispatch(setError('* Пользователь с таким email уже существует!'))
-          }
-        })
+      dispatch(signup(auth, email, password))
     }
 
     if (props.login) {
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          const uid = user.uid
-          localStorage.setItem('id', JSON.stringify(uid))
-          setTimeout(() => {
-            localStorage.setItem('id', null)
-          }, 5000)
-          console.log(user)
-          return navigate('/')
-
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-
-          if (errorCode === 'auth/user-not-found') {
-            dispatch(setError('* Такого пользователя не существует!'))
-            console.log(errorCode)
-          }
-
-          if (errorCode === 'auth/wrong-password') {
-            dispatch(setError('* Неверный пароль!'))
-            console.log(errorCode)
-          }
-        })
+      dispatch(login(auth, email, password))
     }
   }
 
