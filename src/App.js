@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from 'react'
 import {
   BrowserRouter,
   Routes,
@@ -10,21 +10,47 @@ import TodoList from "./todo/TodoList/TodoList"
 import Login from './auth/login/Login'
 import Version from './Version'
 import Signup from './auth/signup/Signup'
+import {useDispatch, useSelector} from 'react-redux'
+import {authSuccess} from './store/actions/auth'
+import NotFound from './NotFound/NotFound'
 
 
 export default function App() {
+  const isAuth = useSelector(state => state.auth.isAuth)
+  const dispatch = useDispatch()
+
+  const isUser = (
+    <Routes>
+      <Route path="/" element={<TodoList/>}/>
+      <Route path="*" element={<NotFound/>}/>
+    </Routes>
+  )
+
+  const isAnonim = (
+    <Routes>
+      <Route path="/" element={<Login/>}/>
+      <Route path="/signup" element={<Signup/>}/>
+    </Routes>
+  )
+
+  useEffect(() => {
+    const id = localStorage.getItem('id')
+    id && dispatch(authSuccess(true))
+  })
+
   return (
     <>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<TodoList/>}/>
-          <Route path="/ToDo" element={<TodoList/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/signup" element={<Signup/>}/>
-        </Routes>
+        {
+          isAuth
+            ? isUser
+            : isAnonim
+        }
+
       </BrowserRouter>
-      <Version />
+      <Version/>
     </>
   )
+
 }
 

@@ -3,6 +3,7 @@ export const VALIDATION = 'VALIDATION'
 export const FORM_VALID = 'FORM_VALID'
 export const LOADING = 'LOADING'
 export const ERROR = 'ERROR'
+export const AUTH_SUCCESS = 'AUTH_SUCCESS'
 
 // ToDo header actions
 export const SET_STATUS = 'SET_STATUS'

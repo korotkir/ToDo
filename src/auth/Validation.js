@@ -1,17 +1,19 @@
 import React, { useEffect } from 'react'
 import is from 'is_js'
 import Input from '../UI/Input/Input'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import MainButton from '../UI/button/MainButton'
 import styles from './Validation.module.css'
 import Load from '../UI/Loader/Load'
 import { getAuth } from "firebase/auth";
 import { useDispatch, useSelector } from 'react-redux'
-import {login, setError, setFormValid, setLoading, setValidation, signup} from '../store/actions/auth'
+import {authSuccess, login, setError, setFormValid, setLoading, setValidation, signup} from '../store/actions/auth'
 
 const Validation = (props) => {
 
   const dispatch = useDispatch()
+
+  const navigate = useNavigate()
 
   const rules = useSelector(state => state.auth.rules)
   const validation = useSelector(state => state.auth.validation)

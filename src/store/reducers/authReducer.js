@@ -1,7 +1,8 @@
-import {ERROR, FORM_VALID, LOADING, VALIDATION} from '../actions/actionType'
+import {AUTH_SUCCESS, ERROR, FORM_VALID, LOADING, VALIDATION} from '../actions/actionType'
 
 const initialState = {
   id: null,
+  isAuth: false,
   rules: {
     email: {
       title: 'E-mail',
@@ -75,6 +76,11 @@ export function authReducer(state = initialState, action) {
       return {
         ...state,
         error: action.value
+      }
+    case AUTH_SUCCESS:
+      return {
+        ...state,
+        isAuth: action.value
       }
     default:
       return state

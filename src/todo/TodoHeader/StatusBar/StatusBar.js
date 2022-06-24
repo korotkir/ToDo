@@ -10,6 +10,7 @@ import styles from './StatusBar.module.css'
 import {useDispatch, useSelector} from 'react-redux'
 import {about, modalSwitch, themeSwitch, themeToggler} from '../../../store/actions/todoList'
 import {adaptiveSettingsStatus} from '../../../store/actions/todoList'
+import {logout} from '../../../store/actions/auth'
 
 export default function StatusBar() {
   const dispatch = useDispatch()
@@ -73,8 +74,8 @@ export default function StatusBar() {
           <li><Person size={size}/></li>
         </Dropdown.Toggle>
         <Dropdown.Menu variant={theme}>
-          <Link className="dropdown-item" to="/login">Авторизация</Link>
-          <Dropdown.Item href="#" disabled>Выйти</Dropdown.Item>
+          <Dropdown.Item disabled style={{color: 'white'}}>Username</Dropdown.Item>
+          <Dropdown.Item onClick={logout}>Выйти</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </ul>

@@ -18,8 +18,10 @@ import {
   autoTheme,
 } from '../../store/actions/todoList'
 import {fetchItems, sendItems} from '../../store/actions/todoList'
+import {useNavigate} from 'react-router-dom'
 
 export default function TodoList() {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const showModalSwitch = useSelector(state => state.todo.showModalSwitch)
   const done = useSelector(state => state.todo.done)
@@ -77,6 +79,7 @@ export default function TodoList() {
 
   useEffect(() => {
     dispatch(fetchItems())
+    navigate('/')
   }, [])
 
 
