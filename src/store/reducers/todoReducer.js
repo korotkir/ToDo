@@ -12,7 +12,7 @@ import {
   ABOUT,
   AUTO_THEME,
   SET_STATUS,
-  SETTINGS_BAR_VISIBLE
+  SETTINGS_BAR_VISIBLE, ADD_DATA
 } from '../actions/actionType'
 
 const initialState = {
@@ -115,6 +115,11 @@ export function todoReducer(state = initialState, action) {
       return {
         ...state,
         showAbout: action.value
+      }
+    case ADD_DATA:
+      return {
+        ...state,
+        items: action.value
       }
     default: return state
   }

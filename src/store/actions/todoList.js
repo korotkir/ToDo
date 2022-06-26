@@ -14,22 +14,19 @@ import {
   ABOUT,
   AUTO_THEME,
   SET_STATUS,
-  SETTINGS_BAR_VISIBLE,
+  SETTINGS_BAR_VISIBLE, ADD_DATA,
 
 } from './actionType'
 import {setLoading} from './auth'
+import {useSelector} from 'react-redux'
 
 export function fetchItems() {
   return dispatch => {
     const db = getDatabase()
     const id = localStorage.getItem('id')
-
     get(child(ref(db), `users/${id}/items`)).then((snapshot) => {
       if (snapshot.exists()) {
-        console.log('there')
-        console.log(snapshot.val())
-        setTimeout(() => {
-          console.log('loading')}, 5000)
+        dispatch(addData(snapshot.val()))
       } else {
         console.log("No data available")
       }
@@ -37,6 +34,13 @@ export function fetchItems() {
       console.error(error)
     });
 
+  }
+}
+
+export function addData(data) {
+  return {
+    type: ADD_DATA,
+    value: data
   }
 }
 

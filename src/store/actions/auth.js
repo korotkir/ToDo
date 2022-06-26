@@ -1,4 +1,4 @@
-import {ERROR, FORM_VALID, LOADING, VALIDATION} from './actionType'
+import {AUTH_SUCCESS, ERROR, FORM_VALID, GET_USERNAME, LOADING, VALIDATION} from './actionType'
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
 
 // TODO: сюда промисы из Validation
@@ -10,11 +10,11 @@ export const login =  (auth, email, password) => {
         const user = userCredential.user;
         const uid = user.uid
         localStorage.setItem('id', JSON.stringify(uid))
-        dispatch(authSuccess(true))
+        dispatch(getUsername(user.email))
         setTimeout(() => {
           localStorage.setItem('id', null)
           dispatch(authSuccess(false))
-        }, 630000)
+        }, 3600000)
 
         dispatch(authSuccess(true))
 
@@ -33,9 +33,6 @@ export const login =  (auth, email, password) => {
       })
   }
 }
-
-// TODO: ПРОДУМАТЬ!
-
 
 export const signup = (auth, email, password) => {
   return (dispatch) => {
@@ -61,8 +58,16 @@ export const logout = () => {
 
 export const authSuccess = (bool) => {
   return {
-    type: 'AUTH_SUCCESS',
+    type: AUTH_SUCCESS,
     value: bool
+  }
+}
+
+// TODO: Не работает!
+export const getUsername = (username) => {
+  return {
+    type: GET_USERNAME,
+    value: username
   }
 }
 

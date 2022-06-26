@@ -14,10 +14,10 @@ import {logout} from '../../../store/actions/auth'
 
 export default function StatusBar() {
   const dispatch = useDispatch()
-  const themeState = useSelector(state => state.theme)
-  const autoThemeSwitch = useSelector(state => state.autoThemeSwitch)
-  const showModalSwitch = useSelector(state => state.showModalSwitch)
-
+  const themeState = useSelector(state => state.todo.theme)
+  const autoThemeSwitch = useSelector(state => state.todo.autoThemeSwitch)
+  const showModalSwitch = useSelector(state => state.todo.showModalSwitch)
+  const username = useSelector(state => state.auth.username)
 
   const cls = [
     styles.StatusBar,
@@ -74,7 +74,7 @@ export default function StatusBar() {
           <li><Person size={size}/></li>
         </Dropdown.Toggle>
         <Dropdown.Menu variant={theme}>
-          <Dropdown.Item disabled style={{color: 'white'}}>Username</Dropdown.Item>
+          <Dropdown.Item disabled style={{color: 'white'}}>{username}</Dropdown.Item>
           <Dropdown.Item onClick={logout}>Выйти</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>

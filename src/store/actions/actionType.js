@@ -4,6 +4,7 @@ export const FORM_VALID = 'FORM_VALID'
 export const LOADING = 'LOADING'
 export const ERROR = 'ERROR'
 export const AUTH_SUCCESS = 'AUTH_SUCCESS'
+export const GET_USERNAME = 'GET_USERNAME'
 
 // ToDo header actions
 export const SET_STATUS = 'SET_STATUS'
@@ -22,4 +23,5 @@ export const NEW_TASK = 'NEW_TASK'
 export const REMOVE_TASK = 'REMOVE_TASK'
 export const ON_CLEAR = 'ON_CLEAR'
 export const AUTO_THEME = 'AUTO_THEME'
+export const ADD_DATA = 'ADD_DATA'
 
