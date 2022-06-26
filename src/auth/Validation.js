@@ -18,8 +18,8 @@ const Validation = (props) => {
   const rules = useSelector(state => state.auth.rules)
   const validation = useSelector(state => state.auth.validation)
   const isFormValid = useSelector(state => state.auth.isFormValid)
-  const loading = useSelector(state => state.auth.loading)
   const error = useSelector(state => state.auth.error)
+  const loading = useSelector(state => state.auth.loading)
 
   const validateControl = (value, rules) => {
     // Если правила валидации отсутствуют, прекращаем функцию
@@ -96,6 +96,7 @@ const Validation = (props) => {
   }
 
   useEffect(() => {
+    dispatch(setLoading(true))
     const renderInputs = () => {
       const includes = {}
 
@@ -115,7 +116,8 @@ const Validation = (props) => {
       console.log('includes', includes)
       dispatch(setValidation(includes))
 
-      setTimeout(() => dispatch(setLoading(false)), 200)
+      dispatch(setLoading(false))
+      //setTimeout(() => dispatch(setLoading(false)), 200)
     }
 
     renderInputs()
@@ -151,11 +153,11 @@ const Validation = (props) => {
               )
             }
             {error ? <p>{error}</p> : null}
-            <MainButton
-              type="submit"
-              disabled={!isFormValid}
-            >{props.button}
-            </MainButton>
+              <MainButton
+                type="submit"
+                disabled={!isFormValid}
+              >{props.button}
+              </MainButton>
             <Link to={props.link[0]}>{props.link[1]}</Link>
           </>
       }

@@ -17,21 +17,26 @@ import {
   SETTINGS_BAR_VISIBLE,
 
 } from './actionType'
+import {setLoading} from './auth'
 
 export function fetchItems() {
-  return () => {
+  return dispatch => {
     const db = getDatabase()
     const id = localStorage.getItem('id')
 
     get(child(ref(db), `users/${id}/items`)).then((snapshot) => {
       if (snapshot.exists()) {
+        console.log('there')
         console.log(snapshot.val())
+        setTimeout(() => {
+          console.log('loading')}, 5000)
       } else {
         console.log("No data available")
       }
     }).catch((error) => {
       console.error(error)
     });
+
   }
 }
 

@@ -14,7 +14,6 @@ import {useDispatch, useSelector} from 'react-redux'
 import {authSuccess} from './store/actions/auth'
 import NotFound from './NotFound/NotFound'
 
-
 export default function App() {
   const isAuth = useSelector(state => state.auth.isAuth)
   const dispatch = useDispatch()
@@ -22,6 +21,8 @@ export default function App() {
   const isUser = (
     <Routes>
       <Route path="/" element={<TodoList/>}/>
+      <Route path="/login" element={<TodoList/>}/>
+      <Route path="/signup" element={<TodoList/>}/>
       <Route path="*" element={<NotFound/>}/>
     </Routes>
   )
@@ -29,7 +30,9 @@ export default function App() {
   const isAnonim = (
     <Routes>
       <Route path="/" element={<Login/>}/>
+      <Route path="/login" element={<Login/>}/>
       <Route path="/signup" element={<Signup/>}/>
+      <Route path="*" element={<NotFound/>}/>
     </Routes>
   )
 

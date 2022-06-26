@@ -19,6 +19,8 @@ import {
 } from '../../store/actions/todoList'
 import {fetchItems, sendItems} from '../../store/actions/todoList'
 import {useNavigate} from 'react-router-dom'
+import {setLoading} from '../../store/actions/auth'
+import Load from '../../UI/Loader/Load'
 
 export default function TodoList() {
   const navigate = useNavigate()
@@ -29,6 +31,7 @@ export default function TodoList() {
   const text = useSelector(state => state.todo.value)
   const theme = useSelector(state => state.todo.theme)
   const autoThemeSwitch = useSelector(state => state.todo.autoThemeSwitch)
+  const loading = useSelector(state => state.auth.loading)
 
   const performed = (condition, index) => {
     let checkboxState = (i, bool) => {
@@ -78,14 +81,15 @@ export default function TodoList() {
  }, [autoThemeSwitch, dispatch])
 
   useEffect(() => {
-    dispatch(fetchItems())
     navigate('/')
+    dispatch(fetchItems())
   }, [])
 
 
 
 
   return (
+    loading ? <Load/> :
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <GlobalStyles />
       <div className={styles.TodoList}>

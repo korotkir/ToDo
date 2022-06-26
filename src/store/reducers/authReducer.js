@@ -51,7 +51,7 @@ const initialState = {
   },
   validation: {},
   isFormValid: false,
-  loading: true,
+  loading: false,
   error: '',
 }
 
