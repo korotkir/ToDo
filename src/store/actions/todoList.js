@@ -20,6 +20,12 @@ import {
 import {setLoading} from './auth'
 import {useSelector} from 'react-redux'
 
+// export function getUserEmail() {
+//   return async () => {
+//     const email = await
+//   }
+// }
+
 export function fetchItems() {
   return dispatch => {
     const db = getDatabase()

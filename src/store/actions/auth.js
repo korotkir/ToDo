@@ -10,7 +10,7 @@ export const login =  (auth, email, password) => {
         const user = userCredential.user;
         const uid = user.uid
         localStorage.setItem('id', JSON.stringify(uid))
-        dispatch(getUsername(user.email))
+        //dispatch(getUsername(user.email))
         setTimeout(() => {
           localStorage.setItem('id', null)
           dispatch(authSuccess(false))
