@@ -18,16 +18,10 @@ import {
 
 } from './actionType'
 import {setLoading} from './auth'
-import {useSelector} from 'react-redux'
-
-// export function getUserEmail() {
-//   return async () => {
-//     const email = await
-//   }
-// }
 
 export function fetchItems() {
   return dispatch => {
+    dispatch(setLoading(true))
     const db = getDatabase()
     const id = localStorage.getItem('id')
     get(child(ref(db), `users/${id}/items`)).then((snapshot) => {
@@ -36,6 +30,7 @@ export function fetchItems() {
       } else {
         console.log("No data available")
       }
+      dispatch(setLoading(false))
     }).catch((error) => {
       console.error(error)
     });

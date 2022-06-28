@@ -8,7 +8,7 @@ const Signup = () => {
 
   useEffect(() => {
     dispatch(setError(''))
-  })
+  }, [])
 
   return (
     <Validation

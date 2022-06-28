@@ -21,8 +21,9 @@ export default function App() {
   const isUser = (
     <Routes>
       <Route path="/" element={<TodoList/>}/>
-      <Route path="/login" element={<TodoList/>}/>
       <Route path="/signup" element={<TodoList/>}/>
+      <Route path="/ToDo" element={<TodoList/>}/>
+      <Route path="/login" element={<Login/>}/>
       <Route path="*" element={<NotFound/>}/>
     </Routes>
   )
@@ -30,6 +31,7 @@ export default function App() {
   const isAnonim = (
     <Routes>
       <Route path="/" element={<Login/>}/>
+      <Route path="/ToDo" element={<Login/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="/signup" element={<Signup/>}/>
       <Route path="*" element={<NotFound/>}/>

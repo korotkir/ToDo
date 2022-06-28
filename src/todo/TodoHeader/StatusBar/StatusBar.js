@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import { Link } from 'react-router-dom'
+import {Link, NavLink, useNavigate} from 'react-router-dom'
 import {Dropdown, Form} from 'react-bootstrap'
 import {
   Moon,
@@ -10,25 +10,13 @@ import styles from './StatusBar.module.css'
 import {useDispatch, useSelector} from 'react-redux'
 import {about, modalSwitch, themeSwitch, themeToggler} from '../../../store/actions/todoList'
 import {adaptiveSettingsStatus} from '../../../store/actions/todoList'
-import {logout} from '../../../store/actions/auth'
-import {getAuth} from 'firebase/auth'
-import {get} from 'firebase/database'
-import firebase from 'firebase/compat'
-import {app} from '../../../firebase'
 
 export default function StatusBar() {
   const dispatch = useDispatch()
   const themeState = useSelector(state => state.todo.theme)
   const autoThemeSwitch = useSelector(state => state.todo.autoThemeSwitch)
   const showModalSwitch = useSelector(state => state.todo.showModalSwitch)
-
-
-  // useEffect(() => {
-  //   return firebase.auth()
-  // }, [])
-
-  console.log(app.auth())
-
+  const navigate = useNavigate()
 
   const cls = [
     styles.StatusBar,
@@ -37,6 +25,11 @@ export default function StatusBar() {
 
   let size = '27'
   let theme = themeState === 'light' ? 'light' : 'dark'
+
+  const logout = () => {
+    localStorage.clear()
+    navigate('/login')
+  }
 
   return (
     <ul className={cls.join(' ')}>
@@ -86,7 +79,8 @@ export default function StatusBar() {
         </Dropdown.Toggle>
         <Dropdown.Menu variant={theme}>
           <Dropdown.Item disabled style={{color: 'white'}}>1</Dropdown.Item>
-          <Dropdown.Item onClick={logout}>Выйти</Dropdown.Item>
+          {/*<Dropdown.Item onClick={logout}>Выйти</Dropdown.Item>*/}
+          <Dropdown.Item><NavLink to={'/login'}>Выйти</NavLink></Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </ul>

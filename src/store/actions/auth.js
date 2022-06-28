@@ -52,10 +52,6 @@ export const signup = (auth, email, password) => {
   }
 }
 
-export const logout = () => {
-  localStorage.clear()
-}
-
 export const authSuccess = (bool) => {
   return {
     type: AUTH_SUCCESS,
